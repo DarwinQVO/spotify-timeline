@@ -20,6 +20,7 @@
                 <button id="zoom-out" title="Zoom Out (Ctrl + Scroll)">🔍➖</button>
                 <button id="zoom-reset" title="Reset Zoom">↻</button>
                 <button id="zoom-in" title="Zoom In (Ctrl + Scroll)">🔍➕</button>
+                <button id="emoji-admin" title="Manage Emojis">⚙️</button>
             </div>
         </div>
     </div>
@@ -35,6 +36,39 @@
     </div>
 
     <div class="tooltip" id="tooltip"></div>
+
+    <!-- Emoji Management Modal -->
+    <div id="emoji-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎨 Emoji Management</h2>
+                <span class="close" id="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="search-controls">
+                    <input type="text" id="entity-search" placeholder="🔍 Search entities..." />
+                    <select id="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="people">👥 People</option>
+                        <option value="tech">💻 Tech Companies</option>
+                        <option value="music">🎵 Music Industry</option>
+                        <option value="business">💼 Business</option>
+                        <option value="products">📱 Products</option>
+                    </select>
+                </div>
+                <div class="emoji-grid" id="emoji-grid">
+                    <!-- Emoji mappings will be populated here -->
+                </div>
+                <div class="modal-actions">
+                    <button id="reset-emojis" class="btn-secondary">🔄 Reset to Defaults</button>
+                    <button id="export-emojis" class="btn-secondary">📤 Export Settings</button>
+                    <input type="file" id="import-emojis" accept=".json" style="display: none;" />
+                    <button id="import-btn" class="btn-secondary">📥 Import Settings</button>
+                    <button id="save-emojis" class="btn-primary">💾 Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="data.js"></script>
     <script src="main.js"></script>

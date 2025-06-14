@@ -1,5 +1,5 @@
-// Emoji mapping for relationships and entities
-const emojiMap = {
+// Default emoji mapping for relationships and entities
+const defaultEmojiMap = {
     // Core People
     'Daniel Ek': '👨‍💻',
     'Daniel Ek (Spotify CEO)': '👨‍💻',
@@ -108,6 +108,42 @@ const emojiMap = {
     '50 Cent': '🎤'
 };
 
+// Current emoji mapping (can be customized)
+let emojiMap = { ...defaultEmojiMap };
+
+// Entity categories for organization
+const entityCategories = {
+    'people': [
+        'Daniel Ek', 'Daniel Ek (Spotify CEO)', 'Daniel Ek (pre-Spotify)', 'Martin Lorentzon',
+        'Steve Jobs', 'Steve Jobs (Apple CEO)', 'Taylor Swift', 'Joe Rogan', 'Jay-Z',
+        'Dr. Dre', 'Jimmy Iovine', 'Sean Parker', 'Mark Zuckerberg', 'Mike Schroepfer',
+        'Pony Ma', 'Elisabet (mother)', 'Felix (half-brother)', 'Hasse (stepfather)',
+        'Andreas Ehn', 'Fredrik Niemelä', 'Ludvig Strigeus', 'Magnus Hult', 'Rasmus Andersson',
+        'Jonathan Forster', 'Gustav Söderström', 'Sophia Bendz', 'Barry McCarthy', 'Felix Hagnö',
+        'Pär-Jörgen Pärson', 'Pär-Jörgen Pärson (Northzone)', 'Mattias Miksche', 'Mattias Miksche (Stardoll)',
+        'Matt Lieber', 'Alex Blumberg', 'Bill Simmons', 'Niklas Zennström', 'Janus Friis',
+        'Edgar Bronfman Jr', 'Hunter S Thompson', 'Göran Persson', 'Per Sundin', 'Bram Cohen',
+        'Magnus Emilson', 'Britney Spears', 'Shakira', '50 Cent', 'Scott Borchetta'
+    ],
+    'tech': [
+        'Apple', 'Google', 'Google (Android)', 'Facebook', 'Amazon', 'Microsoft',
+        'Tencent', 'YouTube', 'BitTorrent Inc', 'Azureus'
+    ],
+    'music': [
+        'Universal Music', 'Universal Music Group', 'Sony Music', 'Warner Music',
+        'EMI', 'BMG', 'Big Machine Records', 'Spotify', 'Apple Music', 'iTunes',
+        'Amazon Music', 'Google Music', 'Pandora', 'Tidal', 'Rdio', 'Beats'
+    ],
+    'business': [
+        'Northzone', 'Soros Private Equity Partners', 'Arctic Ventures', 'NYSE',
+        'Tradedoubler', 'Stardoll', 'The Echo Nest', 'Gimlet Media', 'Anchor',
+        'Parcast', 'The Ringer'
+    ],
+    'products': [
+        'µTorrent', 'Kazaa', 'The Pirate Bay', 'Swedish Legal System', 'STIM'
+    ]
+};
+
 // Get emoji for a relationship/entity
 const getEmojiForEntity = (entityName) => {
     // Clean the entity name by removing parenthetical info for lookup
@@ -159,11 +195,15 @@ document.addEventListener('DOMContentLoaded', () => {
         currentFilter: 'all'
     };
 
+    // Load custom emoji settings
+    loadCustomEmojis();
+    
     // Initialize
     renderTimeline();
     updateStats();
     setupEventListeners();
     setupZoomControls();
+    setupEmojiManager();
 });
 
 const parseYear = (timestamp) => {
@@ -407,4 +447,273 @@ const setupZoomControls = () => {
         currentZoom = 1;
         applyZoom();
     });
+};
+
+// Emoji Management System
+const setupEmojiManager = () => {
+    const modal = document.getElementById('emoji-modal');
+    const adminBtn = document.getElementById('emoji-admin');
+    const closeBtn = document.getElementById('close-modal');
+    
+    // Open modal
+    adminBtn.addEventListener('click', () => {
+        modal.style.display = 'block';
+        populateEmojiGrid();
+    });
+    
+    // Close modal
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    
+    // Close on outside click
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+    
+    // Search and filter functionality
+    document.getElementById('entity-search').addEventListener('input', filterEmojiGrid);
+    document.getElementById('category-filter').addEventListener('change', filterEmojiGrid);
+    
+    // Action buttons
+    document.getElementById('save-emojis').addEventListener('click', saveCustomEmojis);
+    document.getElementById('reset-emojis').addEventListener('click', resetToDefaults);
+    document.getElementById('export-emojis').addEventListener('click', exportEmojiSettings);
+    document.getElementById('import-btn').addEventListener('click', () => {
+        document.getElementById('import-emojis').click();
+    });
+    document.getElementById('import-emojis').addEventListener('change', importEmojiSettings);
+};
+
+const populateEmojiGrid = () => {
+    const grid = document.getElementById('emoji-grid');
+    grid.innerHTML = '';
+    
+    // Get all unique entities from the timeline data
+    const allEntities = new Set();
+    
+    // Add entities from timeline events
+    window.timelineData.all.forEach(event => {
+        allEntities.add(event.entity);
+        if (event.details?.relationships) {
+            event.details.relationships.forEach(rel => allEntities.add(rel));
+        }
+    });
+    
+    // Convert to array and sort
+    const sortedEntities = Array.from(allEntities).sort();
+    
+    sortedEntities.forEach(entity => {
+        const category = getCategoryForEntity(entity);
+        const emojiItem = createEmojiItem(entity, category);
+        grid.appendChild(emojiItem);
+    });
+};
+
+const createEmojiItem = (entity, category) => {
+    const item = document.createElement('div');
+    item.className = 'emoji-item';
+    item.dataset.entity = entity;
+    item.dataset.category = category;
+    
+    const currentEmoji = emojiMap[entity] || getEmojiForEntity(entity);
+    
+    item.innerHTML = `
+        <input type="text" class="emoji-input" value="${currentEmoji}" maxlength="4" 
+               data-entity="${entity}" title="Click to change emoji">
+        <div class="entity-details">
+            <div class="entity-name">${entity}</div>
+            <div class="entity-category">${getCategoryDisplayName(category)}</div>
+        </div>
+    `;
+    
+    // Add event listener for emoji changes
+    const input = item.querySelector('.emoji-input');
+    input.addEventListener('input', (e) => {
+        emojiMap[entity] = e.target.value;
+        // Update timeline immediately to show changes
+        renderTimeline();
+    });
+    
+    return item;
+};
+
+const getCategoryForEntity = (entity) => {
+    for (const [category, entities] of Object.entries(entityCategories)) {
+        if (entities.includes(entity)) {
+            return category;
+        }
+    }
+    return 'other';
+};
+
+const getCategoryDisplayName = (category) => {
+    const names = {
+        'people': '👥 People',
+        'tech': '💻 Tech Companies',
+        'music': '🎵 Music Industry',
+        'business': '💼 Business',
+        'products': '📱 Products',
+        'other': '🔮 Other'
+    };
+    return names[category] || '🔮 Other';
+};
+
+const filterEmojiGrid = () => {
+    const searchTerm = document.getElementById('entity-search').value.toLowerCase();
+    const categoryFilter = document.getElementById('category-filter').value;
+    const items = document.querySelectorAll('.emoji-item');
+    
+    items.forEach(item => {
+        const entityName = item.dataset.entity.toLowerCase();
+        const entityCategory = item.dataset.category;
+        
+        const matchesSearch = entityName.includes(searchTerm);
+        const matchesCategory = categoryFilter === 'all' || entityCategory === categoryFilter;
+        
+        item.style.display = matchesSearch && matchesCategory ? 'flex' : 'none';
+    });
+};
+
+const saveCustomEmojis = () => {
+    try {
+        localStorage.setItem('spotify-timeline-custom-emojis', JSON.stringify(emojiMap));
+        showNotification('✅ Emoji settings saved successfully!', 'success');
+    } catch (error) {
+        showNotification('❌ Failed to save emoji settings', 'error');
+        console.error('Error saving emojis:', error);
+    }
+};
+
+const loadCustomEmojis = () => {
+    try {
+        const saved = localStorage.getItem('spotify-timeline-custom-emojis');
+        if (saved) {
+            emojiMap = { ...defaultEmojiMap, ...JSON.parse(saved) };
+        }
+    } catch (error) {
+        console.error('Error loading custom emojis:', error);
+        emojiMap = { ...defaultEmojiMap };
+    }
+};
+
+const resetToDefaults = () => {
+    if (confirm('Are you sure you want to reset all emojis to defaults? This cannot be undone.')) {
+        emojiMap = { ...defaultEmojiMap };
+        populateEmojiGrid();
+        renderTimeline();
+        showNotification('🔄 Emojis reset to defaults', 'info');
+    }
+};
+
+const exportEmojiSettings = () => {
+    try {
+        const customEmojis = {};
+        
+        // Only export changed emojis
+        Object.keys(emojiMap).forEach(key => {
+            if (emojiMap[key] !== defaultEmojiMap[key]) {
+                customEmojis[key] = emojiMap[key];
+            }
+        });
+        
+        const dataStr = JSON.stringify(customEmojis, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'spotify-timeline-emoji-settings.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        showNotification('📤 Emoji settings exported successfully!', 'success');
+    } catch (error) {
+        showNotification('❌ Failed to export emoji settings', 'error');
+        console.error('Error exporting emojis:', error);
+    }
+};
+
+const importEmojiSettings = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const importedEmojis = JSON.parse(e.target.result);
+            
+            // Validate the imported data
+            if (typeof importedEmojis !== 'object') {
+                throw new Error('Invalid file format');
+            }
+            
+            // Merge with current settings
+            emojiMap = { ...emojiMap, ...importedEmojis };
+            
+            populateEmojiGrid();
+            renderTimeline();
+            showNotification('📥 Emoji settings imported successfully!', 'success');
+        } catch (error) {
+            showNotification('❌ Failed to import emoji settings. Please check the file format.', 'error');
+            console.error('Error importing emojis:', error);
+        }
+    };
+    reader.readAsText(file);
+    
+    // Reset file input
+    event.target.value = '';
+};
+
+const showNotification = (message, type = 'info') => {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    
+    // Style the notification
+    Object.assign(notification.style, {
+        position: 'fixed',
+        top: '20px',
+        right: '20px',
+        padding: '12px 20px',
+        borderRadius: '8px',
+        color: '#fff',
+        fontWeight: '500',
+        zIndex: '3000',
+        opacity: '0',
+        transform: 'translateX(100%)',
+        transition: 'all 0.3s ease'
+    });
+    
+    // Set background color based on type
+    const colors = {
+        success: '#1ED760',
+        error: '#ff4444',
+        info: '#4A90E2'
+    };
+    notification.style.backgroundColor = colors[type] || colors.info;
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    requestAnimationFrame(() => {
+        notification.style.opacity = '1';
+        notification.style.transform = 'translateX(0)';
+    });
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
 };
