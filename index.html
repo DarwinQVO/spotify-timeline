@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Timeline - Interactive Visualization</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Spotify Timeline</h1>
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All Events (144)</button>
+            <button class="filter-btn" data-filter="Spotify">Spotify (107)</button>
+            <button class="filter-btn" data-filter="Daniel Ek (pre-Spotify)">Daniel Ek (pre-Spotify) (11)</button>
+            <button class="filter-btn" data-filter="Music Industry">Music Industry (34)</button>
+        </div>
+    </div>
+
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+        <div id="timeline-events" class="loading">Loading timeline...</div>
+    </div>
+
+    <div class="stats" id="stats">
+        <div>Total Events: <span id="total-events">144</span></div>
+        <div>Visible: <span id="visible-events">0</span></div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
