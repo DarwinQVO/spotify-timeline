@@ -161,6 +161,10 @@ const zoomStep = 0.1;
 let currentEntityFilter = null;
 let entityFilterActive = false;
 
+// Search functionality
+let currentSearchTerm = '';
+let searchActive = false;
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing timeline...');
@@ -208,6 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     setupZoomControls();
     setupEmojiManager();
+    setupSearch();
 });
 
 const parseYear = (timestamp) => {
@@ -246,6 +251,13 @@ const renderTimeline = () => {
             });
         }
         
+        // Apply search filter if active
+        if (searchActive && currentSearchTerm) {
+            yearEvents = yearEvents.filter(event => {
+                return eventMatchesSearch(event, currentSearchTerm);
+            });
+        }
+        
         if (yearEvents.length > 0) {
             html += `<div class="year-marker"><h2>${year}</h2></div>`;
             
@@ -261,20 +273,29 @@ const renderTimeline = () => {
                     ? event.details.relationships.slice(0, 4).map(rel => getEmojiForEntity(rel)).join('')
                     : '';
                 
+                // Highlight search terms if search is active
+                const highlightedTitle = searchActive && currentSearchTerm 
+                    ? highlightSearchTerm(event.event_description, currentSearchTerm)
+                    : event.event_description;
+                    
+                const highlightedSupporting = searchActive && currentSearchTerm && event.supporting_text
+                    ? highlightSearchTerm(event.supporting_text, currentSearchTerm)
+                    : event.supporting_text;
+                
                 html += `
-                    <div class="event" style="animation-delay: ${index * 0.1}s">
+                    <div class="event ${searchActive ? 'search-result' : ''}" style="animation-delay: ${index * 0.1}s">
                         <div class="event-dot"></div>
                         <div class="event-content" data-event-id="${window.timelineData.all.indexOf(event)}" 
                              data-certainty="${event.certainty}" data-page="${event.page_number}">
                             <div class="event-date">${event.timestamp}</div>
                             ${showEntityPill ? `<div class="event-entity entity-${entityClass}">${event.entity}</div>` : ''}
-                            <div class="event-title">${event.event_description}</div>
+                            <div class="event-title">${highlightedTitle}</div>
                             ${relationshipEmojis ? `<div class="relationship-emojis">${relationshipEmojis}</div>` : ''}
                             
                             <div class="event-details">
-                                ${event.supporting_text ? `<div class="event-supporting">${event.supporting_text}</div>` : ''}
+                                ${highlightedSupporting ? `<div class="event-supporting">${highlightedSupporting}</div>` : ''}
                                 
-                                ${event.details ? renderDetails(event.details) : ''}
+                                ${event.details ? renderDetails(event.details, searchActive && currentSearchTerm) : ''}
                             </div>
                             
                             <div class="expand-indicator">▼</div>
@@ -288,28 +309,32 @@ const renderTimeline = () => {
     container.innerHTML = html || '<div class="no-events">No events found for this filter</div>';
 };
 
-const renderDetails = (details) => {
+const renderDetails = (details, shouldHighlight = false) => {
     let html = '';
     
     if (details.quote) {
-        html += `<div class="quote">${details.quote}</div>`;
+        const quote = shouldHighlight ? highlightSearchTerm(details.quote, currentSearchTerm) : details.quote;
+        html += `<div class="quote">${quote}</div>`;
     }
     
     if (details.milestone) {
-        html += `<div class="event-meta"><span class="meta-tag">Milestone: ${details.milestone}</span></div>`;
+        const milestone = shouldHighlight ? highlightSearchTerm(details.milestone, currentSearchTerm) : details.milestone;
+        html += `<div class="event-meta"><span class="meta-tag">Milestone: ${milestone}</span></div>`;
     }
     
     if (details.relationships && details.relationships.length > 0) {
         html += `<div class="event-meta">`;
         details.relationships.forEach(rel => {
             const emoji = getEmojiForEntity(rel);
-            html += `<span class="meta-tag relationship-tag">${emoji} ${rel}</span>`;
+            const highlightedRel = shouldHighlight ? highlightSearchTerm(rel, currentSearchTerm) : rel;
+            html += `<span class="meta-tag relationship-tag">${emoji} ${highlightedRel}</span>`;
         });
         html += `</div>`;
     }
     
     if (details.relevant_info) {
-        html += `<div class="event-supporting">ℹ️ ${details.relevant_info}</div>`;
+        const info = shouldHighlight ? highlightSearchTerm(details.relevant_info, currentSearchTerm) : details.relevant_info;
+        html += `<div class="event-supporting">ℹ️ ${info}</div>`;
     }
     
     return html;
@@ -819,4 +844,153 @@ const showNotification = (message, type = 'info') => {
             }
         }, 300);
     }, 3000);
+};
+
+// Search functionality
+const setupSearch = () => {
+    const searchInput = document.getElementById('timeline-search');
+    const clearBtn = document.getElementById('clear-search');
+    
+    // Search input handler with debouncing
+    let searchTimeout;
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        const term = e.target.value.trim();
+        
+        // Show/hide clear button
+        clearBtn.style.display = term ? 'block' : 'none';
+        
+        // Debounce search
+        searchTimeout = setTimeout(() => {
+            performSearch(term);
+        }, 300);
+    });
+    
+    // Clear search
+    clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        clearBtn.style.display = 'none';
+        clearSearch();
+    });
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        // Ctrl/Cmd + F to focus search
+        if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+            e.preventDefault();
+            searchInput.focus();
+        }
+        
+        // Escape to clear search
+        if (e.key === 'Escape' && searchActive) {
+            clearSearch();
+        }
+    });
+};
+
+const performSearch = (term) => {
+    if (!term || term.length < 2) {
+        clearSearch();
+        return;
+    }
+    
+    currentSearchTerm = term.toLowerCase();
+    searchActive = true;
+    
+    // Update UI
+    renderTimeline();
+    updateStats();
+    updateSearchInfo();
+};
+
+const clearSearch = () => {
+    currentSearchTerm = '';
+    searchActive = false;
+    document.getElementById('timeline-search').value = '';
+    document.getElementById('clear-search').style.display = 'none';
+    
+    // Update UI
+    renderTimeline();
+    updateStats();
+    updateSearchInfo();
+};
+
+const eventMatchesSearch = (event, searchTerm) => {
+    const term = searchTerm.toLowerCase();
+    
+    // Search in main fields
+    if (event.event_description.toLowerCase().includes(term)) return true;
+    if (event.entity.toLowerCase().includes(term)) return true;
+    if (event.timestamp.toLowerCase().includes(term)) return true;
+    if (event.supporting_text?.toLowerCase().includes(term)) return true;
+    
+    // Search in details
+    if (event.details) {
+        if (event.details.quote?.toLowerCase().includes(term)) return true;
+        if (event.details.milestone?.toLowerCase().includes(term)) return true;
+        if (event.details.relevant_info?.toLowerCase().includes(term)) return true;
+        if (event.details.metric?.toLowerCase().includes(term)) return true;
+        
+        // Search in relationships
+        if (event.details.relationships) {
+            for (const rel of event.details.relationships) {
+                if (rel.toLowerCase().includes(term)) return true;
+            }
+        }
+    }
+    
+    return false;
+};
+
+const highlightSearchTerm = (text, searchTerm) => {
+    if (!text || !searchTerm) return text;
+    
+    const regex = new RegExp(`(${escapeRegExp(searchTerm)})`, 'gi');
+    return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+};
+
+const escapeRegExp = (string) => {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+};
+
+const updateSearchInfo = () => {
+    const infoEl = document.getElementById('search-info');
+    
+    if (searchActive) {
+        const totalMatches = countSearchMatches();
+        infoEl.innerHTML = `
+            <span class="search-results">
+                Found <strong>${totalMatches}</strong> event${totalMatches !== 1 ? 's' : ''} 
+                matching "<strong>${currentSearchTerm}</strong>"
+            </span>
+        `;
+        infoEl.style.display = 'block';
+    } else {
+        infoEl.style.display = 'none';
+    }
+};
+
+const countSearchMatches = () => {
+    let count = 0;
+    const filter = window.timelineData.currentFilter;
+    
+    window.timelineData.all.forEach(event => {
+        // Apply category filter first
+        const categoryMatch = filter === 'all' || event.entity === filter;
+        if (!categoryMatch) return;
+        
+        // Apply entity filter if active
+        if (entityFilterActive && currentEntityFilter) {
+            const entityMatch = event.entity === currentEntityFilter || 
+                               event.details?.relationships?.includes(currentEntityFilter);
+            if (!entityMatch) return;
+        }
+        
+        // Check search match
+        if (eventMatchesSearch(event, currentSearchTerm)) {
+            count++;
+        }
+    });
+    
+    return count;
 };
