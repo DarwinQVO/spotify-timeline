@@ -153,9 +153,13 @@ const getEmojiForEntity = (entityName) => {
 
 // Zoom functionality
 let currentZoom = 1;
-const minZoom = 0.5;
-const maxZoom = 2;
+const minZoom = 0.2;  // Increased zoom out range for better overview
+const maxZoom = 3;    // Increased zoom in range for detail viewing
 const zoomStep = 0.1;
+
+// Entity filtering
+let currentEntityFilter = null;
+let entityFilterActive = false;
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
@@ -228,9 +232,19 @@ const renderTimeline = () => {
     let html = '';
     
     Object.keys(eventsByYear).sort((a, b) => a - b).forEach(year => {
-        const yearEvents = eventsByYear[year].filter(event => 
+        let yearEvents = eventsByYear[year].filter(event => 
             filter === 'all' || event.entity === filter
         );
+        
+        // Apply entity filter if active
+        if (entityFilterActive && currentEntityFilter) {
+            yearEvents = yearEvents.filter(event => {
+                // Check if entity is in main entity or relationships
+                if (event.entity === currentEntityFilter) return true;
+                if (event.details?.relationships?.includes(currentEntityFilter)) return true;
+                return false;
+            });
+        }
         
         if (yearEvents.length > 0) {
             html += `<div class="year-marker"><h2>${year}</h2></div>`;
@@ -311,12 +325,79 @@ const getEntityClass = (entity) => {
 const updateStats = () => {
     const totalEvents = window.timelineData.all.length;
     const filter = window.timelineData.currentFilter;
-    const visibleEvents = filter === 'all' 
+    
+    let visibleEvents = filter === 'all' 
         ? totalEvents 
         : window.timelineData.all.filter(event => event.entity === filter).length;
     
+    // Apply entity filter if active
+    if (entityFilterActive && currentEntityFilter) {
+        const allFilteredEvents = window.timelineData.all.filter(event => {
+            // First apply category filter
+            const categoryMatch = filter === 'all' || event.entity === filter;
+            if (!categoryMatch) return false;
+            
+            // Then apply entity filter
+            if (event.entity === currentEntityFilter) return true;
+            if (event.details?.relationships?.includes(currentEntityFilter)) return true;
+            return false;
+        });
+        visibleEvents = allFilteredEvents.length;
+    }
+    
     document.getElementById('total-events').textContent = totalEvents;
     document.getElementById('visible-events').textContent = visibleEvents;
+    
+    // Update entity filter indicator
+    updateEntityFilterIndicator();
+};
+
+const updateEntityFilterIndicator = () => {
+    // Create or update entity filter indicator
+    let indicator = document.getElementById('entity-filter-indicator');
+    
+    if (entityFilterActive && currentEntityFilter) {
+        if (!indicator) {
+            indicator = document.createElement('div');
+            indicator.id = 'entity-filter-indicator';
+            indicator.className = 'entity-filter-indicator';
+            document.querySelector('.controls').appendChild(indicator);
+        }
+        
+        const emoji = getEmojiForEntity(currentEntityFilter);
+        indicator.innerHTML = `
+            <span class="filter-info">${emoji} Showing events with: <strong>${currentEntityFilter}</strong></span>
+            <button class="clear-entity-filter" title="Clear entity filter">✕</button>
+        `;
+        
+        // Add clear filter functionality
+        indicator.querySelector('.clear-entity-filter').addEventListener('click', clearEntityFilter);
+    } else {
+        if (indicator) {
+            indicator.remove();
+        }
+    }
+};
+
+const clearEntityFilter = () => {
+    entityFilterActive = false;
+    currentEntityFilter = null;
+    renderTimeline();
+    updateStats();
+};
+
+const filterByEntity = (entityName) => {
+    currentEntityFilter = entityName;
+    entityFilterActive = true;
+    renderTimeline();
+    updateStats();
+    
+    // Close emoji modal if open
+    document.getElementById('emoji-modal').style.display = 'none';
+    
+    // Show notification
+    const emoji = getEmojiForEntity(entityName);
+    showNotification(`${emoji} Filtering by: ${entityName}`, 'info');
 };
 
 const setupEventListeners = () => {
@@ -520,13 +601,20 @@ const createEmojiItem = (entity, category) => {
     
     const currentEmoji = emojiMap[entity] || getEmojiForEntity(entity);
     
+    // Count events for this entity
+    const eventCount = countEventsForEntity(entity);
+    
     item.innerHTML = `
         <input type="text" class="emoji-input" value="${currentEmoji}" maxlength="4" 
                data-entity="${entity}" title="Click to change emoji">
         <div class="entity-details">
             <div class="entity-name">${entity}</div>
             <div class="entity-category">${getCategoryDisplayName(category)}</div>
+            <div class="entity-stats">${eventCount} event${eventCount !== 1 ? 's' : ''}</div>
         </div>
+        <button class="filter-entity-btn" title="Show events with ${entity}">
+            🔍 Filter
+        </button>
     `;
     
     // Add event listener for emoji changes
@@ -537,7 +625,22 @@ const createEmojiItem = (entity, category) => {
         renderTimeline();
     });
     
+    // Add event listener for entity filtering
+    const filterBtn = item.querySelector('.filter-entity-btn');
+    filterBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        filterByEntity(entity);
+    });
+    
     return item;
+};
+
+const countEventsForEntity = (entityName) => {
+    return window.timelineData.all.filter(event => {
+        if (event.entity === entityName) return true;
+        if (event.details?.relationships?.includes(entityName)) return true;
+        return false;
+    }).length;
 };
 
 const getCategoryForEntity = (entity) => {
