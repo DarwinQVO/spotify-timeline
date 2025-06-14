@@ -125,6 +125,24 @@ body {
     }
 }
 
+.search-suggestions {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+.suggestion-link {
+    color: #1ED760;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.suggestion-link:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
 .controls {
     display: flex;
     justify-content: space-between;

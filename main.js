@@ -351,24 +351,26 @@ const updateStats = () => {
     const totalEvents = window.timelineData.all.length;
     const filter = window.timelineData.currentFilter;
     
-    let visibleEvents = filter === 'all' 
-        ? totalEvents 
-        : window.timelineData.all.filter(event => event.entity === filter).length;
-    
-    // Apply entity filter if active
-    if (entityFilterActive && currentEntityFilter) {
-        const allFilteredEvents = window.timelineData.all.filter(event => {
-            // First apply category filter
-            const categoryMatch = filter === 'all' || event.entity === filter;
-            if (!categoryMatch) return false;
-            
-            // Then apply entity filter
-            if (event.entity === currentEntityFilter) return true;
-            if (event.details?.relationships?.includes(currentEntityFilter)) return true;
-            return false;
-        });
-        visibleEvents = allFilteredEvents.length;
-    }
+    // Count visible events based on all active filters
+    const visibleEvents = window.timelineData.all.filter(event => {
+        // Category filter
+        const categoryMatch = filter === 'all' || event.entity === filter;
+        if (!categoryMatch) return false;
+        
+        // Entity filter
+        if (entityFilterActive && currentEntityFilter) {
+            const entityMatch = event.entity === currentEntityFilter || 
+                               event.details?.relationships?.includes(currentEntityFilter);
+            if (!entityMatch) return false;
+        }
+        
+        // Search filter
+        if (searchActive && currentSearchTerm) {
+            if (!eventMatchesSearch(event, currentSearchTerm)) return false;
+        }
+        
+        return true;
+    }).length;
     
     document.getElementById('total-events').textContent = totalEvents;
     document.getElementById('visible-events').textContent = visibleEvents;
@@ -889,18 +891,59 @@ const setupSearch = () => {
 };
 
 const performSearch = (term) => {
-    if (!term || term.length < 2) {
+    if (!term || term.length < 1) {  // Allow single character search
         clearSearch();
         return;
     }
     
-    currentSearchTerm = term.toLowerCase();
+    currentSearchTerm = term;  // Keep original case for better highlighting
     searchActive = true;
     
     // Update UI
     renderTimeline();
     updateStats();
     updateSearchInfo();
+    
+    // Show search suggestions if no results
+    const matches = countSearchMatches();
+    if (matches === 0) {
+        showSearchSuggestions(term);
+    }
+};
+
+const showSearchSuggestions = (term) => {
+    const suggestions = [];
+    const termLower = term.toLowerCase();
+    
+    // Check if it's a partial match for common searches
+    const commonSearches = [
+        'spotify', 'daniel ek', 'apple', 'music', 'streaming', 'launch', 
+        'funding', 'ipo', 'podcast', 'taylor swift', 'joe rogan', 'sweden'
+    ];
+    
+    commonSearches.forEach(search => {
+        if (search.includes(termLower) && search !== termLower) {
+            suggestions.push(search);
+        }
+    });
+    
+    // Check synonyms
+    for (const [key, synonyms] of Object.entries(searchSynonyms)) {
+        if (key.includes(termLower) || synonyms.some(syn => syn.includes(termLower))) {
+            suggestions.push(key);
+        }
+    }
+    
+    if (suggestions.length > 0) {
+        const infoEl = document.getElementById('search-info');
+        infoEl.innerHTML += `
+            <div class="search-suggestions">
+                Did you mean: ${suggestions.slice(0, 3).map(sug => 
+                    `<span class="suggestion-link" onclick="document.getElementById('timeline-search').value='${sug}'; performSearch('${sug}')">${sug}</span>`
+                ).join(', ')}?
+            </div>
+        `;
+    }
 };
 
 const clearSearch = () => {
@@ -915,38 +958,159 @@ const clearSearch = () => {
     updateSearchInfo();
 };
 
+// Smart search with fuzzy matching and synonyms
+const searchSynonyms = {
+    'ipo': ['public', 'listing', 'stock', 'shares', 'dpo', 'direct public offering', 'nyse'],
+    'ceo': ['chief executive', 'founder', 'leader', 'boss', 'executive'],
+    'money': ['funding', 'investment', 'million', 'billion', 'capital', 'revenue', '$', 'crowns', 'dollar', 'fund'],
+    'launch': ['start', 'begin', 'release', 'introduce', 'debut', 'announce', 'launch', 'open'],
+    'music': ['song', 'track', 'streaming', 'audio', 'playlist', 'album', 'artist'],
+    'deal': ['agreement', 'contract', 'partnership', 'acquisition', 'merge', 'acquire', 'buy'],
+    'apple': ['itunes', 'steve jobs', 'ios', 'iphone', 'mac', 'ipod'],
+    'daniel': ['ek', 'daniel ek', 'founder'],
+    'martin': ['lorentzon', 'co-founder', 'martin lorentzon'],
+    'podcast': ['audio', 'show', 'episode', 'gimlet', 'anchor', 'joe rogan', 'podcasting'],
+    'user': ['subscriber', 'customer', 'listener', 'member', 'users', 'people'],
+    'free': ['freemium', 'ad-supported', 'trial', 'gratis'],
+    'premium': ['paid', 'subscription', 'pro', 'paying', 'subscriber'],
+    'global': ['worldwide', 'international', 'expansion', 'world', 'europe', 'asia'],
+    'sweden': ['swedish', 'stockholm', 'nordic', 'scandinavia'],
+    'us': ['usa', 'america', 'united states', 'american', 'u.s.'],
+    'facebook': ['fb', 'zuckerberg', 'social', 'f8'],
+    'google': ['android', 'youtube', 'alphabet'],
+    'amazon': ['alexa', 'echo', 'aws'],
+    'taylor': ['swift', 'taylor swift', '1989'],
+    'joe': ['rogan', 'joe rogan', 'experience', 'jre'],
+    'pirate': ['piracy', 'illegal', 'the pirate bay', 'kazaa', 'napster'],
+    'license': ['licensing', 'rights', 'copyright', 'label', 'labels'],
+    'mobile': ['app', 'iphone', 'android', 'smartphone', 'phone'],
+    '2006': ['founding', 'founded', 'start'],
+    '2008': ['launch', 'sweden launch'],
+    '2011': ['us launch', 'america', 'facebook'],
+    '2018': ['ipo', 'public', 'listing']
+};
+
 const eventMatchesSearch = (event, searchTerm) => {
-    const term = searchTerm.toLowerCase();
+    // Split search into words for multi-word search
+    const searchWords = searchTerm.toLowerCase().split(/\s+/).filter(word => word.length > 0);
     
-    // Search in main fields
-    if (event.event_description.toLowerCase().includes(term)) return true;
-    if (event.entity.toLowerCase().includes(term)) return true;
-    if (event.timestamp.toLowerCase().includes(term)) return true;
-    if (event.supporting_text?.toLowerCase().includes(term)) return true;
+    // Create a searchable text combining all event fields
+    const searchableText = [
+        event.event_description,
+        event.entity,
+        event.timestamp,
+        event.supporting_text || '',
+        event.details?.quote || '',
+        event.details?.milestone || '',
+        event.details?.relevant_info || '',
+        event.details?.metric || '',
+        ...(event.details?.relationships || [])
+    ].join(' ').toLowerCase();
     
-    // Search in details
-    if (event.details) {
-        if (event.details.quote?.toLowerCase().includes(term)) return true;
-        if (event.details.milestone?.toLowerCase().includes(term)) return true;
-        if (event.details.relevant_info?.toLowerCase().includes(term)) return true;
-        if (event.details.metric?.toLowerCase().includes(term)) return true;
+    // Check if ALL search words match (AND logic)
+    for (const searchWord of searchWords) {
+        let wordMatched = false;
         
-        // Search in relationships
-        if (event.details.relationships) {
-            for (const rel of event.details.relationships) {
-                if (rel.toLowerCase().includes(term)) return true;
+        // Direct match
+        if (searchableText.includes(searchWord)) {
+            wordMatched = true;
+        } else {
+            // Check synonyms
+            for (const [key, synonyms] of Object.entries(searchSynonyms)) {
+                if (key === searchWord || synonyms.includes(searchWord)) {
+                    // Check if any synonym matches
+                    if (searchableText.includes(key) || synonyms.some(syn => searchableText.includes(syn))) {
+                        wordMatched = true;
+                        break;
+                    }
+                }
+            }
+            
+            // Fuzzy matching for typos (Levenshtein distance)
+            if (!wordMatched) {
+                const words = searchableText.split(/\s+/);
+                for (const word of words) {
+                    if (fuzzyMatch(searchWord, word, 2)) { // Allow 2 character differences
+                        wordMatched = true;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (!wordMatched) return false;
+    }
+    
+    return true;
+};
+
+// Fuzzy matching function (Levenshtein distance)
+const fuzzyMatch = (str1, str2, maxDistance) => {
+    // Quick length check
+    if (Math.abs(str1.length - str2.length) > maxDistance) return false;
+    
+    // For short words, require exact match
+    if (str1.length <= 3 || str2.length <= 3) {
+        return str1 === str2;
+    }
+    
+    // Calculate Levenshtein distance
+    const matrix = [];
+    for (let i = 0; i <= str2.length; i++) {
+        matrix[i] = [i];
+    }
+    for (let j = 0; j <= str1.length; j++) {
+        matrix[0][j] = j;
+    }
+    
+    for (let i = 1; i <= str2.length; i++) {
+        for (let j = 1; j <= str1.length; j++) {
+            if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j - 1] + 1, // substitution
+                    matrix[i][j - 1] + 1,     // insertion
+                    matrix[i - 1][j] + 1      // deletion
+                );
             }
         }
     }
     
-    return false;
+    return matrix[str2.length][str1.length] <= maxDistance;
 };
 
 const highlightSearchTerm = (text, searchTerm) => {
     if (!text || !searchTerm) return text;
     
-    const regex = new RegExp(`(${escapeRegExp(searchTerm)})`, 'gi');
-    return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+    let highlightedText = text;
+    const searchWords = searchTerm.toLowerCase().split(/\s+/).filter(word => word.length > 0);
+    
+    // Highlight each search word
+    searchWords.forEach(searchWord => {
+        // Direct word highlighting
+        const regex = new RegExp(`(${escapeRegExp(searchWord)})`, 'gi');
+        highlightedText = highlightedText.replace(regex, '<mark class="search-highlight">$1</mark>');
+        
+        // Also highlight synonyms
+        for (const [key, synonyms] of Object.entries(searchSynonyms)) {
+            if (key === searchWord || synonyms.includes(searchWord)) {
+                // Highlight the key
+                const keyRegex = new RegExp(`(${escapeRegExp(key)})`, 'gi');
+                highlightedText = highlightedText.replace(keyRegex, '<mark class="search-highlight">$1</mark>');
+                
+                // Highlight matching synonyms
+                synonyms.forEach(syn => {
+                    if (text.toLowerCase().includes(syn)) {
+                        const synRegex = new RegExp(`(${escapeRegExp(syn)})`, 'gi');
+                        highlightedText = highlightedText.replace(synRegex, '<mark class="search-highlight">$1</mark>');
+                    }
+                });
+            }
+        }
+    });
+    
+    return highlightedText;
 };
 
 const escapeRegExp = (string) => {
@@ -971,6 +1135,8 @@ const updateSearchInfo = () => {
 };
 
 const countSearchMatches = () => {
+    if (!searchActive || !currentSearchTerm) return 0;
+    
     let count = 0;
     const filter = window.timelineData.currentFilter;
     
