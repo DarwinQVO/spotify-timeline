@@ -385,12 +385,24 @@ body {
 .event-supporting {
     font-size: 0.9rem;
     line-height: 1.6;
-    color: #ccc;
-    margin: 10px 0;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.3);
-    border-left: 3px solid #1DB954;
-    border-radius: 8px;
+    color: #e0e0e0;
+    margin: 15px 0;
+    padding: 18px 18px 18px 50px;
+    background: linear-gradient(135deg, rgba(29, 185, 84, 0.08) 0%, rgba(29, 185, 84, 0.03) 100%);
+    border: 1px solid rgba(29, 185, 84, 0.2);
+    border-left: 4px solid #1DB954;
+    border-radius: 10px;
+    font-weight: 400;
+    position: relative;
+}
+
+.event-supporting:before {
+    content: "📋";
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    font-size: 1.2rem;
+    opacity: 0.7;
 }
 
 .event-meta {
@@ -874,10 +886,26 @@ body {
 
 .quote {
     font-style: italic;
-    opacity: 0.9;
-    margin: 10px 0;
-    padding-left: 20px;
-    border-left: 2px solid #1DB954;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #ffd700;
+    margin: 15px 0;
+    padding: 20px 25px 20px 55px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.06) 0%, rgba(255, 215, 0, 0.02) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    border-left: 4px solid #ffd700;
+    border-radius: 12px;
+    position: relative;
+    font-weight: 300;
+}
+
+.quote:before {
+    content: "💬";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 1.3rem;
+    opacity: 0.8;
 }
 
 .no-events {
