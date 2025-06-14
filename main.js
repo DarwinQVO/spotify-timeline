@@ -261,9 +261,15 @@ const renderTimeline = () => {
         
         // Apply search filter if active
         if (searchActive && currentSearchTerm) {
+            const originalCount = yearEvents.length;
             yearEvents = yearEvents.filter(event => {
-                return eventMatchesSearch(event, currentSearchTerm);
+                const matches = eventMatchesSearch(event, currentSearchTerm);
+                if (matches) {
+                    console.log('EVENT MATCHES:', event.event_description.substring(0, 50));
+                }
+                return matches;
             });
+            console.log(`YEAR ${year}: ${originalCount} -> ${yearEvents.length} events after search`);
         }
         
         if (yearEvents.length > 0) {
@@ -933,6 +939,12 @@ const performSearch = (term) => {
     currentSearchTerm = term;  // Keep original case for better highlighting
     searchActive = true;
     
+    console.log('SEARCH DEBUG:', {
+        term,
+        searchActive,
+        currentSearchTerm
+    });
+    
     // Update UI
     renderTimeline();
     updateStats();
@@ -941,9 +953,17 @@ const performSearch = (term) => {
     // Force DOM reflow to ensure search results are visible
     setTimeout(() => {
         const searchResults = document.querySelectorAll('.event.search-result');
-        searchResults.forEach(result => {
+        console.log('SEARCH RESULTS FOUND:', searchResults.length);
+        searchResults.forEach((result, index) => {
             result.style.opacity = '1';
             result.style.transform = 'translateY(0)';
+            result.style.display = 'block';
+            result.style.visibility = 'visible';
+            console.log(`Result ${index}:`, {
+                opacity: result.style.opacity,
+                display: window.getComputedStyle(result).display,
+                visibility: window.getComputedStyle(result).visibility
+            });
         });
     }, 50);
     
