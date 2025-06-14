@@ -234,7 +234,15 @@ const renderTimeline = () => {
     const filter = window.timelineData.currentFilter;
     const eventsByYear = window.timelineData.byYear;
     
+    console.log('renderTimeline called', {
+        searchActive,
+        currentSearchTerm,
+        filter,
+        totalYears: Object.keys(eventsByYear).length
+    });
+    
     let html = '';
+    let totalEvents = 0;
     
     Object.keys(eventsByYear).sort((a, b) => a - b).forEach(year => {
         let yearEvents = eventsByYear[year].filter(event => 
@@ -260,6 +268,7 @@ const renderTimeline = () => {
         
         if (yearEvents.length > 0) {
             html += `<div class="year-marker"><h2>${year}</h2></div>`;
+            totalEvents += yearEvents.length;
             
             yearEvents.forEach((event, index) => {
                 const entityClass = getEntityClass(event.entity);
@@ -283,10 +292,10 @@ const renderTimeline = () => {
                     : event.supporting_text;
                 
                 html += `
-                    <div class="event ${searchActive ? 'search-result' : ''}" style="animation-delay: ${index * 0.1}s">
+                    <div class="event ${searchActive ? 'search-result' : ''}" style="animation-delay: ${searchActive ? '0s' : (index * 0.1) + 's'}; ${searchActive ? 'opacity: 1 !important; transform: translateY(0) !important;' : 'opacity: 0;'}">
                         <div class="event-dot"></div>
                         <div class="event-content" data-event-id="${window.timelineData.all.indexOf(event)}" 
-                             data-certainty="${event.certainty}" data-page="${event.page_number}">
+                             data-certainty="${event.certainty}" data-page="${event.page_number}" style="${searchActive ? 'opacity: 1 !important; transform: translateY(0) !important;' : ''}">
                             <div class="event-date">${event.timestamp}</div>
                             ${showEntityPill ? `<div class="event-entity entity-${entityClass}">${event.entity}</div>` : ''}
                             <div class="event-title">${highlightedTitle}</div>
@@ -306,7 +315,32 @@ const renderTimeline = () => {
         }
     });
     
+    console.log('Rendering complete', {
+        totalEvents,
+        htmlLength: html.length,
+        searchActive,
+        currentSearchTerm
+    });
+    
     container.innerHTML = html || '<div class="no-events">No events found for this filter</div>';
+    
+    // Ensure search results are immediately visible
+    if (searchActive && currentSearchTerm) {
+        requestAnimationFrame(() => {
+            const searchResults = document.querySelectorAll('.event.search-result');
+            console.log('Found search result elements:', searchResults.length);
+            searchResults.forEach((result, index) => {
+                result.style.opacity = '1';
+                result.style.transform = 'translateY(0)';
+                result.style.animationDelay = '0s';
+                console.log(`Search result ${index} visibility:`, {
+                    opacity: result.style.opacity,
+                    display: window.getComputedStyle(result).display,
+                    visibility: window.getComputedStyle(result).visibility
+                });
+            });
+        });
+    }
 };
 
 const renderDetails = (details, shouldHighlight = false) => {
@@ -904,6 +938,15 @@ const performSearch = (term) => {
     updateStats();
     updateSearchInfo();
     
+    // Force DOM reflow to ensure search results are visible
+    setTimeout(() => {
+        const searchResults = document.querySelectorAll('.event.search-result');
+        searchResults.forEach(result => {
+            result.style.opacity = '1';
+            result.style.transform = 'translateY(0)';
+        });
+    }, 50);
+    
     // Show search suggestions if no results
     const matches = countSearchMatches();
     if (matches === 0) {
@@ -956,6 +999,17 @@ const clearSearch = () => {
     renderTimeline();
     updateStats();
     updateSearchInfo();
+    
+    // Restore normal animation for non-search events
+    setTimeout(() => {
+        const events = document.querySelectorAll('.event');
+        events.forEach((event, index) => {
+            if (!event.classList.contains('search-result')) {
+                event.style.animationDelay = (index * 0.1) + 's';
+                event.style.opacity = '';
+            }
+        });
+    }, 50);
 };
 
 // Smart search with fuzzy matching and synonyms
