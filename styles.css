@@ -33,10 +33,42 @@ body {
     margin-bottom: 20px;
 }
 
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
 .filters {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
+}
+
+.zoom-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.zoom-controls button {
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    min-width: 40px;
+}
+
+.zoom-controls button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
 }
 
 .filter-btn {
@@ -183,6 +215,23 @@ body {
     font-weight: 500;
 }
 
+.relationship-emojis {
+    font-size: 1.2rem;
+    margin: 8px 0;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.event-content:hover .relationship-emojis {
+    opacity: 1;
+}
+
+.relationship-tag {
+    background: rgba(29, 185, 84, 0.1);
+    border-color: rgba(29, 185, 84, 0.3);
+    color: #1ED760;
+}
+
 .entity-spotify {
     background: rgba(29, 185, 84, 0.2);
     color: #1ED760;
@@ -276,16 +325,43 @@ body {
     padding: 15px;
     border-radius: 10px;
     font-size: 0.85rem;
-    max-width: 300px;
+    max-width: 320px;
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 1000;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
 }
 
 .tooltip.show {
     opacity: 1;
+}
+
+.tooltip-header {
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tooltip-meta {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+    font-size: 0.75rem;
+}
+
+.tooltip-meta span {
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.tooltip-info {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: #ccc;
+    margin-top: 8px;
 }
 
 .stats {
@@ -298,6 +374,11 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.85rem;
     backdrop-filter: blur(10px);
+}
+
+/* Smooth zoom transitions */
+.timeline-container {
+    transition: transform 0.2s ease;
 }
 
 @media (max-width: 768px) {
@@ -316,6 +397,29 @@ body {
     
     .header h1 {
         font-size: 1.8rem;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .filters {
+        justify-content: center;
+    }
+    
+    .zoom-controls {
+        justify-content: center;
+    }
+    
+    .relationship-emojis {
+        font-size: 1rem;
+    }
+    
+    .tooltip {
+        max-width: 280px;
+        font-size: 0.8rem;
     }
 }
 

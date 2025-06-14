@@ -9,11 +9,18 @@
 <body>
     <div class="header">
         <h1>Spotify Timeline</h1>
-        <div class="filters">
-            <button class="filter-btn active" data-filter="all">All Events (144)</button>
-            <button class="filter-btn" data-filter="Spotify">Spotify (107)</button>
-            <button class="filter-btn" data-filter="Daniel Ek (pre-Spotify)">Daniel Ek (pre-Spotify) (11)</button>
-            <button class="filter-btn" data-filter="Music Industry">Music Industry (34)</button>
+        <div class="controls">
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All Events (144)</button>
+                <button class="filter-btn" data-filter="Spotify">Spotify (107)</button>
+                <button class="filter-btn" data-filter="Daniel Ek (pre-Spotify)">Daniel Ek (pre-Spotify) (11)</button>
+                <button class="filter-btn" data-filter="Music Industry">Music Industry (34)</button>
+            </div>
+            <div class="zoom-controls">
+                <button id="zoom-out" title="Zoom Out (Ctrl + Scroll)">🔍➖</button>
+                <button id="zoom-reset" title="Reset Zoom">↻</button>
+                <button id="zoom-in" title="Zoom In (Ctrl + Scroll)">🔍➕</button>
+            </div>
         </div>
     </div>
 
