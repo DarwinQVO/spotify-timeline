@@ -60,6 +60,22 @@
 
     <div class="tooltip" id="tooltip"></div>
 
+    <!-- PDF Viewer Panel -->
+    <div id="pdf-panel" class="pdf-panel hidden">
+        <div class="pdf-header">
+            <span class="pdf-title">📄 Spotify Book - Page <span id="current-page">1</span></span>
+            <div class="pdf-controls">
+                <button class="pdf-btn pdf-minimize" title="Minimize">_</button>
+                <button class="pdf-btn pdf-maximize" title="Maximize">□</button>
+                <button class="pdf-btn pdf-close" title="Close">✕</button>
+            </div>
+        </div>
+        <div class="pdf-content">
+            <iframe id="pdf-frame" src="" frameborder="0"></iframe>
+        </div>
+        <div class="pdf-resize-handle"></div>
+    </div>
+
     <!-- Emoji Management Modal -->
     <div id="emoji-modal" class="modal">
         <div class="modal-content">

@@ -211,6 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupZoomControls();
     setupEmojiManager();
     setupSearch();
+    setupPdfViewer();
 });
 
 const parseYear = (timestamp) => {
@@ -553,7 +554,7 @@ const setupEventListeners = () => {
                 // Add metadata
                 tooltipContent += `<div class="tooltip-meta">
                     <span class="certainty-${certainty}">Certainty: ${certainty}</span>
-                    <span>Page: ${page}</span>
+                    <span>Page: <span class="page-clickable" onclick="window.openPdfAtPage(${page})" title="Click to open PDF at page ${page}">${page}</span></span>
                 </div>`;
                 
                 // Add relevant info if available
@@ -563,6 +564,9 @@ const setupEventListeners = () => {
                 
                 tooltip.innerHTML = tooltipContent;
                 tooltip.classList.add('show');
+                
+                // Make tooltip clickable for page numbers
+                tooltip.style.pointerEvents = 'auto';
                 
                 // Position tooltip
                 const rect = eventContent.getBoundingClientRect();
@@ -574,8 +578,17 @@ const setupEventListeners = () => {
     });
     
     document.addEventListener('mouseout', (e) => {
-        if (!e.target.closest('.event-content')) {
+        if (!e.target.closest('.event-content') && !e.target.closest('.tooltip')) {
             tooltip.classList.remove('show');
+            tooltip.style.pointerEvents = 'none';
+        }
+    });
+    
+    // Hide tooltip when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.event-content') && !e.target.closest('.tooltip')) {
+            tooltip.classList.remove('show');
+            tooltip.style.pointerEvents = 'none';
         }
     });
 };
@@ -1253,4 +1266,155 @@ const countSearchMatches = () => {
     });
     
     return count;
+};
+
+// PDF Viewer functionality
+const setupPdfViewer = () => {
+    const pdfPanel = document.getElementById('pdf-panel');
+    const pdfFrame = document.getElementById('pdf-frame');
+    const currentPageSpan = document.getElementById('current-page');
+    const pdfHeader = document.querySelector('.pdf-header');
+    const minimizeBtn = document.querySelector('.pdf-minimize');
+    const maximizeBtn = document.querySelector('.pdf-maximize');
+    const closeBtn = document.querySelector('.pdf-close');
+    const resizeHandle = document.querySelector('.pdf-resize-handle');
+    
+    let isDragging = false;
+    let isResizing = false;
+    let dragOffset = { x: 0, y: 0 };
+    let isMaximized = false;
+    let originalBounds = null;
+    
+    // Open PDF at specific page
+    window.openPdfAtPage = (pageNumber) => {
+        if (!pageNumber) pageNumber = 1;
+        
+        currentPageSpan.textContent = pageNumber;
+        pdfFrame.src = `book.pdf#page=${pageNumber}`;
+        pdfPanel.classList.remove('hidden');
+        
+        // Animate panel in
+        pdfPanel.style.transform = 'translateX(100%)';
+        pdfPanel.style.opacity = '0';
+        
+        setTimeout(() => {
+            pdfPanel.style.transform = 'translateX(0)';
+            pdfPanel.style.opacity = '1';
+        }, 10);
+    };
+    
+    // Panel controls
+    minimizeBtn.addEventListener('click', () => {
+        pdfPanel.classList.toggle('minimized');
+    });
+    
+    maximizeBtn.addEventListener('click', () => {
+        if (isMaximized) {
+            // Restore
+            if (originalBounds) {
+                pdfPanel.style.top = originalBounds.top;
+                pdfPanel.style.left = originalBounds.left;
+                pdfPanel.style.width = originalBounds.width;
+                pdfPanel.style.height = originalBounds.height;
+                pdfPanel.style.right = 'auto';
+                pdfPanel.style.bottom = 'auto';
+            }
+            pdfPanel.classList.remove('maximized');
+            isMaximized = false;
+        } else {
+            // Maximize
+            originalBounds = {
+                top: pdfPanel.style.top || '20%',
+                left: pdfPanel.style.left || 'auto',
+                width: pdfPanel.style.width || '45%',
+                height: pdfPanel.style.height || '60%'
+            };
+            pdfPanel.classList.add('maximized');
+            isMaximized = true;
+        }
+    });
+    
+    closeBtn.addEventListener('click', () => {
+        pdfPanel.style.transform = 'translateX(100%)';
+        pdfPanel.style.opacity = '0';
+        
+        setTimeout(() => {
+            pdfPanel.classList.add('hidden');
+            pdfFrame.src = '';
+        }, 300);
+    });
+    
+    // Dragging functionality
+    pdfHeader.addEventListener('mousedown', (e) => {
+        if (isMaximized) return;
+        
+        isDragging = true;
+        const rect = pdfPanel.getBoundingClientRect();
+        dragOffset.x = e.clientX - rect.left;
+        dragOffset.y = e.clientY - rect.top;
+        
+        pdfHeader.style.cursor = 'grabbing';
+        document.body.style.userSelect = 'none';
+    });
+    
+    // Resizing functionality
+    resizeHandle.addEventListener('mousedown', (e) => {
+        if (isMaximized) return;
+        
+        e.stopPropagation();
+        isResizing = true;
+        document.body.style.userSelect = 'none';
+        document.body.style.cursor = 'se-resize';
+    });
+    
+    // Global mouse handlers
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging && !isMaximized) {
+            const x = e.clientX - dragOffset.x;
+            const y = e.clientY - dragOffset.y;
+            
+            // Keep panel within viewport
+            const maxX = window.innerWidth - pdfPanel.offsetWidth;
+            const maxY = window.innerHeight - pdfPanel.offsetHeight;
+            
+            pdfPanel.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
+            pdfPanel.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
+            pdfPanel.style.right = 'auto';
+        }
+        
+        if (isResizing && !isMaximized) {
+            const rect = pdfPanel.getBoundingClientRect();
+            const newWidth = e.clientX - rect.left;
+            const newHeight = e.clientY - rect.top;
+            
+            // Set minimum dimensions
+            const minWidth = 300;
+            const minHeight = 200;
+            
+            if (newWidth >= minWidth) {
+                pdfPanel.style.width = newWidth + 'px';
+            }
+            if (newHeight >= minHeight) {
+                pdfPanel.style.height = newHeight + 'px';
+            }
+        }
+    });
+    
+    document.addEventListener('mouseup', () => {
+        if (isDragging) {
+            isDragging = false;
+            pdfHeader.style.cursor = 'move';
+            document.body.style.userSelect = '';
+        }
+        
+        if (isResizing) {
+            isResizing = false;
+            document.body.style.userSelect = '';
+            document.body.style.cursor = '';
+        }
+    });
+    
+    // Prevent text selection while dragging
+    pdfHeader.addEventListener('selectstart', (e) => e.preventDefault());
+    resizeHandle.addEventListener('selectstart', (e) => e.preventDefault());
 };

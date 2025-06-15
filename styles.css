@@ -515,6 +515,7 @@ body {
 
 .tooltip.show {
     opacity: 1;
+    pointer-events: auto;
 }
 
 .tooltip-header {
@@ -955,4 +956,143 @@ body {
     text-align: center;
     padding: 50px;
     color: #666;
+}
+
+/* PDF Viewer Panel */
+.pdf-panel {
+    position: fixed;
+    top: 20%;
+    right: 20px;
+    width: 45%;
+    height: 60%;
+    background: #2a2a2a;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    transition: all 0.3s ease;
+    resize: both;
+    min-width: 300px;
+    min-height: 200px;
+}
+
+.pdf-panel.hidden {
+    display: none;
+}
+
+.pdf-panel.minimized {
+    height: 40px;
+    overflow: hidden;
+}
+
+.pdf-panel.maximized {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+}
+
+.pdf-header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+    user-select: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pdf-title {
+    color: #1ED760;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.pdf-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.pdf-btn {
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ccc;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdf-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.pdf-close:hover {
+    background: rgba(255, 100, 100, 0.3);
+    color: #ff6464;
+}
+
+.pdf-content {
+    height: calc(100% - 50px);
+    overflow: hidden;
+}
+
+.pdf-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.pdf-resize-handle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(-45deg, transparent 40%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0.1) 60%, transparent 60%);
+    cursor: se-resize;
+    border-bottom-right-radius: 12px;
+}
+
+/* Page Number Clickeable Style */
+.page-clickable {
+    cursor: pointer;
+    color: #1ED760;
+    text-decoration: underline;
+    transition: all 0.2s ease;
+    font-weight: 600;
+}
+
+.page-clickable:hover {
+    color: #fff;
+    background: rgba(29, 185, 84, 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+/* Animation for PDF panel */
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.pdf-panel:not(.hidden) {
+    animation: slideInFromRight 0.3s ease-out;
 }
