@@ -18,10 +18,26 @@
         </div>
         <div class="controls">
             <div class="filters">
-                <button class="filter-btn active" data-filter="all">All Events (144)</button>
-                <button class="filter-btn" data-filter="Spotify">Spotify (107)</button>
-                <button class="filter-btn" data-filter="Daniel Ek (pre-Spotify)">Daniel Ek (pre-Spotify) (11)</button>
-                <button class="filter-btn" data-filter="Music Industry">Music Industry (34)</button>
+                <button class="filter-btn active" data-filter="all">All Events (152)</button>
+                <button class="filter-btn" data-filter="Spotify">Spotify</button>
+                <button class="filter-btn" data-filter="Daniel Ek">Daniel Ek</button>
+                <button class="filter-btn" data-filter="Music Industry">Music Industry</button>
+            </div>
+            <div class="subsection-filters">
+                <label>Filter by Category:</label>
+                <select id="subsection-filter">
+                    <option value="all">All Categories</option>
+                    <option value="Company Formation & Launch Events">🚀 Company Formation & Launch</option>
+                    <option value="Product Development & Milestones">💻 Product Development</option>
+                    <option value="Financial & Business Transactions">💰 Financial & Business</option>
+                    <option value="Strategic Partnerships & Deals">🤝 Strategic Partnerships</option>
+                    <option value="Key Personnel Events">👥 Key Personnel</option>
+                    <option value="Artist & Label Relations/Conflicts">🎵 Artist & Label Relations</option>
+                    <option value="Personal Life Events of Key Figures">👤 Personal Life Events</option>
+                    <option value="Market Dynamics & Competitive Landscape">📊 Market Dynamics</option>
+                    <option value="Legal, Regulatory & Policy Events">⚖️ Legal & Regulatory</option>
+                    <option value="Public Statements, Appearances & PR">📢 Public Statements & PR</option>
+                </select>
             </div>
             <div class="zoom-controls">
                 <button id="zoom-out" title="Zoom Out (Ctrl + Scroll)">🔍➖</button>
@@ -38,7 +54,7 @@
     </div>
 
     <div class="stats" id="stats">
-        <div>Total Events: <span id="total-events">144</span></div>
+        <div>Total Events: <span id="total-events">152</span></div>
         <div>Visible: <span id="visible-events">0</span></div>
     </div>
 

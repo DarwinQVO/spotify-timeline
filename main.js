@@ -2,11 +2,8 @@
 const defaultEmojiMap = {
     // Core People
     'Daniel Ek': '👨‍💻',
-    'Daniel Ek (Spotify CEO)': '👨‍💻',
-    'Daniel Ek (pre-Spotify)': '👨‍💻',
     'Martin Lorentzon': '👨‍💼',
     'Steve Jobs': '🍎',
-    'Steve Jobs (Apple CEO)': '🍎',
     'Taylor Swift': '👩‍🎤',
     'Joe Rogan': '🎙️',
     'Jay-Z': '🎤',
@@ -200,7 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.timelineData = {
         all: processedEvents,
         byYear: eventsByYear,
-        currentFilter: 'all'
+        currentFilter: 'all',
+        currentSubsectionFilter: 'all'
     };
 
     // Load custom emoji settings
@@ -216,15 +214,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const parseYear = (timestamp) => {
-    // Extract year from various timestamp formats
-    const yearMatch = timestamp.match(/\b(19\d{2}|20\d{2})\b/);
-    if (yearMatch) return parseInt(yearMatch[1]);
-    
-    // Handle special cases
+    // Handle special cases first
     if (timestamp.includes('Childhood') || timestamp.includes('born')) return 1983;
     if (timestamp.includes('Around 1992-1994')) return 1993;
     if (timestamp.includes('Around 1999-2000')) return 1999;
     if (timestamp.includes('Around 2001-2002')) return 2001;
+    
+    // Extract year from various timestamp formats
+    const yearMatch = timestamp.match(/\b(19\d{2}|20\d{2})\b/);
+    if (yearMatch) return parseInt(yearMatch[1]);
     
     return 2020; // Default for very recent events
 };
@@ -249,6 +247,7 @@ const renderTimeline = () => {
             filter === 'all' || event.entity === filter
         );
         
+        
         // Apply entity filter if active
         if (entityFilterActive && currentEntityFilter) {
             yearEvents = yearEvents.filter(event => {
@@ -257,6 +256,13 @@ const renderTimeline = () => {
                 if (event.details?.relationships?.includes(currentEntityFilter)) return true;
                 return false;
             });
+        }
+        
+        // Apply subsection filter if active
+        if (window.timelineData.currentSubsectionFilter && window.timelineData.currentSubsectionFilter !== 'all') {
+            yearEvents = yearEvents.filter(event => 
+                event.subsection_type === window.timelineData.currentSubsectionFilter
+            );
         }
         
         // Apply search filter if active
@@ -298,12 +304,13 @@ const renderTimeline = () => {
                     : event.supporting_text;
                 
                 html += `
-                    <div class="event ${searchActive ? 'search-result' : ''}" style="animation-delay: ${searchActive ? '0s' : (index * 0.1) + 's'}; ${searchActive ? 'opacity: 1 !important; transform: translateY(0) !important;' : 'opacity: 0;'}">
+                    <div class="event ${searchActive ? 'search-result' : ''}" style="animation-delay: ${index * 0.1}s;">
                         <div class="event-dot"></div>
                         <div class="event-content" data-event-id="${window.timelineData.all.indexOf(event)}" 
-                             data-certainty="${event.certainty}" data-page="${event.page_number}" style="${searchActive ? 'opacity: 1 !important; transform: translateY(0) !important;' : ''}">
+                             data-certainty="${event.certainty}" data-page="${event.page_number}">
                             <div class="event-date">${event.timestamp}</div>
                             ${showEntityPill ? `<div class="event-entity entity-${entityClass}">${event.entity}</div>` : ''}
+                            ${event.subsection_type ? `<div class="event-subsection">${event.subsection_type}</div>` : ''}
                             <div class="event-title">${highlightedTitle}</div>
                             ${relationshipEmojis ? `<div class="relationship-emojis">${relationshipEmojis}</div>` : ''}
                             
@@ -325,8 +332,10 @@ const renderTimeline = () => {
         totalEvents,
         htmlLength: html.length,
         searchActive,
-        currentSearchTerm
+        currentSearchTerm,
+        filter
     });
+    
     
     container.innerHTML = html || '<div class="no-events">No events found for this filter</div>';
     
@@ -476,13 +485,24 @@ const setupEventListeners = () => {
             e.target.classList.add('active');
             
             // Update filter
-            window.timelineData.currentFilter = e.target.dataset.filter;
+            const selectedFilter = e.target.dataset.filter;
+            window.timelineData.currentFilter = selectedFilter;
             
             // Re-render
             renderTimeline();
             updateStats();
         });
     });
+    
+    // Subsection filter
+    const subsectionFilter = document.getElementById('subsection-filter');
+    if (subsectionFilter) {
+        subsectionFilter.addEventListener('change', (e) => {
+            window.timelineData.currentSubsectionFilter = e.target.value;
+            renderTimeline();
+            updateStats();
+        });
+    }
     
     // Event content expansion
     document.addEventListener('click', (e) => {

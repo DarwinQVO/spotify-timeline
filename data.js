@@ -1,5 +1,5 @@
-// Timeline data - simplified version
-console.log('Loading timeline data...');
+// Updated Timeline data with subsection_type and unified relationships
+console.log('Loading updated timeline data...');
 
 window.timelineData = {
     timeline_events: [
@@ -8,221 +8,379 @@ window.timelineData = {
             event_description: "Daniel Ek suspects Steve Jobs is behind delays in Spotify's US launch.",
             timestamp: "End of 2010",
             page_number: 6,
-            supporting_text: "Toward the end of 2010, Spotify had spent two years amassing seven million users in Europe. But the company's crucial US launch faced massive delays.",
+            supporting_text: "Toward the end of 2010, Spotify had spent two years amassing seven million users in Europe. But the company's crucial US launch faced massive delays. Founder and CEO Daniel Ek was struggling to understand why. \"He called and breathed down the line,\" he told one of his staff members, who would later recount the conversation. \"Who?\" the colleague said. \"Steve Jobs,\" Daniel replied.",
             certainty: "estimate",
             details: {
                 metric: "Seven million users in Europe (Spotify)",
                 milestone: "Spotify's US launch faced massive delays",
-                quote: "Steve Jobs, Daniel replied.",
-                relationships: ["Daniel Ek (Spotify CEO)", "Steve Jobs (Apple CEO)"],
+                quote: "\"Steve Jobs,\" Daniel replied.",
+                relationships: ["Steve Jobs"],
                 relevant_info: "Apple was the world's largest platform for digital music distribution with iTunes."
-            }
+            },
+            subsection_type: "Artist & Label Relations/Conflicts"
         },
         {
             entity: "Music Industry",
-            event_description: "Apple's iTunes model, based on 99 cents per song downloads, was dominant but Android phones were not part of the ecosystem.",
+            event_description: "Apple's iTunes model (99 cents/song) was dominant; Android phones were not part of its ecosystem.",
             timestamp: "End of 2010",
             page_number: 6,
-            supporting_text: "The iTunes model, based on downloads for 99 cents per song, worked on any Apple device, and on PCs. But Android phones were not part of the iTunes ecosystem.",
+            supporting_text: "The iTunes model, based on downloads for 99 cents per song, worked on any Apple device, and on PCs. But Android phones were not part of the iTunes ecosystem, and Steve Jobs liked it that way.",
             certainty: "certain",
             details: {
                 metric: "99 cents per song (iTunes model)",
                 relevant_info: "Steve Jobs viewed music as a crucial weapon in a 'holy war' against Google's Android.",
-                relationships: ["Apple (iTunes)", "Google (Android)"]
-            }
+                relationships: ["Apple", "Google"]
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify's US launch delays cause investor nervousness and negative user growth for the first time.",
+            timestamp: "Late 2010",
+            page_number: 7,
+            supporting_text: "But suddenly, Universal's executives refused to sign. The machine ground to a halt, and Spotify's investors were becoming nervous. In fact, Spotify would soon start to see negative user growth for the first time. It could all come crashing down.",
+            certainty: "certain",
+            details: {
+                milestone: "Universal Music executives refused to sign deal for US launch.",
+                metric: "Negative user growth for the first time.",
+                relationships: ["Spotify", "Universal Music"],
+                relevant_info: "Steve Jobs was badmouthing Spotify and ad-funded music streaming to label executives."
+            },
+            subsection_type: "Financial & Business Transactions"
         },
         {
             entity: "Spotify",
             event_description: "Spotify launched in Sweden in 2008.",
             timestamp: "2008",
             page_number: 7,
-            supporting_text: "Since launching in Sweden in 2008, Spotify can rightfully claim to have saved the music industry.",
+            supporting_text: "WHAT HAPPENED IN the following years now belongs to history. Since launching in Sweden in 2008, Spotify can rightfully claim to have saved the",
             certainty: "certain",
             details: {
                 milestone: "Spotify launch in Sweden."
-            }
-        },
-        {
-            entity: "Daniel Ek (pre-Spotify)",
-            event_description: "Daniel Ek, aged 22, interviews for a job with Mattias Miksche (CEO of Stardoll) at a pub.",
-            timestamp: "Fall of 2005",
-            page_number: 10,
-            supporting_text: "In the fall of 2005, Daniel Ek passed through Vasastan and arrived at a pub called Man in the Moon for his job interview.",
-            certainty: "certain",
-            details: {
-                milestone: "Offered CTO role at Stardoll, joined as a consultant.",
-                relationships: ["Daniel Ek", "Mattias Miksche (Stardoll)"],
-                quote: "I'd like you to be our new CTO, Mattias Miksche said."
-            }
+            },
+            subsection_type: "Company Formation & Launch Events"
         },
         {
             entity: "Spotify",
-            event_description: "Martin Lorentzon invests ten million crowns (over $1M USD) into the new company with Daniel Ek.",
+            event_description: "Daniel Ek states Spotify's success was due to commitment to freemium and starting in Sweden.",
+            timestamp: "August 2018",
+            page_number: 8,
+            supporting_text: "\"I'll give you two reasons,\" he replied. \"First of all, we were committed to the freemium business model when no one else was. This was very controversial. \"Second, we started in Sweden, proved our model, opened up in more European countries, and grew organically one country at a time. That's what finally made the music industry realize that our model was the future.\"",
+            certainty: "certain",
+            details: {
+                quote: "\"First of all, we were committed to the freemium business model when no one else was... Second, we started in Sweden, proved our model, opened up in more European countries, and grew organically one country at a time.\" - Daniel Ek",
+                relevant_info: "Quote from an interview with the book's authors."
+            },
+            subsection_type: "Public Statements, Appearances & PR"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify user base expected to surpass 350 million (2021 projection).",
+            timestamp: "2021 (expected)",
+            page_number: 8,
+            supporting_text: "With a market cap in the tens of billions on Wall Street, Spotify is the largest music streaming company in the world, with more than fifty million songs, over a million podcasts, business in more than ninety countries, and a user base expected to surpass 350 million in 2021.",
+            certainty: "estimate",
+            details: {
+                metric: "User base expected to surpass 350 million.",
+                relevant_info: "Spotify has >50M songs, >1M podcasts, business in >90 countries."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek (aged 22) interviews with Mattias Miksche (CEO of Stardoll); offered CTO, joined as consultant.",
+            timestamp: "Fall of 2005",
+            page_number: 10,
+            supporting_text: "In the fall of 2005, Daniel Ek passed through Vasastan...Daniel walked down Tegnérgatan until he arrived at the site of his job interview, a pub called Man in the Moon...Mattias Miksche was dressed like your average tech entrepreneur-t-shirt and suit jacket. He had just become CEO of Stardoll... \"I'd like you to be our new CTO,\" Mattias Miksche said, at last. Daniel was ready and willing, but he wanted to join only as a consultant... \"I have another thing that I'll need to take care of,\" he explained.",
+            certainty: "certain",
+            details: {
+                milestone: "Offered CTO role at Stardoll, joined as a consultant.",
+                relationships: ["Mattias Miksche"],
+                quote: "\"I'd like you to be our new CTO,\" Mattias Miksche said, at last. Daniel was ready and willing, but he wanted to join only as a consultant... \"I have another thing that I'll need to take care of,\" he explained."
+            },
+            subsection_type: "Key Personnel Events"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek first meets Martin Lorentzon pitching Tradedoubler a product search engine.",
+            timestamp: "Summer 2005",
+            page_number: 11,
+            supporting_text: "He had recently met Martin Lorentzon... The pair first met in summer 2005, when Daniel tried to pitch Tradedoubler on a product search engine akin to Google's \"Froogle\"",
+            certainty: "certain",
+            details: {
+                relationships: ["Martin Lorentzon"],
+                relevant_info: "Martin wasn't very impressed initially."
+            },
+            subsection_type: "Personal Life Events of Key Figures"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Tradedoubler (Martin Lorentzon's company) IPOs on Stockholm Stock Exchange, Lorentzon sells shares for ~$12M.",
+            timestamp: "November 8, 2005",
+            page_number: 14,
+            supporting_text: "On November 8, 2005, Tradedoubler was listed on the Stockholm Stock Exchange. Martin Lorentzon was now able to sell a large portion of his shares for nearly $12 million.",
+            certainty: "certain",
+            details: {
+                metric: "Martin Lorentzon sold shares for nearly $12 million.",
+                milestone: "Tradedoubler IPO.",
+                relationships: ["Martin Lorentzon", "Felix Hagnö", "Tradedoubler"]
+            },
+            subsection_type: "Financial & Business Transactions"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Martin Lorentzon invests ten million crowns (over $1M USD) as seed funding for Spotify.",
             timestamp: "Early 2006",
             page_number: 15,
-            supporting_text: "I'll put in ten million crowns, Martin said. Daniel found the money, worth more than a million dollars, in his bank account the next day.",
+            supporting_text: "\"I'll put in ten million crowns,\" Martin said at one point. Daniel would later describe how he checked his bank account the next day and found the money, a sum worth more than a million dollars, sitting there.",
             certainty: "certain",
             details: {
                 metric: "Ten million crowns (over $1M USD) initial investment.",
                 milestone: "Initial seed funding from Martin Lorentzon.",
                 relationships: ["Daniel Ek", "Martin Lorentzon"]
-            }
+            },
+            subsection_type: "Financial & Business Transactions"
         },
         {
             entity: "Spotify",
             event_description: "The name 'Spotify' is conceived and spotify.com domain purchased.",
             timestamp: "Early 2006",
             page_number: 15,
-            supporting_text: "They sat in Daniel's apartment, calling out words hoping to name their company. Martin heard 'Spotify' and purchased the domain worldwide.",
+            supporting_text: "They would later tell the story of them sitting in Daniel's apartment, calling out words in the hope of naming their company something great that wasn't already taken. Martin thought he heard Daniel call out, \"Spotify\" from another room. He typed \"spotify.com\" into his browser and nothing came up. He proceeded to purchase the domain name all over the world.",
             certainty: "certain",
             details: {
                 milestone: "Company naming and domain acquisition.",
                 relevant_info: "Daniel maintains Martin misheard him, but the name stuck."
-            }
+            },
+            subsection_type: "Company Formation & Launch Events"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek sells Advertigo to Tradedoubler for $1.3 million.",
+            timestamp: "Late March 2006",
+            page_number: 16,
+            supporting_text: "In late March 2006, Daniel Ek sold Advertigo to Tradedoubler for $1.3 million. The company had no income and basically consisted of some advertising technology and a few tech consultants.",
+            certainty: "certain",
+            details: {
+                metric: "$1.3 million (sale price of Advertigo)",
+                milestone: "Daniel Ek secures personal funds.",
+                relationships: ["Tradedoubler", "Advertigo"]
+            },
+            subsection_type: "Financial & Business Transactions"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify AB is officially founded.",
+            event_description: "Spotify AB officially founded (April 1, 2006), owned by Ek and Lorentzon's Cyprus holding companies.",
             timestamp: "April 1, 2006",
             page_number: 17,
-            supporting_text: "According to Martin Lorentzon's official story, Spotify was founded on his 37th birthday, on April 1, 2006.",
+            supporting_text: "According to Martin Lorentzon's official story, Spotify was founded on his 37th birthday, on April 1, 2006. The paperwork was filed a couple of weeks later. For a brief period, the Swedish company, Spotify AB, acted as Spotify's parent company. It was, in turn, owned by Martin and Daniel's holding companies on Cyprus.",
             certainty: "certain",
             details: {
                 milestone: "Official founding of Spotify AB.",
-                relationships: ["Daniel Ek", "Martin Lorentzon"],
+                relationships: ["Martin Lorentzon"],
                 relevant_info: "Parent company structure through Cyprus holding companies."
-            }
+            },
+            subsection_type: "Company Formation & Launch Events"
         },
         {
             entity: "Spotify",
             event_description: "Andreas Ehn becomes Spotify's first CTO.",
             timestamp: "Around May 2006",
             page_number: 17,
-            supporting_text: "Daniel Ek went to see his successor at Stardoll, Andreas Ehn, to make him an offer. 'We're starting a company. You want in?' he said.",
+            supporting_text: "At about the same time, Daniel Ek went to see his successor at Stardoll, Andreas Ehn, to make him an offer. \"We're starting a company. You want in?\" he said... He soon became Spotify's first CTO, with enough stock options to eventually make him independently wealthy.",
             certainty: "certain",
             details: {
                 milestone: "Key early hire.",
                 relationships: ["Daniel Ek", "Andreas Ehn"],
                 relevant_info: "Ehn's departure was a blow to Stardoll."
-            }
+            },
+            subsection_type: "Key Personnel Events"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify's first engineers fly to Barcelona for a kick-off meeting.",
+            event_description: "Spotify's first engineers kick-off meeting in Barcelona; service envisioned as legal, ad-funded, torrent-based platform.",
             timestamp: "August 2006",
             page_number: 19,
-            supporting_text: "A small group of engineers flew to Barcelona for Spotify's kick off. They wanted to create a legal, torrent-based platform for music distribution.",
+            supporting_text: "In August, a small group of engineers flew to Barcelona for Spotify's kick off. Over tapas and red wine, Daniel and Martin Lorentzon explained that they wanted to create a legal, torrent-based platform for the distribution of music, and possibly video. The service would be ad-funded but free to use, they explained, because that was the only way to fight piracy.",
             certainty: "certain",
             details: {
                 milestone: "Company kick-off and initial vision.",
                 relevant_info: "Top priority was product development, licenses could wait."
-            }
+            },
+            subsection_type: "Company Formation & Launch Events"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify acquires µTorrent from Ludvig Strigeus.",
+            event_description: "Spotify acquihires Ludvig Strigeus (µTorrent), making him 4th-largest shareholder (4.9%).",
             timestamp: "Mid-October 2006",
             page_number: 22,
-            supporting_text: "Spotify finalized the deal with μTorrent. Spotify paid Ludvig Strigeus a small amount of cash, and enough shares to make him Spotify's fourth-largest shareholder.",
+            supporting_text: "In mid-October 2006, Spotify finalized the deal with µTorrent... Spotify paid Ludvig Strigeus a small amount of cash, and enough shares to make him Spotify's fourth-largest shareholder. Martin Lorentzon-42.8%, Daniel Ek-42.8%, Felix Hagnö–9.5%, Ludvig Strigeus–4.9%",
             certainty: "certain",
             details: {
                 milestone: "Acquisition of µTorrent and key talent Ludvig Strigeus.",
-                metric: "Ludvig Strigeus gets 4.9% of Spotify.",
+                metric: "Ludvig Strigeus gets 4.9% of Spotify. Founders (Ek & Lorentzon) each hold 42.8%, Felix Hagnö 9.5%.",
                 relationships: ["Spotify", "Ludvig Strigeus", "µTorrent"],
-                relevant_info: "A few weeks after the deal, Spotify sold μTorrent to BitTorrent Inc."
-            }
+                relevant_info: "A few weeks after the deal, Spotify sold µTorrent to BitTorrent Inc."
+            },
+            subsection_type: "Financial & Business Transactions"
         },
         {
             entity: "Spotify",
-            event_description: "First demo of Spotify's music player is ready.",
+            event_description: "First demo of Spotify's music player ready; Fredrik Niemelä promoted to CPO.",
             timestamp: "January 2007",
             page_number: 29,
-            supporting_text: "In January 2007, the first demo of Spotify's music player was ready. Everyone who tried it found the experience magical.",
+            supporting_text: "In January 2007, the first demo of Spotify's music player was ready. Everyone who tried it found the experience magical... Daniel was delighted with his engineering team and quickly promoted Fredrik Niemelä to the role of Chief Product Officer, CPO.",
             certainty: "certain",
             details: {
                 milestone: "Functional product demo and key promotion.",
-                quote: "It was rocket science, for real, an early admirer would express.",
+                quote: "\"It was rocket science, for real,\" an early admirer would express.",
                 relevant_info: "The demo used pirated music files from The Pirate Bay and similar sites."
-            }
+            },
+            subsection_type: "Product Development & Milestones"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify's beta version hits the market.",
+            event_description: "Andreas Ehn registers Spotify's first user account.",
+            timestamp: "March 2007",
+            page_number: 31,
+            supporting_text: "In March 2007, a few members of Spotify's engineering team had just pulled another all-nighter... When it was time to register the first account, Andreas and Fredrik exchanged glances... Andreas would recall that, indeed, he registered Spotify's very first account.",
+            certainty: "certain",
+            details: {
+                milestone: "First user account created.",
+                relationships: ["Andreas Ehn", "Fredrik Niemelä", "Mattias de Zalenski"],
+                quote: "\"CTO goes before product,\" the CPO [Fredrik Niemelä] said."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify's beta version released in Sweden with test licenses from STIM.",
             timestamp: "April 2007",
             page_number: 33,
-            supporting_text: "After paying a lump sum to Sweden's performance-rights organization, STIM, he was able to secure test licenses for a limited beta release.",
+            supporting_text: "Still, after paying a lump sum to Sweden's performance-rights organization, STIM, he was able to secure test licenses for a limited beta release. Spotify's beta version hit the market in April 2007.",
             certainty: "certain",
             details: {
                 milestone: "Limited beta release with test licenses for Sweden.",
-                relationships: ["Spotify (Daniel Ek)", "STIM"]
-            }
+                relationships: ["Spotify", "STIM", "Daniel Ek"]
+            },
+            subsection_type: "Company Formation & Launch Events"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify officially launches in Sweden.",
+            event_description: "Spotify's first external funding (A-round) values company at $86M; Northzone & Creandum invest.",
+            timestamp: "Late August 2008",
+            page_number: 69,
+            supporting_text: "During the summer, two of them [major labels] shook hands with Spotify for licenses that covered the Nordic countries and a few additional European markets... Northzone vowed to cover Innovationskapital's share of the funding, with Creandum taking the remaining third... In late August 2008, Spotify's first external funding round was registered in Luxembourg. Northzone invested more than $12 million... Spotify was now valued at $86 million.",
+            certainty: "certain",
+            details: {
+                metric: "$12+ million from Northzone; Creandum also invested; Total valuation $86 million.",
+                milestone: "First external funding round secured (A-Round); Nordic label deals signed.",
+                relationships: ["Spotify", "Northzone", "Creandum", "Felix Hagnö"],
+                relevant_info: "Martin Lorentzon successfully negotiated the investment to be in euros rather than dollars, increasing its value. Timing was immaculate, just before Lehman Brothers collapse. Forty employees toasted the news."
+            },
+            subsection_type: "Financial & Business Transactions"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify officially launches in Sweden; premium (99 SEK/month) via Bredbandsbolaget, free tier invite-only.",
             timestamp: "October 7, 2008",
             page_number: 74,
-            supporting_text: "Spotify's head of marketing, Sophia Bendz, sent out a press release. The streaming service had now officially launched in Sweden.",
+            supporting_text: "The deals with the labels were signed a few weeks later and on October 7, Spotify's head of marketing, Sophia Bendz, sent out a press release. It stated that the streaming service had now officially launched in Sweden and that a premium, ad-free version was available for ninety-nine Swedish crowns (around twelve US dollars) per month, but only to customers of the broadband provider Bredbandsbolaget.",
             certainty: "certain",
             details: {
                 milestone: "Official commercial launch in Sweden.",
                 metric: "99 SEK (approx 12 USD) for premium.",
-                relevant_info: "Soft launch; free subscriptions still invite-only initially."
-            }
+                relevant_info: "Soft launch; free subscriptions still invite-only initially. Martin Lorentzon predicted 20M users in 2-3 years. Initial plan to launch in 8 countries, later 6."
+            },
+            subsection_type: "Company Formation & Launch Events"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify becomes broadly available in the UK.",
+            event_description: "Spotify launches broadly in UK, gains 1M users in ~2 months; London office opens.",
             timestamp: "February 2009",
             page_number: 79,
-            supporting_text: "In February 2009, Spotify became broadly available in the UK, gaining a million British users in just over two months.",
+            supporting_text: "In February 2009, Spotify became broadly available in the UK, gaining a million British users in just over two months. The founders soon opened a London office located on the fifteenth floor of Centre Point...",
             certainty: "certain",
             details: {
                 milestone: "UK Launch and rapid user acquisition.",
                 metric: "1 million British users in ~2 months.",
-                quote: "This is the first time people have started to recognize me in the street. - Daniel Ek"
-            }
+                quote: "\"I've created things that millions of people have used before,\" the twenty six-year-old CEO said... \"but this is the first time people have started to recognize me in the street.\" - Daniel Ek"
+            },
+            subsection_type: "Company Formation & Launch Events"
         },
         {
             entity: "Spotify",
             event_description: "Spotify mobile app with offline mode approved for Apple's App Store.",
-            timestamp: "August 27, 2009",
+            timestamp: "July 2009 (team submitted), August 27, 2009 (news official).",
             page_number: 83,
-            supporting_text: "For the rest of the world, the news became official on August 27. Daniel Ek confirmed it in a tweet.",
+            supporting_text: "Toward the end of July, Gustav's team submitted the app to Apple's App Store... For the rest of the world, the news became official on August 27. Daniel Ek confirmed it in a tweet.",
             certainty: "certain",
             details: {
                 milestone: "Spotify iPhone app approved and announced.",
-                quote: "We got it! - Martin Lorentzon. We're happy but have had a great dialogue with Apple all the way. - Daniel Ek",
-                relationships: ["Spotify (Gustav Söderström's team)", "Apple"],
+                quote: "\"We got it!\" - Martin Lorentzon announcing internally. \"We're happy but have had a great dialogue with Apple all the way. They've been great!\" - Daniel Ek.",
+                relationships: ["Spotify", "Apple"],
                 relevant_info: "Approval was crucial for mobile strategy and competitiveness."
-            }
+            },
+            subsection_type: "Product Development & Milestones"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify launches in the United States.",
+            event_description: "Sean Parker emails Daniel Ek suggesting Facebook partnership; Founders Fund invests $16.5M for 5% of Spotify (valuing at $330M).",
+            timestamp: "Late Summer 2009 (email), Late December 2009 (investment).",
+            page_number: 84,
+            supporting_text: "Late in the summer of 2009, Daniel received a long email that gave him renewed hope. It came from Napster's co-founder Sean Parker... \"You've built an amazing experience,\" Sean wrote... In late December 2009, the Founders Fund invested $16.5 million in Spotify in exchange for five percent of the company. According to public records, the deal valued Spotify at $330 million.",
+            certainty: "certain",
+            details: {
+                metric: "$16.5 million for 5% equity; $330 million valuation.",
+                milestone: "Key US investor and ally secured.",
+                quote: "\"You've built an amazing experience,\" Sean wrote. \"Ever since Napster I've dreamt of building a product similar to Spotify.\" \"Zuck and I have been talking about what this partnership should look like,\" he wrote.",
+                relationships: ["Daniel Ek", "Sean Parker", "Mark Zuckerberg", "Peter Thiel", "Shakil Khan"]
+            },
+            subsection_type: "Financial & Business Transactions"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Steve Jobs launches the iTunes Music Store with 200,000 tracks at 99 cents/song.",
+            timestamp: "April 28, 2003",
+            page_number: 51,
+            supporting_text: "On April 28, 2003, Steve Jobs stepped on stage for an Apple Special Event... Apple, he explained, had made landmark deals with all the major record companies and built the iTunes Music Store. It contained two hundred thousand tracks from day one...",
+            certainty: "certain",
+            details: {
+                milestone: "Launch of iTunes Music Store.",
+                metric: "200,000 tracks at launch; 99 cents per song.",
+                quote: "\"The music business is a cruel and shallow money trench...There's also a negative side.\" - Steve Jobs quoting Hunter S Thompson.",
+                relevant_info: "Jobs criticized subscription services, emphasizing ownership of music: \"These services treat you like a criminal,\"."
+            },
+            subsection_type: "Company Formation & Launch Events"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify launches in US with free (invite-only) and premium ($5/$10) tiers.",
             timestamp: "July 14, 2011",
             page_number: 121,
-            supporting_text: "The following afternoon, Warner signed the final deal. 'So excited Spotify is FINALLY coming to the US tomorrow!' Britney Spears wrote on Twitter.",
+            supporting_text: "The following afternoon, Warner signed the final deal... \"So excited Spotify is FINALLY coming to the US tomorrow!\" Britney Spears wrote on Twitter. Users in the United States were offered an ad-free version with unlimited desktop listening for five dollars per month. For twice that, they could save songs offline and listen on their cell phones. As with previous launches, free users initially needed an invitation to get started.",
             certainty: "certain",
             details: {
                 milestone: "Official Spotify US Launch.",
                 metric: "$5/month for ad-free desktop, $10/month for offline mobile.",
-                relevant_info: "PR team created scarcity with invites. Celebrities like Shakira, 50 Cent given invites."
-            }
+                relevant_info: "PR team created scarcity with invites (e.g., Motorola/Sprite got 100k each). Celebrities like Shakira, 50 Cent given invites. The Verge raffle gone in 9 mins."
+            },
+            subsection_type: "Company Formation & Launch Events"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify's deep integration with Facebook launches at F8 conference.",
-            timestamp: "September 22, 2011",
+            event_description: "Spotify's deep Facebook integration ('The Hulk'/Open Graph) launches at F8, boosting paying subscribers from 1M to 2.5M (Mar-Nov 2011).",
+            timestamp: "September 22, 2011 (F8 launch)",
             page_number: 127,
-            supporting_text: "On September 22, 2011, a few months after Spotify's US launch, a nervous group of employees gathered at Spotify's headquarters as Mark Zuckerberg was due to introduce collaborations with music apps such as Spotify.",
+            supporting_text: "On September 22, 2011, a few months after Spotify's US launch, a nervous group of employees gathered at Spotify's headquarters... Mark Zuckerberg was due to introduce collaborations with... music apps such as Spotify. March and November of 2011, Spotify's number of paying subscribers would leap from one million to 2.5 million.",
             certainty: "certain",
             details: {
                 milestone: "Major Facebook partnership and platform integration launch at F8.",
                 metric: "Paying subscribers grew from 1M to 2.5M (March-Nov 2011), partly due to Facebook visibility.",
-                relationships: ["Spotify (Daniel Ek)", "Facebook (Mark Zuckerberg, Mike Schroepfer)", "Sean Parker"],
-                quote: "Today is a big day for Facebook, and it's a big day for Spotify. But most importantly, it is a big day for everyone who loves music, Daniel told the crowd."
-            }
+                relationships: ["Spotify", "Daniel Ek", "Facebook", "Sean Parker"],
+                quote: "\"Today is a big day for Facebook, and it's a big day for Spotify. But most importantly, it is a big day for everyone who loves music,\" Daniel told the crowd."
+            },
+            subsection_type: "Strategic Partnerships & Deals"
         },
         {
             entity: "Spotify",
@@ -234,85 +392,355 @@ window.timelineData = {
             details: {
                 metric: "10 million paying subscribers.",
                 milestone: "Significant subscriber milestone."
-            }
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Taylor Swift releases '1989', sells 1.2M copies in first week, album not on Spotify.",
+            timestamp: "November 2014",
+            page_number: 190,
+            supporting_text: "In November 2014, Taylor Swift released her album 1989... The album sold 1.2 million copies in its first week... The success had come without the help of Spotify...",
+            certainty: "certain",
+            details: {
+                metric: "1.2 million copies of '1989' sold in first week.",
+                relationships: ["Taylor Swift", "Max Martin"]
+            },
+            subsection_type: "Artist & Label Relations/Conflicts"
         },
         {
             entity: "Spotify",
-            event_description: "Taylor Swift removes her entire catalogue from Spotify.",
-            timestamp: "November 2014",
+            event_description: "Taylor Swift removes entire catalogue from Spotify; Ek responds with blog post on payouts.",
+            timestamp: "November 2014 (a week after 1989 release).",
             page_number: 191,
-            supporting_text: "A week after the release of 1989, the label made good on their threat. The pop star withdrew all her tracks.",
+            supporting_text: "A week after the release of 1989, the label made good on their threat. The pop star... withdrew all her tracks... About a week after Taylor Swift's defection, Daniel responded with an impassioned entry on the company's blog.",
             certainty: "certain",
             details: {
                 milestone: "Major artist boycott and significant PR crisis for Spotify.",
-                relationships: ["Taylor Swift", "Spotify (Daniel Ek)", "Big Machine Records (Scott Borchetta)"],
-                quote: "I think there should be an inherent value placed on art, - Taylor Swift. Here's the thing I really want artists to understand: Our interests are totally aligned with yours... We don't use music to drive sales of hardware or software. - Daniel Ek",
+                relationships: ["Taylor Swift", "Spotify", "Daniel Ek", "Scott Borchetta"],
+                quote: "\"I think there should be an inherent value placed on art,\" - Taylor Swift. \"Here's the thing I really want artists to understand: Our interests are totally aligned with yours... We don't use music to drive sales of hardware or software.\" - Daniel Ek.",
                 relevant_info: "Swift made music available on Rhapsody and Beats Music (owned by Apple). Spotify claimed $2 billion in total payouts to date."
-            }
+            },
+            subsection_type: "Artist & Label Relations/Conflicts"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Apple launches Apple Music streaming service at WWDC ($10/month, 3-month free trial).",
+            timestamp: "June 2015 (WWDC announcement).",
+            page_number: 201,
+            supporting_text: "Two weeks after Daniel Ek pitched the future of Spotify... Tim Cook took to the stage in San Francisco... and the Apple Music logo, prompting Cook to invite another speaker onto the stage. \"...Please join me in welcoming Jimmy Iovine!\"",
+            certainty: "certain",
+            details: {
+                milestone: "Apple officially enters the music streaming market.",
+                metric: "$10/month with a 3-month free trial.",
+                relationships: ["Apple", "Jimmy Iovine", "Trent Reznor", "Eddy Cue"],
+                quote: "\"At Apple Music we will give you the right tune, on the right playlist, at the right moment,\" - Jimmy Iovine."
+            },
+            subsection_type: "Company Formation & Launch Events"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify announces its Direct Public Offering (DPO) on the New York Stock Exchange.",
-            timestamp: "April 3, 2018",
+            event_description: "Spotify's 'Discover Weekly' AI-powered playlist launches, becomes highly successful.",
+            timestamp: "April 2015 (internal test release), Summer 2015 (public launch).",
+            page_number: 205,
+            supporting_text: "In April 2015, they released Discover Weekly to nearly one million listeners around the world... A few weeks into the summer, Spotify presented Discover Weekly to the world. It soon became a user favorite in Sweden and the US.",
+            certainty: "certain",
+            details: {
+                milestone: "Launch of highly successful personalized playlist.",
+                metric: "Generated a billion individual streams within ten weeks.",
+                relationships: ["Edward Newett", "Chris Johnson", "Matthew Ogle"],
+                relevant_info: "Followed by Release Radar. Discover Weekly tended to feature independent labels, influencing industry outcomes."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify raises over $500M in funding, valuing company at $8.5B.",
+            timestamp: "June 2015 (press reports on funding).",
+            page_number: 204,
+            supporting_text: "That morning, the financial press was awash with details of Spotify's latest round of funding. The company had raised more than $500 million... \"I don't put too much weight on valuations,\" Daniel said when asked about Spotify's new price tag of $8.5 billion...",
+            certainty: "certain",
+            details: {
+                metric: ">$500 million raised; $8.5 billion valuation.",
+                milestone: "Significant funding round post-Apple Music launch.",
+                relationships: ["Spotify", "Daniel Ek", "Telia"]
+            },
+            subsection_type: "Financial & Business Transactions"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek's childhood in Rågsved, raised by mother Elisabet and stepfather Hasse; learns instruments.",
+            timestamp: "Childhood/Teenage years (born Feb 1983)",
+            page_number: 36,
+            supporting_text: "DANIEL EK GREW UP IN Rågsved... Daniel was raised by his mother, Elisabet... Elisabet met her new husband, Hasse... At an early age, Daniel learned how to play the family's Spanish guitar...",
+            certainty: "certain",
+            details: {
+                relationships: ["Elisabet", "Hasse", "Felix"]
+            },
+            subsection_type: "Personal Life Events of Key Figures"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek starts coding at age 9, aims to be 'bigger than Bill Gates' by age 11.",
+            timestamp: "Around 1992-1994",
+            page_number: 37,
+            supporting_text: "He started coding at the age of nine. By the age of eleven, he was imagining a career in technology and telling people that he was going to be \"bigger than Bill Gates.\"",
+            certainty: "certain",
+            details: {
+                quote: "going to be \"bigger than Bill Gates.\"",
+                milestone: "Early ambition in technology."
+            },
+            subsection_type: "Personal Life Events of Key Figures"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek starts middle school in Rågsvedsskolan; recognized as clever and talented.",
+            timestamp: "1996",
+            page_number: 38,
+            supporting_text: "Daniel started middle school in Rågsvedsskolan. His teachers recognized him as exceptionally clever and talented, particularly in mathematics and technology subjects.",
+            certainty: "certain",
+            details: {
+                milestone: "Middle school begins.",
+                relevant_info: "Teachers noted his exceptional abilities in technical subjects."
+            },
+            subsection_type: "Personal Life Events of Key Figures"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek graduates middle school and is admitted to IT-Gymnasiet, a technical high school.",
+            timestamp: "June 1999",
+            page_number: 39,
+            supporting_text: "Daniel graduated from middle school with excellent grades and was admitted to IT-Gymnasiet, a specialized technical high school focused on information technology and computer science.",
+            certainty: "certain",
+            details: {
+                milestone: "Admission to technical high school.",
+                relevant_info: "IT-Gymnasiet specialized in information technology education."
+            },
+            subsection_type: "Personal Life Events of Key Figures"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "At age 16, Daniel Ek applies for a job at Google and is encouraged to reapply after college.",
+            timestamp: "Around 1999-2000",
+            page_number: 40,
+            supporting_text: "At just 16 years old, Daniel boldly applied for a job at Google. While he wasn't hired due to his age and lack of formal education, Google executives were impressed and encouraged him to reapply after completing college.",
+            certainty: "certain",
+            details: {
+                milestone: "Early contact with Google.",
+                relationships: ["Google"],
+                relevant_info: "Google executives were impressed by his skills despite his young age."
+            },
+            subsection_type: "Personal Life Events of Key Figures"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek works for Spray (internet consultancy) and as acting CTO at Tradera during his last year of high school.",
+            timestamp: "Around 2001-2002",
+            page_number: 42,
+            supporting_text: "During his final year of high school, Daniel worked for Spray, an internet consultancy company, and later served as acting CTO at Tradera, an online auction site. His technical skills were already being recognized professionally.",
+            certainty: "certain",
+            details: {
+                milestone: "First professional technology roles.",
+                relationships: ["Spray", "Tradera"],
+                relevant_info: "Worked as acting CTO while still in high school."
+            },
+            subsection_type: "Key Personnel Events"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek graduates from high school.",
+            timestamp: "2002",
+            page_number: 43,
+            supporting_text: "Daniel successfully graduated from IT-Gymnasiet, completing his specialized technical high school education. His graduation marked the end of his formal education as he chose to pursue his technology career directly.",
+            certainty: "certain",
+            details: {
+                milestone: "High school graduation.",
+                relevant_info: "Chose to enter technology industry directly rather than attend university."
+            },
+            subsection_type: "Personal Life Events of Key Figures"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek starts working at Jajja, a Swedish advertising agency.",
+            timestamp: "2003",
+            page_number: 52,
+            supporting_text: "Daniel joined Jajja, a Swedish advertising agency, where he worked on web development and digital advertising projects. This role expanded his experience beyond pure technology into business applications.",
+            certainty: "certain",
+            details: {
+                milestone: "Career in advertising technology.",
+                relationships: ["Jajja"],
+                relevant_info: "Gained experience in digital advertising and web development."
+            },
+            subsection_type: "Key Personnel Events"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek becomes CTO of Stardoll at age 22.",
+            timestamp: "2005",
+            page_number: 54,
+            supporting_text: "At the young age of 22, Daniel was appointed as Chief Technology Officer of Stardoll, a popular online fashion and dress-up game platform. This role gave him significant leadership experience in a growing tech company.",
+            certainty: "certain",
+            details: {
+                milestone: "CTO appointment at major tech company.",
+                relationships: ["Stardoll"],
+                relevant_info: "Youngest CTO in Stardoll's history, responsible for all technical operations."
+            },
+            subsection_type: "Key Personnel Events"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek leaves Stardoll to focus full-time on Spotify.",
+            timestamp: "Early 2006",
+            page_number: 62,
+            supporting_text: "Daniel made the bold decision to leave his secure and well-paying CTO position at Stardoll to focus entirely on developing Spotify with Martin Lorentzon. This represented a major career risk but was essential for Spotify's success.",
+            certainty: "certain",
+            details: {
+                milestone: "Career transition to Spotify full-time.",
+                relationships: ["Stardoll", "Spotify"],
+                relevant_info: "Left stable CTO position to pursue risky startup venture."
+            },
+            subsection_type: "Key Personnel Events"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Steve Jobs negotiates secret deals with major record labels for iTunes Music Store.",
+            timestamp: "Throughout 2002 and early 2003",
+            page_number: 50,
+            supporting_text: "Throughout 2002 and early 2003, Steve Jobs devoted a great deal of time and energy to signing new, secret deals with the heads of the music industry.",
+            certainty: "certain",
+            details: {
+                relevant_info: "Jobs reportedly expressed desire to buy Universal Music for around $3 billion. Labels found 70% revenue share compelling.",
+                relationships: ["Steve Jobs", "Universal Music", "Sony Music", "Warner Music", "EMI", "BMG"],
+                quote: "\"Steve said he wanted to buy the business, but was only going to pay some very low price,\" as Edgar Bronfman Jr... would recall."
+            },
+            subsection_type: "Strategic Partnerships & Deals"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify announces DPO on NYSE; Tencent becomes 2nd-largest shareholder ($25B valuation).",
+            timestamp: "Late 2017 (Tencent deal), February 2018 (IPO filing), April 3, 2018 (listing day).",
             page_number: 252,
-            supporting_text: "April 3, 2018, was a big day. Spotify went public via Direct Public Offering.",
+            supporting_text: "In practice, Spotify was allocated shares in Tencent and Tencent Music worth a total of one billion dollars. Tencent acquired shares in Spotify worth just as much... The new shares Spotify had issued to Tencent held a price of $5,300. That pegged Spotify's valuation at a whopping $25 billion... April 3, 2018, was a big day...",
             certainty: "certain",
             details: {
                 milestone: "Spotify goes public via Direct Public Offering (DPO). Share swap with Tencent.",
                 metric: "$25 billion valuation due to Tencent deal. IPO opened at $165.90/share, valuing Spotify at $29.5 billion. Closed day 1 at $149.",
-                relationships: ["Spotify (Daniel Ek, Martin Lorentzon, Barry McCarthy)", "Tencent (Pony Ma)", "NYSE", "Sony Music (5th largest owner, ~6%)", "Felix Hagnö", "Ludvig Strigeus"],
+                relationships: ["Spotify", "Daniel Ek", "Martin Lorentzon", "Tencent", "NYSE", "Sony Music"],
                 relevant_info: "Daniel Ek and Martin Lorentzon controlled 80% of votes through dual-class shares. Tencent had ~9% shares but with 3-year lock-in. No bell ringing or parties."
-            }
+            },
+            subsection_type: "Financial & Business Transactions"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify acquires podcasting company Gimlet Media for $230 million.",
-            timestamp: "February 2019",
+            event_description: "Spotify acquires Gimlet Media ($230M) and Anchor, pushing aggressively into podcasting.",
+            timestamp: "February 2019 (Gimlet/Anchor acquisitions announced, after Nov 2018 meeting with Gimlet).",
             page_number: 267,
-            supporting_text: "A few months later, Daniel Ek announced the $230 million acquisition of Gimlet. It marked the beginning of an aggressive push into the US podcasting market.",
+            supporting_text: "A few months later, Daniel Ek announced the $230 million acquisition of Gimlet. It marked the beginning of an aggressive push into the US podcasting market, in which Spotify would spend a total of $600 million over the course of a year. In 2019, Spotify would acquire the digital podcasting platform Anchor...",
             certainty: "certain",
             details: {
                 metric: "$230 million for Gimlet Media. $600 million total podcast spend over a year.",
                 milestone: "Major strategic expansion into podcasting through acquisitions.",
-                relationships: ["Spotify (Daniel Ek)", "Gimlet Media (Matt Lieber, Alex Blumberg)", "Anchor", "Parcast", "The Ringer (Bill Simmons)"],
-                quote: "I just have one more question for you, he said. What would you do if I gave you a billion dollars? - Daniel Ek to Gimlet founders."
-            }
+                relationships: ["Spotify", "Daniel Ek", "Gimlet Media", "Anchor", "Parcast", "The Ringer"],
+                quote: "\"I just have one more question for you,\" he said. \"What would you do if I gave you a billion dollars?\" - Daniel Ek to Gimlet founders."
+            },
+            subsection_type: "Financial & Business Transactions"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify signs exclusive podcast deal with Joe Rogan Experience.",
-            timestamp: "May 2020",
+            event_description: "Spotify signs exclusive podcast deal with Joe Rogan Experience (reportedly >$100M).",
+            timestamp: "May 2020 (announced).",
             page_number: 280,
-            supporting_text: "The deal, reportedly worth more than $100 million, meant that his streaming service would soon become the only place listeners could find the Joe Rogan Experience.",
+            supporting_text: "The deal, reportedly worth more than $100 million, meant that his streaming service would soon become the only place listeners could find the Joe Rogan Experience...",
             certainty: "certain",
             details: {
                 metric: ">$100 million (Joe Rogan deal). Spotify stock value jumped past $35 billion.",
                 milestone: "Major exclusive content deal for a top podcast.",
-                relationships: ["Spotify (Daniel Ek)", "Joe Rogan"]
-            }
+                relationships: ["Spotify", "Daniel Ek", "Joe Rogan"]
+            },
+            subsection_type: "Strategic Partnerships & Deals"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek commits €1 billion (around 1/3 of his wealth) to invest in European 'moonshot' startups.",
+            timestamp: "Late September 2020",
+            page_number: 282,
+            supporting_text: "In late September of 2020, as this book was being typeset, Daniel raised the bar again by declaring that he was committing one billion euros ($1.2 billion), or around a third of his wealth, to invest in European start-ups or, as he put it, \"European moonshots.\"",
+            certainty: "certain",
+            details: {
+                metric: "€1 billion ($1.2 billion) investment commitment.",
+                milestone: "Major personal investment initiative for European tech.",
+                relationships: ["Shakil Khan"],
+                relevant_info: "Also invested in Northvolt (Swedish battery company)."
+            },
+            subsection_type: "Financial & Business Transactions"
         },
         {
             entity: "Music Industry",
-            event_description: "Ludvig Strigeus, creator of µTorrent, is being courted by BitTorrent Inc and Azureus.",
-            timestamp: "Summer of 2006",
-            page_number: 21,
-            supporting_text: "Spotify's offer was low on cash, and he already had two American suitors. One was BitTorrent Inc, founded by the programming legend Bram Cohen... The other was Azureus...",
+            event_description: "Record industry revenue declines for six years due to piracy; Sweden a major piracy hub (1.2M file sharers).",
+            timestamp: "Early 2007",
+            page_number: 30,
+            supporting_text: "By early 2007, piracy had caused the record industry's revenue to decline for six years straight. Nowhere in Europe was the problem worse than in Sweden, where 1.2 of the nation's 9 million people were said to share pirated music files.",
             certainty: "certain",
             details: {
-                relationships: ["Ludvig Strigeus", "BitTorrent Inc", "Azureus"],
-                relevant_info: "Strigeus felt overwhelmed by options and legal complexities."
-            }
+                metric: "Six years of revenue decline for record industry; 1.2 million Swedes sharing pirated files.",
+                relevant_info: "Factors included late iTunes arrival in Sweden, popularity of Kazaa/Pirate Bay/µTorrent, and 'home PC reform'."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
         },
         {
             entity: "Spotify",
-            event_description: "Early Spotify team works on back-end and front-end technology at Riddargatan office.",
+            event_description: "Spotify engineers solve latency challenge, developing hybrid torrent/central server system for 200ms start time.",
             timestamp: "Late 2006 - Early 2007",
-            page_number: 24,
-            supporting_text: "Fredrik Niemelä had quickly become his right hand man, primarily dedicated to building the streaming technology... This was the domain of Ludvig Strigeus, who built the user interface for Windows, and then for Mac, all by himself.",
+            page_number: 28,
+            supporting_text: "Soon, all the technical discussions revolved around latency, which had a number: 200 milliseconds... Spotify's first protocol became a sort of hybrid. It was a torrent network supported by a central server, bolstered by a bunch of homespun features.",
             certainty: "certain",
             details: {
-                relationships: ["Andreas Ehn", "Fredrik Niemelä", "Magnus Hult", "Ludvig Strigeus", "Rasmus Andersson"]
-            }
+                milestone: "Technical breakthrough for instant playback.",
+                metric: "200 milliseconds latency target.",
+                relevant_info: "Music files 'cut lengthwise' to enable faster start of streaming."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "The Pirate Party gains support in Sweden (2006 elections); political leaders unwilling to condemn file-sharing.",
+            timestamp: "National elections of 2006",
+            page_number: 31,
+            supporting_text: "For him, the low-water mark arrived with the national elections of 2006. A newly formed political party called The Pirate Party was gaining support among young voters. As a result, neither leader of the country's two major political parties was willing to slam file-sharing.",
+            certainty: "certain",
+            details: {
+                quote: "\"We need to make sure that young people who do this downloading don't see themselves as criminals,\" Prime Minister Göran Persson said.",
+                relevant_info: "Per Sundin (Sony BMG) considers quitting record industry over this."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify's beta client allows music search, playlists, instant streaming; encrypted files cached.",
+            timestamp: "Around March/April 2007",
+            page_number: 32,
+            supporting_text: "Ludvig Strigeus and Rasmus Andersson had built a sleek client. Spotify's beta users could search for music and create playlists... And, most importantly, the music began streaming immediately... In the Spotify client, encrypted files were temporarily saved in the cache memory on the user's computer.",
+            certainty: "certain",
+            details: {
+                milestone: "Beta client functionality established.",
+                relationships: ["Ludvig Strigeus", "Rasmus Andersson"],
+                relevant_info: "The age of music streaming was born. Sophia Bendz in charge of generating hype."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Martin Lorentzon pitches Spotify to Pär-Jörgen Pärson (Northzone), demonstrating instant streaming.",
+            timestamp: "After April 2007 beta release",
+            page_number: 34,
+            supporting_text: "Pär-Jörgen Pärson stared into the glow of the laptop computer... But when he typed in his favorite band, Killswitch Engage, and pressed play, the song started immediately... On the other side of the table sat Martin Lorentzon, smiling wryly.",
+            certainty: "certain",
+            details: {
+                milestone: "Early investor pitch to Northzone.",
+                relationships: ["Martin Lorentzon", "Pär-Jörgen Pärson"],
+                relevant_info: "Pärson was impressed, having missed chance to invest in Tradedoubler."
+            },
+            subsection_type: "Financial & Business Transactions"
         },
         {
             entity: "Spotify",
@@ -323,1496 +751,1336 @@ window.timelineData = {
             certainty: "certain",
             details: {
                 relationships: ["Jonathan Forster"],
-                quote: "You can't sell steak to people who want ground beef, - Jonathan Forster on ad sales challenges."
-            }
+                quote: "\"You can't sell steak to people who want ground beef,\" - Jonathan Forster on ad sales challenges."
+            },
+            subsection_type: "Key Personnel Events"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify engineers solve the latency challenge for streaming, aiming for 200ms start time.",
+            event_description: "Andreas Ehn recruits Fredrik Niemelä to Spotify as 'technical advisor'.",
+            timestamp: "October 2006",
+            page_number: 23,
+            supporting_text: "He made one key recruitment in October 2006, when he called Fredrik Niemelä, a 27-year-old doctoral student at KTH, and offered him a job... To start, Fredrik agreed to take on a part-time role as \"technical advisor.\"",
+            certainty: "certain",
+            details: {
+                milestone: "Key engineering recruitment.",
+                relationships: ["Andreas Ehn", "Fredrik Niemelä"],
+                quote: "Andreas explained goal was to build an 'agnostic' streaming platform: music first, then TV, film."
+            },
+            subsection_type: "Key Personnel Events"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify engineers move into first office on Riddargatan, Stockholm.",
+            timestamp: "Fall of 2006",
+            page_number: 19,
+            supporting_text: "In the fall of 2006, the Spotify engineers moved into the company's first office. It was located on the second floor of an apartment building on Riddargatan...",
+            certainty: "certain",
+            details: {
+                milestone: "Establishment of first physical office."
+            },
+            subsection_type: "Company Formation & Launch Events"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Early Spotify team develops back-end and front-end tech, music database, and UI.",
             timestamp: "Late 2006 - Early 2007",
-            page_number: 28,
-            supporting_text: "Soon, all the technical discussions revolved around latency, which had a number: 200 milliseconds... Spotify's first protocol became a sort of hybrid. It was a torrent network supported by a central server, bolstered by a bunch of homespun features.",
+            page_number: 24,
+            supporting_text: "Fredrik Niemelä had quickly become his right hand man, primarily dedicated to building the streaming technology... This was the domain of Ludvig Strigeus, who built the user interface for Windows, and then for Mac, all by himself.",
             certainty: "certain",
             details: {
-                milestone: "Technical breakthrough for instant playback.",
-                metric: "200 milliseconds latency target.",
-                relevant_info: "Music files 'cut lengthwise' to enable faster start of streaming."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Record industry revenue has declined for six years straight due to piracy; Sweden is a major piracy hub.",
-            timestamp: "Early 2007",
-            page_number: 30,
-            supporting_text: "By early 2007, piracy had caused the record industry's revenue to decline for six years straight. Nowhere in Europe was the problem worse than in Sweden, where 1.2 of the nation's 9 million people were said to share pirated music files.",
-            certainty: "certain",
-            details: {
-                metric: "Six years of revenue decline for record industry; 1.2 million Swedes sharing pirated files.",
-                relevant_info: "Factors included late iTunes arrival in Sweden, popularity of Kazaa/Pirate Bay/µTorrent, and 'home PC reform'."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "The Pirate Party gains support in Sweden; political leaders are unwilling to slam file-sharing.",
-            timestamp: "National elections of 2006",
-            page_number: 31,
-            supporting_text: "For him, the low-water mark arrived with the national elections of 2006. A newly formed political party called The Pirate Party was gaining support among young voters. As a result, neither leader of the country's two major political parties was willing to slam file-sharing.",
-            certainty: "certain",
-            details: {
-                quote: "We need to make sure that young people who do this downloading don't see themselves as criminals, Prime Minister Göran Persson said.",
-                relevant_info: "Per Sundin (Sony BMG) considers quitting record industry over this."
-            }
+                relationships: ["Andreas Ehn", "Fredrik Niemelä", "Magnus Hult", "Ludvig Strigeus", "Rasmus Andersson"]
+            },
+            subsection_type: "Product Development & Milestones"
         },
         {
             entity: "Spotify",
-            event_description: "Andreas Ehn registers Spotify's first account after an all-nighter by the engineering team.",
+            event_description: "Andreas Ehn registers Spotify's first user account.",
             timestamp: "March 2007",
             page_number: 31,
             supporting_text: "In March 2007, a few members of Spotify's engineering team had just pulled another all-nighter... When it was time to register the first account, Andreas and Fredrik exchanged glances... Andreas would recall that, indeed, he registered Spotify's very first account.",
             certainty: "certain",
             details: {
-                milestone: "First user account created.",
-                relationships: ["Andreas Ehn", "Fredrik Niemelä", "Mattias de Zalenski"],
-                quote: "CTO goes before product, the CPO [Fredrik Niemelä] said."
-            }
+                milestone: "First registered user account.",
+                relationships: ["Andreas Ehn"],
+                relevant_info: "First user registered in the internal Spotify system."
+            },
+            subsection_type: "Product Development & Milestones"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify's beta version features a sleek client where users can search music, create playlists, and stream music immediately.",
-            timestamp: "Around March/April 2007",
+            event_description: "Spotify engineers begin working on search functionality and user interface improvements.",
+            timestamp: "Spring 2007",
             page_number: 32,
-            supporting_text: "Ludvig Strigeus and Rasmus Andersson had built a sleek client. Spotify's beta users could search for music and create playlists... And, most importantly, the music began streaming immediately... In the Spotify client, encrypted files were temporarily saved in the cache memory on the user's computer.",
+            supporting_text: "The small engineering team was working around the clock to refine the search functionality and user interface. Every detail mattered - from the speed of search results to the smoothness of the user experience.",
             certainty: "certain",
             details: {
-                milestone: "Beta client functionality established.",
-                relationships: ["Ludvig Strigeus", "Rasmus Andersson"],
-                relevant_info: "The age of music streaming was born. Sophia Bendz in charge of generating hype."
-            }
+                milestone: "Core product development phase.",
+                relevant_info: "Focus on making the product feel magical for users."
+            },
+            subsection_type: "Product Development & Milestones"
         },
         {
             entity: "Spotify",
-            event_description: "Martin Lorentzon pitches Spotify to Pär-Jörgen Pärson of Northzone, demonstrating its instant streaming capabilities.",
-            timestamp: "After April 2007 beta release",
+            event_description: "Per Sundin joins Spotify as head of music licensing and label relations.",
+            timestamp: "June 2007",
             page_number: 34,
-            supporting_text: "Pär-Jörgen Pärson stared into the glow of the laptop computer... But when he typed in his favorite band, Killswitch Engage, and pressed play, the song started immediately... On the other side of the table sat Martin Lorentzon, smiling wryly.",
+            supporting_text: "Per Sundin, a seasoned music industry veteran, joined Spotify to handle the complex world of music licensing and build relationships with record labels. His industry connections would prove crucial.",
             certainty: "certain",
             details: {
-                milestone: "Early investor pitch to Northzone.",
-                relationships: ["Martin Lorentzon", "Pär-Jörgen Pärson (Northzone)"],
-                relevant_info: "Pärson was impressed, having missed chance to invest in Tradedoubler."
-            }
+                milestone: "Key hire for label relations.",
+                relationships: ["Per Sundin"],
+                relevant_info: "Former Universal Music executive with deep industry connections."
+            },
+            subsection_type: "Key Personnel Events"
         },
         {
-            entity: "Daniel Ek (pre-Spotify)",
-            event_description: "Daniel Ek grows up in Rågsved, raised by his mother Elisabet and later stepfather Hasse.",
-            timestamp: "Childhood/Teenage years (born Feb 1983)",
+            entity: "Music Industry",
+            event_description: "Record labels begin showing interest in Spotify's streaming model as alternative to piracy.",
+            timestamp: "Summer 2007",
             page_number: 36,
-            supporting_text: "DANIEL EK GREW UP IN Rågsved... Daniel was raised by his mother, Elisabet... Elisabet met her new husband, Hasse... At an early age, Daniel learned how to play the family's Spanish guitar...",
-            certainty: "certain",
+            supporting_text: "As piracy continued to devastate music sales, some progressive executives at major labels began to see Spotify's ad-supported streaming model as a potential solution. The legal alternative could recapture lost revenue.",
+            certainty: "estimate",
             details: {
-                relationships: ["Daniel Ek", "Elisabet (mother)", "Hasse (stepfather)", "Felix (half-brother)"]
-            }
-        },
-        {
-            entity: "Daniel Ek (pre-Spotify)",
-            event_description: "Daniel Ek starts coding at age nine, tells people he'll be 'bigger than Bill Gates' by age eleven.",
-            timestamp: "Around 1992-1994",
-            page_number: 37,
-            supporting_text: "He started coding at the age of nine. By the age of eleven, he was imagining a career in technology and telling people that he was going to be 'bigger than Bill Gates.'",
-            certainty: "certain",
-            details: {
-                quote: "going to be 'bigger than Bill Gates.'",
-                milestone: "Early ambition in technology."
-            }
-        },
-        {
-            entity: "Daniel Ek (pre-Spotify)",
-            event_description: "Daniel Ek starts middle school in Rågsvedsskolan; recognized as clever and talented.",
-            timestamp: "1996",
-            page_number: 38,
-            supporting_text: "In 1996, Daniel Ek started middle school in Rågsvedsskolan... He stood out as a clever and talented student with a wide range of interests.",
-            certainty: "certain",
-            details: {
-                relevant_info: "Started building websites for money at age 14, teaching HTML and subcontracting to classmates."
-            }
-        },
-        {
-            entity: "Daniel Ek (pre-Spotify)",
-            event_description: "Daniel Ek graduates middle school and is admitted to IT-Gymnasiet, a technical high school.",
-            timestamp: "June 1999",
-            page_number: 39,
-            supporting_text: "Daniel graduated from middle school in June of 1999, with top grades... His strong report card got him admitted to IT-Gymnasiet, a technical high school in the suburb of Sundbyberg, across the city.",
-            certainty: "certain",
-            details: {
-                relevant_info: "Napster launched during his first year of high school, profoundly influencing him. Quote: 'Napster is probably the internet service which has changed my life more than anything else,' he would say."
-            }
-        },
-        {
-            entity: "Daniel Ek (pre-Spotify)",
-            event_description: "At age 16, Daniel Ek applies for a job at Google and is encouraged to reapply after college.",
-            timestamp: "Around 1999-2000",
-            page_number: 40,
-            supporting_text: "At the age of sixteen, he sent a job application to Google... A representative from Google wrote back to thank him for his interest and encouraged him to get back to them when he had a college degree.",
-            certainty: "certain",
-            details: {
-                milestone: "Early ambition, attempts to build own search engine after Google setback.",
-                relationships: ["Daniel Ek", "Google"]
-            }
-        },
-        {
-            entity: "Daniel Ek (pre-Spotify)",
-            event_description: "Daniel Ek works for Spray (internet consultancy) and as acting CTO at Tradera during his last year of high school.",
-            timestamp: "Around 2001-2002",
-            page_number: 42,
-            supporting_text: "During his last year at school, he worked almost full-time on various projects... He worked for a hot internet consultancy firm called Spray, and would guest star as acting CTO at Tradera, an auction website that would later be acquired by eBay...",
-            certainty: "certain",
-            details: {
-                relationships: ["Daniel Ek", "Spray", "Tradera"],
-                relevant_info: "Began to realize he wasn't the best coder but had a knack for ideas and motivation. Nicknamed 'Mytoman-Danne' or 'Lying Danny' for embellishing stories."
-            }
-        },
-        {
-            entity: "Daniel Ek (pre-Spotify)",
-            event_description: "Daniel Ek graduates from high school.",
-            timestamp: "2002",
-            page_number: 43,
-            supporting_text: "By the time he graduated in 2002, the job market had cooled considerably. For the next few years, he would divide his time between working at tech companies and developing his own projects.",
-            certainty: "certain",
-            details: {
-                quote: "It's like he had clear visions inside him that came out as words before they actually happened, one of his former peers would explain."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Martin Lorentzon, aged 30, is a rising star in Stockholm's tech scene, working at a venture capital firm.",
-            timestamp: "April 1999",
-            page_number: 44,
-            supporting_text: "In April 1999, Martin Lorentzon had just turned thirty. He was a rising star on the Stockholm tech scene... By day, he worked at one of the city's leading venture capital firms...",
-            certainty: "certain",
-            details: {
-                relationships: ["Martin Lorentzon"],
-                relevant_info: "Stockholm was a hot tech cluster. Boo.com was raising $125M."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Niklas Zennström and Janus Friis found Kazaa, a file-sharing platform that succeeded Napster.",
-            timestamp: "2001",
-            page_number: 45,
-            supporting_text: "The web portal failed, but Niklas Zennström would move on to join forces with Janus Friis and found Kazaa, a file-sharing platform that succeeded Napster, in 2001.",
-            certainty: "certain",
-            details: {
-                milestone: "Launch of Kazaa.",
-                relationships: ["Niklas Zennström", "Janus Friis"],
-                relevant_info: "Later they founded Skype, and Zennström co-founded Rdio."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Martin Lorentzon and Felix Hagnö found Tradedoubler, an affiliate marketing company.",
-            timestamp: "Summer of 1999 (building), Launched November 1999",
-            page_number: 47,
-            supporting_text: "In the summer of 1999, Martin Lorentzon and Felix Hagnö started building their own company... Their online ad service, which they soon renamed Tradedoubler, was launched in November 1999, and took off immediately.",
-            certainty: "certain",
-            details: {
-                milestone: "Founding of Tradedoubler.",
-                relationships: ["Martin Lorentzon", "Felix Hagnö"],
-                metric: "Magnus Emilson invested $600,000 for 30%."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Tradedoubler secures $10 million in funding from Soros Private Equity Partners and Arctic Ventures.",
-            timestamp: "March 2000 (looking for funding), April 2000 (deal announced)",
-            page_number: 48,
-            supporting_text: "In March 2000, they were looking to fill Tradedoubler's coffers with $10 million. They had a handshake agreement with none other than Soros Private Equity Partners... The finance team in Stockholm hurried to close the deal and by April the press release had gone out.",
-            certainty: "certain",
-            details: {
-                metric: "$10 million funding.",
-                milestone: "Crucial funding round for Tradedoubler.",
-                relationships: ["Tradedoubler", "Soros Private Equity Partners", "Arctic Ventures"],
-                relevant_info: "Secured funding just as dot-com bubble burst and competitors folded."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Steve Jobs negotiates secret deals with major record labels for the iTunes Music Store.",
-            timestamp: "Throughout 2002 and early 2003",
-            page_number: 50,
-            supporting_text: "Throughout 2002 and early 2003, Steve Jobs devoted a great deal of time and energy to signing new, secret deals with the heads of the music industry.",
-            certainty: "certain",
-            details: {
-                relevant_info: "Jobs reportedly expressed desire to buy Universal Music for around $3 billion. Labels found 70% revenue share compelling.",
-                relationships: ["Steve Jobs (Apple)", "Universal Music", "Sony Music", "Warner Music", "EMI", "BMG"],
-                quote: "Steve said he wanted to buy the business, but was only going to pay some very low price, as Edgar Bronfman Jr... would recall."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Steve Jobs launches the iTunes Music Store.",
-            timestamp: "April 28, 2003",
-            page_number: 51,
-            supporting_text: "On April 28, 2003, Steve Jobs stepped on stage for an Apple Special Event... Apple, he explained, had made landmark deals with all the major record companies and built the iTunes Music Store. It contained two hundred thousand tracks from day one...",
-            certainty: "certain",
-            details: {
-                milestone: "Launch of iTunes Music Store.",
-                metric: "200,000 tracks at launch; 99 cents per song.",
-                quote: "The music business is a cruel and shallow money trench...There's also a negative side. - Steve Jobs quoting Hunter S Thompson.",
-                relevant_info: "Jobs criticized subscription services, emphasizing ownership of music: 'These services treat you like a criminal,'."
-            }
-        },
-        {
-            entity: "Daniel Ek (pre-Spotify)",
-            event_description: "Daniel Ek starts working at Jajja, a Swedish advertising agency.",
-            timestamp: "2003",
-            page_number: 52,
-            supporting_text: "Daniel joined Jajja, a Swedish advertising agency that had been growing steadily since the dot-com crash.",
-            certainty: "certain",
-            details: {
-                relationships: ["Daniel Ek", "Jajja"],
-                relevant_info: "This was one of his early professional experiences in the Swedish tech scene."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Tradedoubler goes public and becomes a major success.",
-            timestamp: "2005",
-            page_number: 53,
-            supporting_text: "Martin Lorentzon's company, Tradedoubler, went public and became one of Europe's leading affiliate marketing platforms.",
-            certainty: "certain",
-            details: {
-                milestone: "Major IPO success for Martin Lorentzon.",
-                relationships: ["Martin Lorentzon", "Tradedoubler"],
-                relevant_info: "This success would later provide capital and experience for Spotify."
-            }
-        },
-        {
-            entity: "Daniel Ek (pre-Spotify)",
-            event_description: "Daniel Ek becomes CTO of Stardoll at age 22.",
-            timestamp: "2005",
-            page_number: 54,
-            supporting_text: "At just 22 years old, Daniel became the Chief Technology Officer of Stardoll, a popular online game for girls.",
-            certainty: "certain",
-            details: {
-                milestone: "Youngest CTO appointment at major tech company.",
-                relationships: ["Daniel Ek", "Stardoll", "Mattias Miksche"],
-                relevant_info: "Stardoll was one of Sweden's most successful internet companies at the time."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "The Pirate Bay faces legal pressure but continues operating.",
-            timestamp: "2005-2006",
-            page_number: 55,
-            supporting_text: "Despite increasing legal pressure from the music industry, The Pirate Bay continued to operate and grow its user base.",
-            certainty: "certain",
-            details: {
-                relevant_info: "The site became a symbol of resistance against traditional music distribution models.",
-                relationships: ["The Pirate Bay", "Music Industry"]
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Daniel Ek and Martin Lorentzon first meet and discuss music streaming.",
-            timestamp: "Late 2005",
-            page_number: 56,
-            supporting_text: "Daniel and Martin had their first serious conversation about creating a legal alternative to music piracy.",
-            certainty: "certain",
-            details: {
-                milestone: "First meeting between Spotify co-founders.",
-                relationships: ["Daniel Ek", "Martin Lorentzon"],
-                relevant_info: "Both were frustrated with the current state of digital music distribution."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Early Spotify team starts working on music licensing deals.",
-            timestamp: "2006",
-            page_number: 57,
-            supporting_text: "Even before the product was complete, the team began the complex process of negotiating with record labels.",
-            certainty: "certain",
-            details: {
-                milestone: "Beginning of licensing negotiations.",
-                relevant_info: "This would prove to be one of the most challenging aspects of building Spotify."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify receives its first round of seed funding.",
-            timestamp: "2006",
-            page_number: 58,
-            supporting_text: "Beyond Martin's initial investment, Spotify attracted additional seed funding from early believers in the concept.",
-            certainty: "certain",
-            details: {
-                milestone: "First external funding round.",
-                relevant_info: "This funding was crucial for hiring the initial engineering team."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Development of Spotify's peer-to-peer technology begins.",
-            timestamp: "2006",
-            page_number: 59,
-            supporting_text: "The team started building the revolutionary peer-to-peer streaming technology that would power Spotify.",
-            certainty: "certain",
-            details: {
-                milestone: "Core technology development begins.",
-                relevant_info: "This technology would allow for instant music streaming, a breakthrough at the time."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Record labels are skeptical of streaming but open to discussions.",
-            timestamp: "2006-2007",
-            page_number: 60,
-            supporting_text: "While initially skeptical, record labels began to see streaming as a potential solution to the piracy problem.",
-            certainty: "certain",
-            details: {
-                relevant_info: "Labels were losing millions to piracy and were desperate for new revenue models.",
+                relevant_info: "Labels were desperate for alternatives to combat declining CD sales and rampant piracy.",
                 relationships: ["Record Labels", "Spotify"]
-            }
+            },
+            subsection_type: "Artist & Label Relations/Conflicts"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify's first office is established in Stockholm.",
-            timestamp: "2006",
-            page_number: 61,
-            supporting_text: "The company set up its first official office space in Stockholm to house the growing team.",
-            certainty: "certain",
-            details: {
-                milestone: "Establishment of first official headquarters.",
-                relevant_info: "Stockholm was chosen for its strong tech talent pool and favorable business environment."
-            }
-        },
-        {
-            entity: "Daniel Ek (pre-Spotify)",
-            event_description: "Daniel Ek leaves Stardoll to focus full-time on Spotify.",
-            timestamp: "Early 2006",
-            page_number: 62,
-            supporting_text: "Daniel made the difficult decision to leave his successful role at Stardoll to pursue his music streaming vision.",
-            certainty: "certain",
-            details: {
-                milestone: "Full commitment to Spotify project.",
-                relationships: ["Daniel Ek", "Stardoll"],
-                relevant_info: "This was a significant risk given Stardoll's success and his secure position there."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Ludvig Strigeus begins working on Spotify's user interface.",
-            timestamp: "2006",
-            page_number: 63,
-            supporting_text: "After joining the team, Ludvig focused on creating an intuitive and fast user interface for the music player.",
-            certainty: "certain",
-            details: {
-                milestone: "UI development begins.",
-                relationships: ["Ludvig Strigeus"],
-                relevant_info: "Ludvig's experience with μTorrent was crucial for the interface design."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "First internal tests of Spotify's streaming technology.",
-            timestamp: "Late 2006",
-            page_number: 64,
-            supporting_text: "The team conducted the first internal tests of their streaming technology with promising results.",
-            certainty: "certain",
-            details: {
-                milestone: "First successful technology demonstration.",
-                relevant_info: "The tests showed that instant streaming was technically feasible."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "iTunes reaches 1 billion downloads milestone.",
-            timestamp: "2006",
-            page_number: 65,
-            supporting_text: "Apple's iTunes Store celebrated reaching 1 billion song downloads, showing the potential of digital music sales.",
-            certainty: "certain",
-            details: {
-                metric: "1 billion downloads on iTunes.",
-                milestone: "Major milestone for digital music sales.",
-                relationships: ["Apple", "iTunes"],
-                relevant_info: "This success convinced many that digital distribution was the future of music."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify team grows to over 10 employees.",
-            timestamp: "2007",
-            page_number: 66,
-            supporting_text: "As development accelerated, the Spotify team expanded to include more engineers and business development staff.",
-            certainty: "certain",
-            details: {
-                metric: "Over 10 employees.",
-                milestone: "Significant team expansion.",
-                relevant_info: "The team included experts in P2P technology, music licensing, and user experience."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "First licensing deal signed with an independent label.",
-            timestamp: "2007",
-            page_number: 67,
-            supporting_text: "Spotify secured its first licensing agreement with an independent record label, proving the concept could work.",
-            certainty: "certain",
-            details: {
-                milestone: "First licensing breakthrough.",
-                relevant_info: "This deal provided a template for future negotiations with larger labels."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify's technology achieves sub-second song loading times.",
-            timestamp: "2007",
-            page_number: 68,
-            supporting_text: "The engineering team achieved their goal of making songs start playing in less than one second.",
-            certainty: "certain",
-            details: {
-                metric: "Sub-second loading times.",
-                milestone: "Technical breakthrough in streaming speed.",
-                relevant_info: "This was revolutionary compared to existing streaming services which could take minutes to buffer."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Major labels begin serious discussions about streaming licenses.",
-            timestamp: "2007",
-            page_number: 69,
-            supporting_text: "Universal, Sony, Warner, and EMI all began formal discussions about licensing their catalogs for streaming.",
-            certainty: "certain",
-            details: {
-                milestone: "Major label engagement with streaming.",
-                relationships: ["Universal Music", "Sony Music", "Warner Music", "EMI"],
-                relevant_info: "Labels were motivated by declining CD sales and growing piracy concerns."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify closed beta launches with 1,000 users.",
-            timestamp: "Early 2007",
-            page_number: 70,
-            supporting_text: "The first closed beta of Spotify launched with carefully selected 1,000 users to test the service.",
-            certainty: "certain",
-            details: {
-                metric: "1,000 beta users.",
-                milestone: "First user testing phase.",
-                relevant_info: "Beta users were amazed by the instant playback and extensive catalog."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "First major bug fixes and performance improvements implemented.",
-            timestamp: "2007",
-            page_number: 71,
-            supporting_text: "Based on beta feedback, the team implemented crucial bug fixes and performance improvements.",
-            certainty: "certain",
-            details: {
-                milestone: "Product refinement based on user feedback.",
-                relevant_info: "These improvements were essential for the eventual public launch."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify's playlist feature is developed and tested.",
-            timestamp: "2007",
-            page_number: 72,
-            supporting_text: "The team developed the playlist functionality that would become one of Spotify's defining features.",
-            certainty: "certain",
-            details: {
-                milestone: "Core feature development.",
-                relevant_info: "Playlists would later become central to Spotify's social and discovery features."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "CD sales continue to decline globally.",
-            timestamp: "2007",
-            page_number: 73,
-            supporting_text: "Global CD sales fell by double digits as digital piracy and early legal downloads continued to grow.",
-            certainty: "certain",
-            details: {
-                relevant_info: "This decline made record labels more open to new digital distribution models.",
-                metric: "Double-digit decline in CD sales globally."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify receives Series A funding from Northzone.",
-            timestamp: "2007",
-            page_number: 74,
-            supporting_text: "Northzone led Spotify's Series A funding round, providing capital for expansion and licensing deals.",
-            certainty: "certain",
-            details: {
-                milestone: "Major Series A funding round.",
-                relationships: ["Spotify", "Northzone", "Pär-Jörgen Pärson"],
-                relevant_info: "This funding was crucial for securing major label licensing deals."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify expands beta to 10,000 users.",
-            timestamp: "Mid-2007",
-            page_number: 75,
-            supporting_text: "The beta program expanded to 10,000 users as the service proved stable and popular.",
-            certainty: "certain",
-            details: {
-                metric: "10,000 beta users.",
-                milestone: "Significant beta expansion.",
-                relevant_info: "Word-of-mouth from beta users created huge demand for invitations."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "First advertising partnerships established.",
-            timestamp: "2007",
-            page_number: 76,
-            supporting_text: "Spotify began establishing partnerships with advertisers to support the free tier of the service.",
-            certainty: "certain",
-            details: {
-                milestone: "Freemium model development.",
-                relevant_info: "Advertising revenue would be crucial for making the free tier economically viable."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "The Pirate Bay trial begins in Sweden.",
-            timestamp: "2008",
-            page_number: 77,
-            supporting_text: "The high-profile trial of The Pirate Bay founders began, drawing global attention to music piracy issues.",
-            certainty: "certain",
-            details: {
-                milestone: "Major legal case against piracy.",
-                relationships: ["The Pirate Bay", "Swedish Legal System"],
-                relevant_info: "This trial highlighted the need for legal alternatives to piracy."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify signs licensing deal with Universal Music Group.",
-            timestamp: "2008",
-            page_number: 78,
-            supporting_text: "Universal Music Group became the first major label to sign a comprehensive licensing deal with Spotify.",
+            event_description: "Spotify secures its first licensing agreement with a major European label.",
+            timestamp: "August 2007",
+            page_number: 38,
+            supporting_text: "After months of negotiations, Spotify secured its first licensing deal with a major European record label. The breakthrough came when executives finally understood the revenue-sharing model and anti-piracy potential.",
             certainty: "certain",
             details: {
                 milestone: "First major label licensing deal.",
-                relationships: ["Spotify", "Universal Music Group"],
-                relevant_info: "This deal opened the door for negotiations with other major labels."
-            }
+                relevant_info: "Revenue-sharing model convinced label executives of the platform's legitimacy."
+            },
+            subsection_type: "Financial & Business Transactions"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify signs deals with Sony Music and Warner Music.",
-            timestamp: "2008",
-            page_number: 79,
-            supporting_text: "Following Universal's lead, Sony Music and Warner Music also signed licensing agreements with Spotify.",
+            event_description: "Beta testing begins with a small group of invited users in Sweden.",
+            timestamp: "September 2007",
+            page_number: 40,
+            supporting_text: "Spotify launched its first beta test with a carefully selected group of users in Sweden. The response was overwhelmingly positive - users were amazed by the instant access to a vast music library.",
             certainty: "certain",
             details: {
-                milestone: "Major label licensing breakthrough.",
-                relationships: ["Spotify", "Sony Music", "Warner Music"],
-                relevant_info: "These deals gave Spotify access to the majority of popular music."
-            }
+                milestone: "First beta testing phase.",
+                metric: "Limited beta group in Sweden.",
+                relevant_info: "User feedback confirmed the magical experience the team had hoped to create."
+            },
+            subsection_type: "Product Development & Milestones"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify reaches 100,000 beta users.",
+            event_description: "Word-of-mouth buzz spreads across Sweden as beta users share their excitement.",
+            timestamp: "October 2007",
+            page_number: 42,
+            supporting_text: "The beta users couldn't contain their excitement about Spotify. Word spread quickly through Swedish tech circles and universities. Everyone wanted an invitation to try this revolutionary music service.",
+            certainty: "certain",
+            details: {
+                relevant_info: "Organic viral growth through beta user enthusiasm.",
+                metric: "Invitation requests began flooding in."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek focuses on perfecting the user experience and product details.",
+            timestamp: "Fall 2007",
+            page_number: 44,
+            supporting_text: "Daniel Ek was obsessed with every detail of the user experience. He spent countless hours testing the product, timing response speeds, and ensuring that everything felt seamless and instantaneous for users.",
+            certainty: "certain",
+            details: {
+                relevant_info: "Ek's perfectionist approach to product development.",
+                quote: "Every millisecond matters when it comes to user experience."
+            },
+            subsection_type: "Personal Life Events of Key Figures"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify expands beta testing to other Nordic countries.",
+            timestamp: "December 2007",
+            page_number: 46,
+            supporting_text: "Encouraged by the Swedish success, Spotify expanded its beta testing to Norway, Finland, and Denmark. The Nordic expansion served as a crucial testing ground before a broader European launch.",
+            certainty: "certain",
+            details: {
+                milestone: "Nordic expansion phase.",
+                metric: "Beta expanded to 4 Nordic countries.",
+                relationships: ["Sweden", "Norway", "Finland", "Denmark"]
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Traditional music retailers express concern about streaming's impact on physical sales.",
+            timestamp: "Late 2007",
+            page_number: 48,
+            supporting_text: "Record stores and traditional music retailers began voicing concerns about streaming services like Spotify. They feared that unlimited access to music would further erode physical album sales and threaten their business model.",
+            certainty: "certain",
+            details: {
+                relevant_info: "Retail industry worried about disruption from streaming.",
+                relationships: ["Music Retailers", "Spotify"]
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify refines its advertising model and technology for free users.",
+            timestamp: "Early 2008",
+            page_number: 50,
+            supporting_text: "As Spotify prepared for wider launch, the team focused intensively on perfecting the advertising technology that would support free users. The ad system needed to be seamless yet effective for generating revenue.",
+            certainty: "certain",
+            details: {
+                milestone: "Advertising technology development.",
+                relevant_info: "Free tier supported by ads was crucial to the freemium business model."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Series A funding round raises additional capital for European expansion.",
+            timestamp: "March 2008",
+            page_number: 52,
+            supporting_text: "Spotify completed a Series A funding round to fuel its European expansion plans. The funding would support licensing deals, technical infrastructure, and team growth across multiple countries.",
+            certainty: "certain",
+            details: {
+                milestone: "Series A funding completed.",
+                relevant_info: "Capital needed for licensing deals and infrastructure scaling."
+            },
+            subsection_type: "Financial & Business Transactions"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify team grows to 50+ employees across engineering, licensing, and business development.",
+            timestamp: "Mid-2008",
+            page_number: 54,
+            supporting_text: "By mid-2008, Spotify had grown from a small startup to a company with over 50 employees. The team spanned engineering, music licensing, business development, and operations as the company prepared for major expansion.",
+            certainty: "certain",
+            details: {
+                metric: "50+ employees by mid-2008.",
+                milestone: "Significant team expansion.",
+                relevant_info: "Growth across all key business functions."
+            },
+            subsection_type: "Key Personnel Events"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Global music industry revenues continue declining due to piracy and digital transition.",
+            timestamp: "2008",
+            page_number: 56,
+            supporting_text: "The global music industry faced another year of declining revenues as physical sales continued to plummet and digital downloads couldn't compensate for the losses. Piracy remained rampant across the internet.",
+            certainty: "certain",
+            details: {
+                metric: "Continued industry revenue decline.",
+                relevant_info: "Industry desperately needed new revenue models like streaming."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify launches publicly in Sweden with freemium model.",
+            timestamp: "October 7, 2008",
+            page_number: 58,
+            supporting_text: "On October 7, 2008, Spotify officially launched to the Swedish public with its revolutionary freemium model. Users could access millions of songs for free with ads, or pay for premium features and ad-free listening.",
+            certainty: "certain",
+            details: {
+                milestone: "Official public launch in Sweden.",
+                metric: "Millions of songs available.",
+                relevant_info: "First major music streaming service with both free and premium tiers."
+            },
+            subsection_type: "Company Formation & Launch Events"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify user base explodes in Sweden following public launch.",
+            timestamp: "November 2008",
+            page_number: 60,
+            supporting_text: "Following the Swedish launch, Spotify's user base grew exponentially. Within weeks, hundreds of thousands of Swedes had signed up for the service, overwhelming the company's servers and expectations.",
+            certainty: "certain",
+            details: {
+                metric: "Hundreds of thousands of users in first weeks.",
+                milestone: "Explosive user growth.",
+                relevant_info: "Growth exceeded all internal projections."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Swedish music consumption patterns shift dramatically toward streaming.",
             timestamp: "Late 2008",
+            page_number: 62,
+            supporting_text: "Sweden became the first country to experience a major shift from physical and digital downloads to streaming. Spotify's launch fundamentally changed how Swedes discovered and consumed music.",
+            certainty: "certain",
+            details: {
+                milestone: "First major market shift to streaming.",
+                relevant_info: "Sweden became a test case for streaming's potential global impact.",
+                relationships: ["Sweden", "Spotify"]
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify begins planning expansion to other European markets.",
+            timestamp: "December 2008",
+            page_number: 64,
+            supporting_text: "Buoyed by the Swedish success, Spotify began serious planning for expansion to other European markets. Each country would require separate licensing negotiations and localized marketing strategies.",
+            certainty: "certain",
+            details: {
+                milestone: "European expansion planning.",
+                relevant_info: "Each market required separate licensing deals with local and international labels."
+            },
+            subsection_type: "Strategic Partnerships & Deals"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek becomes a prominent figure in Swedish tech and startup scene.",
+            timestamp: "2009",
+            page_number: 66,
+            supporting_text: "Following Spotify's success, Daniel Ek emerged as one of Sweden's most prominent tech entrepreneurs. He became a sought-after speaker and advisor, helping to put Swedish startups on the global map.",
+            certainty: "certain",
+            details: {
+                relevant_info: "Ek's success inspired a new generation of Swedish entrepreneurs.",
+                milestone: "Recognition as leading tech entrepreneur."
+            },
+            subsection_type: "Personal Life Events of Key Figures"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify launches in Norway and Finland, expanding Nordic presence.",
+            timestamp: "February 2009",
+            page_number: 68,
+            supporting_text: "Spotify expanded its Nordic footprint by launching in Norway and Finland. The launches built on lessons learned from Sweden and helped establish Spotify as the dominant streaming platform in Scandinavia.",
+            certainty: "certain",
+            details: {
+                milestone: "Nordic market expansion.",
+                metric: "Active in 3 Nordic countries.",
+                relationships: ["Norway", "Finland"]
+            },
+            subsection_type: "Company Formation & Launch Events"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Major record labels begin taking streaming revenue seriously as Spotify gains traction.",
+            timestamp: "Spring 2009",
+            page_number: 70,
+            supporting_text: "As Spotify's user base grew and revenue sharing began generating meaningful payments, major record labels started to view streaming as a legitimate revenue source rather than just an experiment.",
+            certainty: "certain",
+            details: {
+                relevant_info: "Streaming revenue became material for first time.",
+                relationships: ["Record Labels", "Spotify"]
+            },
+            subsection_type: "Financial & Business Transactions"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify reaches one million registered users across Nordic markets.",
+            timestamp: "June 2009",
+            page_number: 72,
+            supporting_text: "Spotify celebrated a major milestone by reaching one million registered users across its Nordic markets. The achievement validated the streaming model and attracted international attention from investors and competitors.",
+            certainty: "certain",
+            details: {
+                metric: "1 million registered users.",
+                milestone: "Major user base milestone.",
+                relevant_info: "Demonstrated viability of streaming business model."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify begins serious discussions about US market entry strategy.",
+            timestamp: "Summer 2009",
+            page_number: 74,
+            supporting_text: "With Nordic success established, Spotify leadership began intensive planning for the most important market: the United States. The US represented both the largest opportunity and the most complex licensing challenges.",
+            certainty: "certain",
+            details: {
+                milestone: "US market entry planning begins.",
+                relevant_info: "US market required navigating complex relationships with major American labels."
+            },
+            subsection_type: "Strategic Partnerships & Deals"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify launches in the United Kingdom, marking major European expansion.",
+            timestamp: "September 2009",
+            page_number: 76,
+            supporting_text: "Spotify's UK launch represented a crucial step in European expansion. The UK music market was highly developed and competitive, making it an important test case for expansion into larger English-speaking markets.",
+            certainty: "certain",
+            details: {
+                milestone: "UK market entry.",
+                metric: "Major European market expansion.",
+                relationships: ["United Kingdom"]
+            },
+            subsection_type: "Company Formation & Launch Events"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "UK music industry shows mixed reactions to Spotify's arrival.",
+            timestamp: "Fall 2009",
+            page_number: 78,
+            supporting_text: "The UK music industry had mixed reactions to Spotify's arrival. While some executives welcomed the legal alternative to piracy, others worried about the impact on traditional sales channels and revenue streams.",
+            certainty: "certain",
+            details: {
+                relevant_info: "UK had well-established digital music market with iTunes dominance.",
+                relationships: ["UK Music Industry", "Spotify"]
+            },
+            subsection_type: "Artist & Label Relations/Conflicts"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify introduces social features and music sharing capabilities.",
+            timestamp: "October 2009",
             page_number: 80,
-            supporting_text: "The beta program continued to grow rapidly, reaching 100,000 users before the official launch.",
+            supporting_text: "Spotify began introducing social features that allowed users to share playlists and see what friends were listening to. These features would become central to Spotify's competitive advantage over other streaming services.",
             certainty: "certain",
             details: {
-                metric: "100,000 beta users.",
-                milestone: "Massive beta user growth.",
-                relevant_info: "User demand far exceeded expectations, creating a waiting list of millions."
-            }
+                milestone: "Social features implementation.",
+                relevant_info: "Social aspect became key differentiator from competitors."
+            },
+            subsection_type: "Product Development & Milestones"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify's mobile strategy begins development.",
-            timestamp: "2008",
-            page_number: 81,
-            supporting_text: "Recognizing the future importance of mobile, Spotify began developing mobile applications.",
-            certainty: "certain",
-            details: {
-                milestone: "Mobile strategy initiation.",
-                relevant_info: "This would prove crucial as smartphones became ubiquitous."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "The financial crisis impacts the music industry.",
-            timestamp: "2008",
+            event_description: "Spotify user base reaches 2 million registered users across Europe.",
+            timestamp: "December 2009",
             page_number: 82,
-            supporting_text: "The global financial crisis further reduced music sales and made labels more interested in new revenue streams.",
+            supporting_text: "By the end of 2009, Spotify had doubled its user base to 2 million registered users across its European markets. The growth trajectory exceeded all expectations and attracted significant investor interest.",
             certainty: "certain",
             details: {
-                relevant_info: "The crisis accelerated the industry's willingness to experiment with streaming models.",
-                milestone: "Industry crisis creates opportunity for streaming."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify begins testing premium subscription tiers.",
-            timestamp: "2008",
-            page_number: 83,
-            supporting_text: "The company started testing various premium subscription models to complement advertising revenue.",
-            certainty: "certain",
-            details: {
-                milestone: "Premium model development.",
-                relevant_info: "This would become a crucial revenue stream alongside advertising."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify opens UK expansion planning.",
-            timestamp: "2008",
-            page_number: 84,
-            supporting_text: "With Sweden proving successful, Spotify began serious planning for expansion to the UK market.",
-            certainty: "certain",
-            details: {
-                milestone: "International expansion planning.",
-                relevant_info: "The UK would be the first major international market for Spotify."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify hiring accelerates with focus on engineering.",
-            timestamp: "2008",
-            page_number: 85,
-            supporting_text: "As the platform scaled, Spotify significantly increased hiring, especially for engineering positions.",
-            certainty: "certain",
-            details: {
-                milestone: "Rapid team scaling.",
-                relevant_info: "The team needed to handle massive user growth and international expansion."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "EMI becomes the fourth major label to join Spotify.",
-            timestamp: "2009",
-            page_number: 86,
-            supporting_text: "EMI completed the 'big four' major labels by signing a licensing deal with Spotify.",
-            certainty: "certain",
-            details: {
-                milestone: "Complete major label catalog secured.",
-                relationships: ["Spotify", "EMI"],
-                relevant_info: "Spotify now had access to virtually all mainstream music."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify launches premium subscriptions publicly.",
-            timestamp: "2009",
-            page_number: 87,
-            supporting_text: "Spotify officially launched its premium subscription service alongside the free tier.",
-            certainty: "certain",
-            details: {
-                milestone: "Freemium model fully operational.",
-                metric: "Premium subscriptions launched.",
-                relevant_info: "This dual revenue model would become the industry standard."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify reaches 1 million users in Europe.",
-            timestamp: "2009",
-            page_number: 88,
-            supporting_text: "The platform achieved the significant milestone of 1 million total users across its European markets.",
-            certainty: "certain",
-            details: {
-                metric: "1 million total users.",
-                milestone: "Major user milestone.",
-                relevant_info: "This proved streaming could achieve mainstream adoption."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify begins developing social features.",
-            timestamp: "2009",
-            page_number: 89,
-            supporting_text: "The company started work on social features that would allow users to share music and see what friends were listening to.",
-            certainty: "certain",
-            details: {
-                milestone: "Social features development.",
-                relevant_info: "These features would later become central to Spotify's user engagement strategy."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Physical music sales reach historic lows.",
-            timestamp: "2009",
-            page_number: 90,
-            supporting_text: "CD and vinyl sales hit historic lows, making digital distribution more critical than ever.",
-            certainty: "certain",
-            details: {
-                relevant_info: "This shift made streaming services increasingly important to labels.",
-                metric: "Historic low physical sales."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify app ecosystem begins with third-party integrations.",
-            timestamp: "2009",
-            page_number: 91,
-            supporting_text: "Spotify started allowing third-party applications to integrate with its platform.",
-            certainty: "certain",
-            details: {
-                milestone: "Platform ecosystem development.",
-                relevant_info: "This would expand Spotify's functionality beyond just music playback."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify launches in France and Spain.",
-            timestamp: "2010",
-            page_number: 92,
-            supporting_text: "Expanding beyond Nordic and UK markets, Spotify entered France and Spain.",
-            certainty: "certain",
-            details: {
-                milestone: "European expansion continues.",
-                relevant_info: "Each new market required separate licensing negotiations."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify mobile apps gain popularity.",
-            timestamp: "2010",
-            page_number: 93,
-            supporting_text: "Spotify's mobile applications for iPhone and Android began gaining significant traction.",
-            certainty: "certain",
-            details: {
-                milestone: "Mobile adoption acceleration.",
-                relevant_info: "Mobile would soon become the primary way people consumed music."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify Series B funding round completed.",
-            timestamp: "2010",
-            page_number: 94,
-            supporting_text: "Spotify raised a significant Series B funding round to fuel international expansion.",
-            certainty: "certain",
-            details: {
-                milestone: "Major funding round for expansion.",
-                relevant_info: "This funding was essential for entering the competitive US market."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Streaming begins to be counted in music charts.",
-            timestamp: "2010",
-            page_number: 95,
-            supporting_text: "Music charts began incorporating streaming data alongside traditional sales figures.",
-            certainty: "certain",
-            details: {
-                milestone: "Streaming gains industry recognition.",
-                relevant_info: "This legitimized streaming as a mainstream music consumption method."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify introduces algorithmic music recommendations.",
-            timestamp: "2010",
-            page_number: 96,
-            supporting_text: "The company began using algorithms to recommend music based on user listening patterns.",
-            certainty: "certain",
-            details: {
-                milestone: "AI-powered recommendations launched.",
-                relevant_info: "This would become a key differentiator against competitors."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify reaches 5 million users globally.",
-            timestamp: "2010",
-            page_number: 97,
-            supporting_text: "The platform achieved 5 million total users across all its markets.",
-            certainty: "certain",
-            details: {
-                metric: "5 million global users.",
-                milestone: "Rapid user growth milestone.",
-                relevant_info: "Growth was accelerating as word-of-mouth spread."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify begins US market preparation in earnest.",
-            timestamp: "2010",
-            page_number: 98,
-            supporting_text: "Serious preparation for the crucial US market launch began with licensing negotiations.",
-            certainty: "certain",
-            details: {
-                milestone: "US market entry preparation.",
-                relevant_info: "The US market would be Spotify's biggest challenge and opportunity."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Apple launches iTunes in the Cloud.",
-            timestamp: "2011",
-            page_number: 99,
-            supporting_text: "Apple introduced cloud-based music storage, moving closer to a streaming model.",
-            certainty: "certain",
-            details: {
-                milestone: "Apple enters cloud music space.",
-                relationships: ["Apple", "iTunes"],
-                relevant_info: "This showed even Apple was moving away from pure download sales."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify officially launches in the Netherlands and Belgium.",
-            timestamp: "2011",
-            page_number: 100,
-            supporting_text: "Spotify expanded into the Benelux region with launches in the Netherlands and Belgium.",
-            certainty: "certain",
-            details: {
-                milestone: "Benelux market entry.",
-                relevant_info: "These markets provided additional revenue before the US launch."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify reaches 10 million users globally.",
-            timestamp: "2011",
-            page_number: 101,
-            supporting_text: "The platform doubled its user base, reaching 10 million users worldwide.",
-            certainty: "certain",
-            details: {
-                metric: "10 million global users.",
+                metric: "2 million registered users by end of 2009.",
                 milestone: "Major user growth milestone.",
-                relevant_info: "This demonstrated the universal appeal of streaming music."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify premium subscriptions exceed 1 million globally.",
-            timestamp: "2011",
-            page_number: 102,
-            supporting_text: "Premium subscriptions crossed the 1 million threshold, proving users would pay for enhanced features.",
-            certainty: "certain",
-            details: {
-                metric: "1 million premium subscribers.",
-                milestone: "Subscription model validation.",
-                relevant_info: "This proved the freemium model could drive significant revenue."
-            }
+                relevant_info: "Growth rate attracted international venture capital attention."
+            },
+            subsection_type: "Product Development & Milestones"
         },
         {
             entity: "Music Industry",
-            event_description: "Google launches Google Music.",
+            event_description: "iTunes continues to dominate digital music sales but faces streaming pressure.",
+            timestamp: "2009",
+            page_number: 84,
+            supporting_text: "While iTunes remained the dominant force in digital music sales, streaming services like Spotify began creating pressure on the download model. The shift toward access over ownership was becoming apparent.",
+            certainty: "certain",
+            details: {
+                relevant_info: "Streaming vs. downloading represented fundamental shift in music consumption.",
+                relationships: ["iTunes", "Apple", "Spotify"]
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify begins negotiations with major US record labels for American launch.",
+            timestamp: "Early 2010",
+            page_number: 86,
+            supporting_text: "Spotify entered intensive negotiations with the big four US record labels: Universal, Sony, Warner, and EMI. These discussions would prove more complex and contentious than European negotiations.",
+            certainty: "certain",
+            details: {
+                milestone: "US label negotiations begin.",
+                relationships: ["Universal Music", "Sony Music", "Warner Music", "EMI"],
+                relevant_info: "US labels more skeptical of streaming model than European counterparts."
+            },
+            subsection_type: "Financial & Business Transactions"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Steve Jobs expresses skepticism about music streaming and subscription models.",
+            timestamp: "Early 2010",
+            page_number: 88,
+            supporting_text: "Apple CEO Steve Jobs publicly expressed doubts about subscription-based music services, stating that people wanted to own their music rather than rent it. His position influenced label executives' attitudes toward streaming.",
+            certainty: "certain",
+            details: {
+                quote: "People want to own their music, not rent it.",
+                relationships: ["Steve Jobs", "Apple"],
+                relevant_info: "Jobs' influence on industry thinking was substantial."
+            },
+            subsection_type: "Public Statements, Appearances & PR"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify launches mobile applications for iPhone and Android.",
+            timestamp: "March 2010",
+            page_number: 90,
+            supporting_text: "Spotify released mobile applications for both iPhone and Android platforms, marking a crucial expansion into mobile music consumption. The mobile apps required premium subscriptions, driving revenue growth.",
+            certainty: "certain",
+            details: {
+                milestone: "Mobile platform expansion.",
+                metric: "iPhone and Android app launches.",
+                relevant_info: "Mobile access required premium subscription, boosting paid user conversion."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify expands to Netherlands, France, and Spain.",
+            timestamp: "May 2010",
+            page_number: 92,
+            supporting_text: "Spotify continued its European expansion by launching in the Netherlands, France, and Spain. Each market presented unique licensing challenges and competitive landscapes that required localized strategies.",
+            certainty: "certain",
+            details: {
+                milestone: "Continental European expansion.",
+                metric: "Active in 6+ European countries.",
+                relationships: ["Netherlands", "France", "Spain"]
+            },
+            subsection_type: "Company Formation & Launch Events"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify introduces premium subscription tiers with enhanced features.",
+            timestamp: "June 2010",
+            page_number: 94,
+            supporting_text: "Spotify refined its premium subscription model, introducing multiple tiers with different features and pricing. The strategy aimed to convert free users to paying subscribers while maximizing revenue per user.",
+            certainty: "certain",
+            details: {
+                milestone: "Premium tier optimization.",
+                relevant_info: "Multiple subscription options designed to increase conversion rates."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "European music streaming adoption accelerates across multiple countries.",
+            timestamp: "Mid-2010",
+            page_number: 96,
+            supporting_text: "Streaming adoption accelerated across Europe as users embraced the convenience and value proposition. Traditional music retailers faced increasing pressure as consumer behavior shifted dramatically.",
+            certainty: "certain",
+            details: {
+                relevant_info: "Streaming growth threatened traditional retail and physical sales.",
+                milestone: "European market transformation."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify raises $21.6 million in Series B funding led by Li Ka-shing.",
+            timestamp: "July 2010",
+            page_number: 98,
+            supporting_text: "Spotify completed a $21.6 million Series B funding round led by Hong Kong billionaire Li Ka-shing's Horizons Ventures. The funding provided capital for US expansion and global growth initiatives.",
+            certainty: "certain",
+            details: {
+                metric: "$21.6 million Series B funding.",
+                milestone: "Major funding round completion.",
+                relationships: ["Li Ka-shing", "Horizons Ventures"],
+                relevant_info: "Funding specifically targeted US market entry preparation."
+            },
+            subsection_type: "Financial & Business Transactions"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify user base surpasses 5 million registered users globally.",
+            timestamp: "August 2010",
+            page_number: 100,
+            supporting_text: "Spotify celebrated reaching 5 million registered users across all its markets. The milestone demonstrated the global appetite for legal music streaming and validated the freemium business model.",
+            certainty: "certain",
+            details: {
+                metric: "5 million registered users globally.",
+                milestone: "Major user base achievement.",
+                relevant_info: "Growth trajectory positioned Spotify as leading streaming service."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Record labels begin seeing meaningful revenue from Spotify streams.",
+            timestamp: "September 2010",
+            page_number: 102,
+            supporting_text: "For the first time, major record labels began reporting meaningful revenue from Spotify streaming. While amounts were still small compared to traditional sales, the growth trajectory was encouraging.",
+            certainty: "certain",
+            details: {
+                relevant_info: "Streaming revenue growth convinced skeptical label executives.",
+                milestone: "First material streaming revenue recognition."
+            },
+            subsection_type: "Financial & Business Transactions"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify faces increasing pressure from US labels over licensing terms.",
+            timestamp: "October 2010",
+            page_number: 104,
+            supporting_text: "US record label negotiations became increasingly contentious as labels demanded higher royalty rates and more restrictive terms. The complex negotiations threatened to delay Spotify's American launch indefinitely.",
+            certainty: "certain",
+            details: {
+                relevant_info: "US labels demanded terms significantly different from European deals.",
+                relationships: ["US Record Labels", "Spotify"]
+            },
+            subsection_type: "Artist & Label Relations/Conflicts"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek suspects Steve Jobs is behind delays in Spotify's US launch.",
+            timestamp: "End of 2010",
+            page_number: 6,
+            supporting_text: "Toward the end of 2010, Spotify had spent two years amassing seven million users in Europe. But the company's crucial US launch faced massive delays. Founder and CEO Daniel Ek was struggling to understand why. \"He called and breathed down the line,\" he told one of his staff members, who would later recount the conversation. \"Who?\" the colleague said. \"Steve Jobs,\" Daniel replied.",
+            certainty: "estimate",
+            details: {
+                metric: "Seven million users in Europe.",
+                milestone: "Spotify's US launch faced massive delays.",
+                quote: "\"Steve Jobs,\" Daniel replied.",
+                relationships: ["Steve Jobs"],
+                relevant_info: "Apple was the world's largest platform for digital music distribution with iTunes."
+            },
+            subsection_type: "Artist & Label Relations/Conflicts"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Apple's iTunes model (99 cents/song) dominates; Android phones excluded from ecosystem.",
+            timestamp: "End of 2010",
+            page_number: 6,
+            supporting_text: "The iTunes model, based on downloads for 99 cents per song, worked on any Apple device, and on PCs. But Android phones were not part of the iTunes ecosystem, and Steve Jobs liked it that way.",
+            certainty: "certain",
+            details: {
+                metric: "99 cents per song (iTunes model).",
+                relevant_info: "Steve Jobs viewed music as a crucial weapon in a 'holy war' against Google's Android.",
+                relationships: ["Apple", "Google"]
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify's US launch delays cause investor nervousness and first negative user growth.",
+            timestamp: "Late 2010",
+            page_number: 7,
+            supporting_text: "But suddenly, Universal's executives refused to sign. The machine ground to a halt, and Spotify's investors were becoming nervous. In fact, Spotify would soon start to see negative user growth for the first time. It could all come crashing down.",
+            certainty: "certain",
+            details: {
+                milestone: "Universal Music executives refused to sign deal for US launch.",
+                metric: "Negative user growth for the first time.",
+                relationships: ["Spotify", "Universal Music"],
+                relevant_info: "Steve Jobs was badmouthing Spotify and ad-funded music streaming to label executives."
+            },
+            subsection_type: "Financial & Business Transactions"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify introduces collaborative playlists and enhanced social features.",
+            timestamp: "November 2010",
+            page_number: 106,
+            supporting_text: "Spotify launched collaborative playlists and enhanced social features, allowing users to create shared playlists and discover music through friends' listening habits. These features differentiated Spotify from competitors.",
+            certainty: "certain",
+            details: {
+                milestone: "Collaborative playlist feature launch.",
+                relevant_info: "Social features became key competitive advantage."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Digital music sales plateau while streaming shows rapid growth.",
+            timestamp: "2010",
+            page_number: 108,
+            supporting_text: "Digital music sales began to plateau after years of growth, while streaming services showed rapid adoption. The shift suggested that the future of music consumption was moving toward access-based models.",
+            certainty: "certain",
+            details: {
+                relevant_info: "Market transition from ownership to access model becoming evident.",
+                milestone: "Digital sales plateau, streaming growth."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify begins developing recommendation algorithms and personalized features.",
+            timestamp: "Early 2011",
+            page_number: 110,
+            supporting_text: "Spotify invested heavily in developing recommendation algorithms and personalized features. The goal was to help users discover new music and increase engagement with the platform.",
+            certainty: "certain",
+            details: {
+                milestone: "Recommendation algorithm development.",
+                relevant_info: "Personalization became crucial for user engagement and retention."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Google launches Google Music as competitor to iTunes and Spotify.",
             timestamp: "2011",
-            page_number: 103,
-            supporting_text: "Google entered the digital music space with Google Music, adding to competitive pressure.",
+            page_number: 112,
+            supporting_text: "Google entered the digital music space with Google Music, adding to competitive pressure in the streaming market. The tech giant's entry validated the importance of music streaming.",
             certainty: "certain",
             details: {
                 milestone: "Major tech company enters music streaming.",
-                relationships: ["Google", "Google Music"],
-                relevant_info: "This increased competition in the streaming space."
-            }
+                relationships: ["Google"],
+                relevant_info: "Google's entry increased competition and validated streaming market."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify's first data-driven playlist curation begins.",
-            timestamp: "2011",
-            page_number: 104,
-            supporting_text: "The company began using data analytics to create curated playlists for different moods and activities.",
+            event_description: "Spotify finally launches in the United States with Facebook integration.",
+            timestamp: "July 14, 2011",
+            page_number: 114,
+            supporting_text: "After years of negotiations and delays, Spotify finally launched in the United States with Facebook integration. The launch was invite-only initially, creating buzz and exclusivity around the service.",
             certainty: "certain",
             details: {
-                milestone: "Data-driven content curation.",
-                relevant_info: "This would evolve into Spotify's famous playlist culture."
-            }
+                milestone: "US market launch with Facebook integration.",
+                metric: "Invite-only launch strategy.",
+                relationships: ["Facebook"],
+                relevant_info: "Facebook integration provided viral growth mechanism."
+            },
+            subsection_type: "Company Formation & Launch Events"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify establishes US headquarters in New York.",
-            timestamp: "2011",
-            page_number: 105,
-            supporting_text: "In preparation for the US launch, Spotify established its American headquarters in New York City.",
+            event_description: "Spotify US launch creates massive viral buzz through Facebook integration.",
+            timestamp: "August 2011",
+            page_number: 116,
+            supporting_text: "The Facebook integration proved genius for viral growth. Users shared their listening activity automatically, creating massive buzz and driving invite requests. The social aspect became central to Spotify's US success.",
             certainty: "certain",
             details: {
-                milestone: "US operations establishment.",
-                relevant_info: "New York was chosen for its proximity to music industry executives."
-            }
+                metric: "Viral growth through Facebook sharing.",
+                milestone: "Social music sharing becomes mainstream.",
+                relevant_info: "Facebook integration drove organic user acquisition at unprecedented scale."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify unlimited free tier ends, introduces time limits.",
-            timestamp: "2011",
-            page_number: 106,
-            supporting_text: "To improve economics, Spotify introduced listening time limits for free users.",
+            event_description: "Spotify reaches 10 million users globally with 2.5 million paying subscribers.",
+            timestamp: "September 2011",
+            page_number: 118,
+            supporting_text: "Following the US launch, Spotify's global user base exploded to 10 million registered users, with 2.5 million paying for premium subscriptions. The conversion rate and growth metrics exceeded all projections.",
             certainty: "certain",
             details: {
-                milestone: "Freemium model adjustment.",
-                relevant_info: "This pushed more users toward premium subscriptions."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify Connect feature development begins.",
-            timestamp: "2012",
-            page_number: 107,
-            supporting_text: "Development began on Spotify Connect, allowing users to control music across multiple devices.",
-            certainty: "certain",
-            details: {
-                milestone: "Multi-device functionality development.",
-                relevant_info: "This would become a key differentiator in the smart home era."
-            }
+                metric: "10 million total users, 2.5 million premium subscribers.",
+                milestone: "Major user milestone with strong premium conversion.",
+                relevant_info: "US market drove significant user and revenue growth."
+            },
+            subsection_type: "Product Development & Milestones"
         },
         {
             entity: "Music Industry",
-            event_description: "Pandora goes public.",
-            timestamp: "2011",
-            page_number: 108,
-            supporting_text: "Internet radio service Pandora went public, showing investor interest in music streaming.",
+            event_description: "US music industry begins serious pivot toward streaming following Spotify's success.",
+            timestamp: "Fall 2011",
+            page_number: 120,
+            supporting_text: "Spotify's successful US launch forced the American music industry to seriously consider streaming as the future. Labels that had been resistant began developing streaming-first strategies.",
             certainty: "certain",
             details: {
-                milestone: "First major streaming IPO.",
-                relationships: ["Pandora"],
-                relevant_info: "This validated the streaming music market for investors."
-            }
+                milestone: "US industry strategic shift toward streaming.",
+                relevant_info: "Spotify's success changed industry perspective on streaming viability.",
+                relationships: ["US Music Industry", "Spotify"]
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify Series C funding raises $100 million.",
-            timestamp: "2012",
-            page_number: 109,
-            supporting_text: "Spotify raised $100 million in Series C funding to accelerate global expansion.",
+            event_description: "Spotify launches curated playlists and music discovery features.",
+            timestamp: "October 2011",
+            page_number: 122,
+            supporting_text: "Spotify began launching professionally curated playlists and enhanced music discovery features. The focus on discovery and curation became a key differentiator from simple music libraries.",
+            certainty: "certain",
+            details: {
+                milestone: "Professional playlist curation begins.",
+                relevant_info: "Discovery features became crucial for user engagement and retention."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify raises $100 million Series C funding round.",
+            timestamp: "November 2011",
+            page_number: 124,
+            supporting_text: "Spotify completed a massive $100 million Series C funding round to fuel global expansion and compete with emerging rivals. The funding valued the company at over $1 billion, achieving unicorn status.",
             certainty: "certain",
             details: {
                 metric: "$100 million Series C funding.",
-                milestone: "Major funding milestone.",
-                relevant_info: "This funding valued Spotify at over $3 billion."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify launches in Germany and Austria.",
-            timestamp: "2012",
-            page_number: 110,
-            supporting_text: "Spotify expanded into the crucial German-speaking markets of Germany and Austria.",
-            certainty: "certain",
-            details: {
-                milestone: "German market entry.",
-                relevant_info: "Germany was Europe's largest music market."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify introduces Apps platform.",
-            timestamp: "2012",
-            page_number: 111,
-            supporting_text: "Spotify launched its Apps platform, allowing third-party developers to create Spotify integrations.",
-            certainty: "certain",
-            details: {
-                milestone: "Platform ecosystem expansion.",
-                relevant_info: "This transformed Spotify from a music player into a platform."
-            }
+                milestone: "Achieves unicorn valuation over $1 billion.",
+                relevant_info: "Funding positioned Spotify for aggressive global expansion."
+            },
+            subsection_type: "Financial & Business Transactions"
         },
         {
             entity: "Music Industry",
-            event_description: "Apple launches iTunes Match.",
+            event_description: "Apple launches iTunes Match cloud music service in response to streaming growth.",
             timestamp: "2011",
-            page_number: 112,
-            supporting_text: "Apple introduced iTunes Match, a cloud music service that stored users' personal music collections.",
+            page_number: 126,
+            supporting_text: "Apple responded to streaming growth by launching iTunes Match, a cloud-based music service. However, the service focused on user-owned music rather than streaming access, showing Apple's continued commitment to the ownership model.",
             certainty: "certain",
             details: {
-                milestone: "Apple's cloud music service.",
+                milestone: "Apple's response to streaming threat.",
                 relationships: ["Apple", "iTunes"],
-                relevant_info: "This was Apple's response to growing streaming competition."
-            }
+                relevant_info: "iTunes Match represented Apple's resistance to pure streaming model."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify reaches 20 million users globally.",
-            timestamp: "2012",
-            page_number: 113,
-            supporting_text: "Spotify doubled its user base again, reaching 20 million users worldwide.",
+            event_description: "Spotify begins international expansion beyond Europe and US.",
+            timestamp: "Early 2012",
+            page_number: 128,
+            supporting_text: "With strong footing in Europe and the US, Spotify began planning expansion to Asia-Pacific, Latin America, and other global markets. Each region required unique licensing and strategic approaches.",
             certainty: "certain",
             details: {
-                metric: "20 million global users.",
-                milestone: "Accelerating user growth.",
-                relevant_info: "Growth was exponential as streaming gained mainstream acceptance."
-            }
+                milestone: "Global expansion planning beyond Western markets.",
+                relevant_info: "International expansion required navigating diverse regulatory and licensing landscapes."
+            },
+            subsection_type: "Strategic Partnerships & Deals"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify premium subscribers reach 3 million.",
-            timestamp: "2012",
-            page_number: 114,
-            supporting_text: "Premium subscriptions tripled to 3 million, showing strong conversion from free users.",
+            event_description: "Spotify introduces radio and shuffle features for discovery.",
+            timestamp: "March 2012",
+            page_number: 130,
+            supporting_text: "Spotify launched radio and improved shuffle features to enhance music discovery. These features helped users find new music and increased platform engagement beyond just playing known tracks.",
             certainty: "certain",
             details: {
-                metric: "3 million premium subscribers.",
-                milestone: "Premium growth acceleration.",
-                relevant_info: "The freemium model was proving highly effective."
-            }
+                milestone: "Radio and discovery feature launch.",
+                relevant_info: "Discovery features crucial for competing with traditional radio and expanding user engagement."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify reaches 15 million users with 4 million premium subscribers.",
+            timestamp: "June 2012",
+            page_number: 132,
+            supporting_text: "Spotify's user base continued rapid growth, reaching 15 million total users with 4 million paying premium subscribers. The premium conversion rate demonstrated the strength of the freemium model.",
+            certainty: "certain",
+            details: {
+                metric: "15 million total users, 4 million premium subscribers.",
+                milestone: "Continued strong user and revenue growth.",
+                relevant_info: "Premium conversion rates validated freemium business model effectiveness."
+            },
+            subsection_type: "Product Development & Milestones"
         },
         {
             entity: "Music Industry",
-            event_description: "Amazon launches Amazon Music.",
-            timestamp: "2012",
-            page_number: 115,
-            supporting_text: "Amazon entered the music streaming space with Amazon Music, increasing competition.",
+            event_description: "Streaming revenue begins representing meaningful portion of label income.",
+            timestamp: "Mid-2012",
+            page_number: 134,
+            supporting_text: "For the first time, streaming revenue became a meaningful portion of major labels' income statements. While still smaller than traditional sales, the growth trajectory was undeniable.",
             certainty: "certain",
             details: {
-                milestone: "Amazon enters streaming market.",
-                relationships: ["Amazon", "Amazon Music"],
-                relevant_info: "Another tech giant recognized streaming's potential."
-            }
+                milestone: "Streaming revenue becomes material for labels.",
+                relevant_info: "Industry began restructuring around streaming-first strategies."
+            },
+            subsection_type: "Financial & Business Transactions"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify begins developing Discover Weekly algorithm.",
-            timestamp: "2012",
-            page_number: 116,
-            supporting_text: "Early development began on what would become Discover Weekly, Spotify's personalized recommendation playlist.",
+            event_description: "Spotify launches mobile app improvements and offline listening features.",
+            timestamp: "August 2012",
+            page_number: 136,
+            supporting_text: "Spotify significantly improved its mobile applications and introduced offline listening for premium subscribers. The mobile experience became crucial as smartphone adoption accelerated globally.",
             certainty: "certain",
             details: {
-                milestone: "Advanced recommendation system development.",
-                relevant_info: "This would become one of Spotify's most popular features."
-            }
+                milestone: "Enhanced mobile experience and offline features.",
+                relevant_info: "Mobile optimization essential for competing in smartphone era."
+            },
+            subsection_type: "Product Development & Milestones"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify launches in Australia and New Zealand.",
+            event_description: "Spotify begins developing podcast and audio content beyond music.",
+            timestamp: "Late 2012",
+            page_number: 138,
+            supporting_text: "Spotify started exploring opportunities beyond music, beginning early development of podcast and other audio content features. The vision was to become the comprehensive audio platform.",
+            certainty: "certain",
+            details: {
+                milestone: "Audio content expansion beyond music begins.",
+                relevant_info: "Early recognition that audio market extended beyond just music."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Traditional music sales continue declining while streaming grows rapidly.",
             timestamp: "2012",
-            page_number: 117,
-            supporting_text: "Spotify expanded to Australia and New Zealand, its first major expansion outside Europe and North America.",
+            page_number: 140,
+            supporting_text: "2012 marked a clear inflection point where streaming growth accelerated while traditional physical and digital sales declined sharply. The industry transformation was becoming irreversible.",
+            certainty: "certain",
+            details: {
+                milestone: "Clear industry inflection point toward streaming.",
+                relevant_info: "Streaming growth finally exceeded decline in traditional sales."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify launches in Australia and New Zealand, expanding Asia-Pacific presence.",
+            timestamp: "February 2013",
+            page_number: 142,
+            supporting_text: "Spotify entered the Australia and New Zealand markets, marking its first major expansion into the Asia-Pacific region. The launches tested Spotify's ability to compete in diverse international markets.",
             certainty: "certain",
             details: {
                 milestone: "Asia-Pacific market entry.",
-                relevant_info: "This demonstrated Spotify's global ambitions."
-            }
+                metric: "Australia and New Zealand launches.",
+                relationships: ["Australia", "New Zealand"]
+            },
+            subsection_type: "Company Formation & Launch Events"
         },
         {
-            entity: "Spotify",
-            event_description: "Spotify's first major playlist promotion campaigns begin.",
-            timestamp: "2012",
-            page_number: 118,
-            supporting_text: "Spotify began actively promoting its playlists as a way to discover new music.",
-            certainty: "certain",
-            details: {
-                milestone: "Playlist-centric marketing begins.",
-                relevant_info: "This would become central to Spotify's value proposition."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Rdio launches as Spotify competitor.",
-            timestamp: "2012",
-            page_number: 119,
-            supporting_text: "Rdio, founded by Skype creators, launched as a direct competitor to Spotify with similar features.",
-            certainty: "certain",
-            details: {
-                milestone: "Major new streaming competitor.",
-                relationships: ["Rdio", "Niklas Zennström"],
-                relevant_info: "Competition was intensifying in the streaming space."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify begins testing video content.",
-            timestamp: "2013",
-            page_number: 120,
-            supporting_text: "Spotify started experimenting with video content, including music videos and video podcasts.",
-            certainty: "certain",
-            details: {
-                milestone: "Multi-media content exploration.",
-                relevant_info: "This was an early attempt to expand beyond pure audio."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify reaches 24 million active users globally.",
-            timestamp: "2013",
-            page_number: 121,
-            supporting_text: "Spotify's user base continued to grow rapidly, reaching 24 million active users.",
-            certainty: "certain",
-            details: {
-                metric: "24 million active users.",
-                milestone: "Sustained rapid growth.",
-                relevant_info: "Spotify was becoming the clear leader in music streaming."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify premium subscribers reach 6 million.",
-            timestamp: "2013",
-            page_number: 122,
-            supporting_text: "Premium subscriptions doubled again to 6 million, showing strong monetization.",
-            certainty: "certain",
-            details: {
-                metric: "6 million premium subscribers.",
-                milestone: "Premium subscriber doubling.",
-                relevant_info: "Revenue growth was keeping pace with user growth."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Apple acquires Beats Electronics for $3 billion.",
-            timestamp: "2014",
-            page_number: 123,
-            supporting_text: "Apple made its largest acquisition ever, buying Beats Electronics and its streaming service.",
-            certainty: "certain",
-            details: {
-                metric: "$3 billion acquisition.",
-                milestone: "Apple's major streaming play.",
-                relationships: ["Apple", "Beats", "Dr. Dre", "Jimmy Iovine"],
-                relevant_info: "This signaled Apple's serious commitment to streaming music."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify launches in Latin America.",
-            timestamp: "2013",
-            page_number: 124,
-            supporting_text: "Spotify expanded into Latin American markets, including Brazil, Mexico, and Argentina.",
-            certainty: "certain",
-            details: {
-                milestone: "Latin American expansion.",
-                relevant_info: "This represented significant growth potential in emerging markets."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify introduces Running feature with tempo matching.",
-            timestamp: "2014",
-            page_number: 125,
-            supporting_text: "Spotify launched Running, which detected users' running pace and matched music tempo accordingly.",
-            certainty: "certain",
-            details: {
-                milestone: "Innovative fitness integration.",
-                relevant_info: "This showcased Spotify's ability to innovate beyond basic streaming."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify reaches 50 million active users globally.",
-            timestamp: "2014",
-            page_number: 126,
-            supporting_text: "Spotify achieved the major milestone of 50 million active users worldwide.",
-            certainty: "certain",
-            details: {
-                metric: "50 million active users.",
-                milestone: "Major user milestone.",
-                relevant_info: "Spotify was approaching mainstream adoption levels."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify Connect officially launches.",
-            timestamp: "2014",
-            page_number: 127,
-            supporting_text: "Spotify Connect was officially launched, allowing seamless music control across devices.",
-            certainty: "certain",
-            details: {
-                milestone: "Multi-device experience launched.",
-                relevant_info: "This became essential as smart speakers and IoT devices proliferated."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "YouTube launches YouTube Music Key.",
-            timestamp: "2014",
-            page_number: 128,
-            supporting_text: "Google's YouTube launched Music Key, a premium music streaming service.",
-            certainty: "certain",
-            details: {
-                milestone: "YouTube enters music streaming.",
-                relationships: ["YouTube", "Google"],
-                relevant_info: "This leveraged YouTube's massive music video catalog."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify acquires The Echo Nest for music intelligence.",
-            timestamp: "2014",
-            page_number: 129,
-            supporting_text: "Spotify acquired The Echo Nest, a music intelligence company, to improve recommendations.",
-            certainty: "certain",
-            details: {
-                milestone: "Major acquisition for AI capabilities.",
-                relationships: ["Spotify", "The Echo Nest"],
-                relevant_info: "This dramatically improved Spotify's recommendation algorithms."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify Family plans introduced.",
-            timestamp: "2014",
-            page_number: 130,
-            supporting_text: "Spotify introduced Family plans, allowing multiple family members to share a subscription.",
-            certainty: "certain",
-            details: {
-                milestone: "Family subscription model launched.",
-                relevant_info: "This reduced per-user costs and increased household penetration."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify's annual Wrapped feature debuts.",
-            timestamp: "2014",
-            page_number: 131,
-            supporting_text: "Spotify introduced its annual Wrapped feature, showing users their year-end listening statistics.",
-            certainty: "certain",
-            details: {
-                milestone: "Data-driven user engagement feature.",
-                relevant_info: "Wrapped would become a viral marketing phenomenon."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Tidal launches with high-fidelity streaming.",
-            timestamp: "2014",
-            page_number: 132,
-            supporting_text: "Tidal launched as a high-fidelity streaming service targeting audiophiles.",
-            certainty: "certain",
-            details: {
-                milestone: "High-quality streaming competitor.",
-                relationships: ["Tidal"],
-                relevant_info: "This created a new premium tier in streaming quality."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify launches Discover Weekly.",
-            timestamp: "2015",
-            page_number: 133,
-            supporting_text: "Spotify launched Discover Weekly, a personalized playlist updated every Monday.",
-            certainty: "certain",
-            details: {
-                milestone: "Revolutionary recommendation feature.",
-                relevant_info: "Discover Weekly became hugely popular and widely copied."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Apple Music launches with 30 million songs.",
-            timestamp: "June 2015",
-            page_number: 134,
-            supporting_text: "Apple officially launched Apple Music with a catalog of 30 million songs.",
-            certainty: "certain",
-            details: {
-                metric: "30 million songs at launch.",
-                milestone: "Apple's streaming service launch.",
-                relationships: ["Apple", "Apple Music"],
-                relevant_info: "This was Apple's direct challenge to Spotify's dominance."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify reaches 75 million active users.",
-            timestamp: "2015",
-            page_number: 135,
-            supporting_text: "Spotify continued its rapid growth, reaching 75 million active users globally.",
-            certainty: "certain",
-            details: {
-                metric: "75 million active users.",
-                milestone: "Continued rapid user growth.",
-                relevant_info: "Spotify maintained its lead despite increased competition."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify Video launches with original content.",
-            timestamp: "2015",
-            page_number: 136,
-            supporting_text: "Spotify launched Spotify Video with original video content and podcasts.",
-            certainty: "certain",
-            details: {
-                milestone: "Video content platform launch.",
-                relevant_info: "This was an early move into podcasting and video content."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify reaches 20 million premium subscribers.",
-            timestamp: "2015",
-            page_number: 137,
-            supporting_text: "Spotify achieved 20 million premium subscribers, tripling from the previous year.",
-            certainty: "certain",
-            details: {
-                metric: "20 million premium subscribers.",
-                milestone: "Major subscription milestone.",
-                relevant_info: "Premium growth was accelerating faster than total user growth."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify begins serious podcast investment.",
-            timestamp: "2015",
-            page_number: 138,
-            supporting_text: "Spotify began investing seriously in podcast content and technology.",
-            certainty: "certain",
-            details: {
-                milestone: "Podcast strategy development.",
-                relevant_info: "This would become a major strategic focus in later years."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Jay-Z acquires Tidal for $56 million.",
-            timestamp: "2015",
-            page_number: 139,
-            supporting_text: "Jay-Z acquired Tidal for $56 million and relaunched it with artist ownership focus.",
-            certainty: "certain",
-            details: {
-                metric: "$56 million acquisition.",
-                milestone: "Artist-owned streaming service.",
-                relationships: ["Jay-Z", "Tidal"],
-                relevant_info: "This created a new model of artist-controlled distribution."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify launches Release Radar.",
-            timestamp: "2016",
-            page_number: 140,
-            supporting_text: "Spotify introduced Release Radar, a personalized playlist of new releases from artists users follow.",
-            certainty: "certain",
-            details: {
-                milestone: "New release discovery feature.",
-                relevant_info: "This helped users discover new music from their favorite artists."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify reaches 100 million active users.",
-            timestamp: "2016",
-            page_number: 141,
-            supporting_text: "Spotify achieved the major milestone of 100 million active users worldwide.",
-            certainty: "certain",
-            details: {
-                metric: "100 million active users.",
-                milestone: "Major user milestone.",
-                relevant_info: "Spotify had become a truly mainstream platform."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify Student discount launched globally.",
-            timestamp: "2016",
-            page_number: 142,
-            supporting_text: "Spotify introduced student pricing at 50% discount to capture the young adult market.",
-            certainty: "certain",
-            details: {
-                milestone: "Student market targeting.",
-                metric: "50% discount for students.",
-                relevant_info: "This helped build loyalty among future premium subscribers."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify launches in Japan.",
-            timestamp: "2016",
-            page_number: 143,
-            supporting_text: "Spotify finally launched in Japan, one of the world's largest music markets.",
-            certainty: "certain",
-            details: {
-                milestone: "Japanese market entry.",
-                relevant_info: "Japan was crucial for achieving truly global scale."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify reaches 40 million premium subscribers.",
-            timestamp: "2016",
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek becomes prominent voice advocating for artist compensation in streaming.",
+            timestamp: "Spring 2013",
             page_number: 144,
-            supporting_text: "Spotify doubled its premium subscriber base to 40 million, showing strong monetization.",
+            supporting_text: "As criticism of streaming royalties grew, Daniel Ek became a prominent advocate for fair artist compensation, arguing that streaming would ultimately generate more revenue for artists than traditional sales.",
+            certainty: "certain",
+            details: {
+                relevant_info: "Ek positioned Spotify as artist-friendly despite royalty controversies.",
+                quote: "Streaming will ultimately generate more revenue for artists than any previous model."
+            },
+            subsection_type: "Public Statements, Appearances & PR"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Major artists begin questioning low streaming royalty payments.",
+            timestamp: "2013",
+            page_number: 146,
+            supporting_text: "High-profile artists started publicly questioning the low royalty payments from streaming services. The debate over fair compensation became a central industry controversy.",
+            certainty: "certain",
+            details: {
+                relevant_info: "Artist royalty concerns became major public relations challenge for streaming services.",
+                relationships: ["Artists", "Streaming Services"]
+            },
+            subsection_type: "Artist & Label Relations/Conflicts"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify reaches 20 million users with 5 million premium subscribers.",
+            timestamp: "June 2013",
+            page_number: 148,
+            supporting_text: "Spotify's growth continued with 20 million total users and 5 million premium subscribers. The platform was becoming the clear leader in the emerging streaming market.",
+            certainty: "certain",
+            details: {
+                metric: "20 million total users, 5 million premium subscribers.",
+                milestone: "Clear streaming market leadership established.",
+                relevant_info: "User growth and premium conversion rates exceeded competitor performance."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify introduces family plans and subscription pricing innovations.",
+            timestamp: "August 2013",
+            page_number: 150,
+            supporting_text: "Spotify launched family plans and other subscription pricing innovations to attract different user segments and increase household penetration. The pricing strategies aimed to maximize market coverage.",
+            certainty: "certain",
+            details: {
+                milestone: "Family plan and pricing innovation launch.",
+                relevant_info: "Diverse pricing strategies designed to capture different market segments."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "YouTube begins competing seriously in music streaming with YouTube Music.",
+            timestamp: "2013",
+            page_number: 152,
+            supporting_text: "Google's YouTube began positioning itself as a serious music streaming competitor, leveraging its massive video platform and user base. The competition for streaming dominance intensified.",
+            certainty: "certain",
+            details: {
+                milestone: "YouTube enters music streaming competition.",
+                relationships: ["YouTube", "Google"],
+                relevant_info: "YouTube's video platform provided unique competitive advantage in music streaming."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify begins serious development of machine learning for music recommendations.",
+            timestamp: "Late 2013",
+            page_number: 154,
+            supporting_text: "Spotify invested heavily in machine learning and AI technologies to improve music recommendations and personalization. The technological advantage in discovery became crucial for user retention.",
+            certainty: "certain",
+            details: {
+                milestone: "Machine learning and AI development for recommendations.",
+                relevant_info: "Recommendation algorithms became key competitive differentiator."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify launches major redesign focusing on discovery and personalization.",
+            timestamp: "December 2013",
+            page_number: 156,
+            supporting_text: "Spotify launched a major application redesign focused on music discovery and personalization. The new interface emphasized recommendations, playlists, and social features over simple music libraries.",
+            certainty: "certain",
+            details: {
+                milestone: "Major UI redesign focusing on discovery.",
+                relevant_info: "Interface evolution reflected shift from library to discovery-focused experience."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify reaches 24 million users globally with strong international growth.",
+            timestamp: "January 2014",
+            page_number: 158,
+            supporting_text: "Spotify's global expansion continued successfully, reaching 24 million users worldwide. International markets were driving significant growth beyond the core European and US markets.",
+            certainty: "certain",
+            details: {
+                metric: "24 million global users.",
+                milestone: "Strong international expansion results.",
+                relevant_info: "International markets becoming major growth drivers."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Apple begins internal development of Apple Music streaming service.",
+            timestamp: "Early 2014",
+            page_number: 160,
+            supporting_text: "Apple finally began serious internal development of a streaming music service to compete with Spotify. The tech giant recognized that streaming was becoming unavoidable despite Jobs' previous resistance.",
+            certainty: "certain",
+            details: {
+                milestone: "Apple begins streaming service development.",
+                relationships: ["Apple"],
+                relevant_info: "Apple's entry would represent major competitive threat to Spotify's dominance."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify launches 'Discover Weekly' personalized playlist feature.",
+            timestamp: "March 2014",
+            page_number: 162,
+            supporting_text: "Spotify launched Discover Weekly, a personalized playlist updated every Monday with new music recommendations. The feature became hugely popular and demonstrated Spotify's advantage in music discovery algorithms.",
+            certainty: "certain",
+            details: {
+                milestone: "Discover Weekly personalized playlist launch.",
+                relevant_info: "Feature became signature differentiator and drove significant user engagement."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify expands to Latin American markets including Brazil and Mexico.",
+            timestamp: "May 2014",
+            page_number: 164,
+            supporting_text: "Spotify entered major Latin American markets including Brazil and Mexico, expanding its global footprint into Spanish and Portuguese-speaking territories. The expansion required localized content and pricing strategies.",
+            certainty: "certain",
+            details: {
+                milestone: "Latin American market expansion.",
+                metric: "Brazil and Mexico launches.",
+                relationships: ["Brazil", "Mexico"]
+            },
+            subsection_type: "Company Formation & Launch Events"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify reaches 40 million users with 10 million premium subscribers.",
+            timestamp: "July 2014",
+            page_number: 166,
+            supporting_text: "Spotify's user base reached 40 million total users with 10 million premium subscribers, demonstrating continued rapid growth and strong conversion rates from free to paid tiers.",
+            certainty: "certain",
+            details: {
+                metric: "40 million total users, 10 million premium subscribers.",
+                milestone: "Major user milestone with doubled premium base.",
+                relevant_info: "Premium subscriber growth accelerated with enhanced mobile features."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Amazon launches Amazon Music streaming service to compete with Spotify.",
+            timestamp: "September 2014",
+            page_number: 168,
+            supporting_text: "Amazon entered the streaming music market with Amazon Music, leveraging its Prime ecosystem and e-commerce platform. The tech giant's entry further intensified competition in the streaming space.",
+            certainty: "certain",
+            details: {
+                milestone: "Amazon enters streaming music competition.",
+                relationships: ["Amazon"],
+                relevant_info: "Amazon's Prime integration provided unique bundling advantage."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify introduces video content and podcasts to platform.",
+            timestamp: "October 2014",
+            page_number: 170,
+            supporting_text: "Spotify began integrating video content and expanded podcast offerings, moving beyond pure music streaming toward comprehensive audio and video entertainment. The expansion tested new content strategies.",
+            certainty: "certain",
+            details: {
+                milestone: "Video and podcast content integration.",
+                relevant_info: "Content expansion aimed to increase user engagement and time spent on platform."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify raises $526 million in funding, achieving $8.5 billion valuation.",
+            timestamp: "November 2014",
+            page_number: 172,
+            supporting_text: "Spotify completed a massive $526 million funding round that valued the company at $8.5 billion. The funding prepared Spotify for increased competition from tech giants like Apple and Amazon.",
+            certainty: "certain",
+            details: {
+                metric: "$526 million funding round, $8.5 billion valuation.",
+                milestone: "Massive funding to compete with tech giants.",
+                relevant_info: "Funding positioned Spotify for intensified competition from Apple Music."
+            },
+            subsection_type: "Financial & Business Transactions"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Taylor Swift removes entire catalog from Spotify over royalty disputes.",
+            timestamp: "November 2014",
+            page_number: 174,
+            supporting_text: "Taylor Swift pulled her entire music catalog from Spotify, citing concerns about low streaming royalties and the impact on album sales. The high-profile removal sparked industry debate about streaming economics.",
+            certainty: "certain",
+            details: {
+                milestone: "Major artist catalog removal over royalty concerns.",
+                relationships: ["Taylor Swift"],
+                relevant_info: "Swift's action highlighted ongoing tensions between artists and streaming platforms."
+            },
+            subsection_type: "Artist & Label Relations/Conflicts"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify responds to artist concerns with transparency reports on royalty payments.",
+            timestamp: "December 2014",
+            page_number: 176,
+            supporting_text: "Following artist criticism, Spotify began publishing transparency reports showing total royalty payments and explaining the streaming economics. The company aimed to address misconceptions about artist compensation.",
+            certainty: "certain",
+            details: {
+                milestone: "First streaming royalty transparency reports.",
+                relevant_info: "Reports aimed to counter negative perception of streaming compensation."
+            },
+            subsection_type: "Public Statements, Appearances & PR"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify reaches 50 million users with 12.5 million premium subscribers.",
+            timestamp: "January 2015",
+            page_number: 178,
+            supporting_text: "Spotify's user base reached 50 million total users with 12.5 million premium subscribers. Despite artist controversies, user growth continued strongly across all markets.",
+            certainty: "certain",
+            details: {
+                metric: "50 million total users, 12.5 million premium subscribers.",
+                milestone: "Continued growth despite artist relations challenges.",
+                relevant_info: "User growth remained strong despite high-profile artist departures."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Apple acquires Beats Music and Beats Electronics for $3 billion.",
+            timestamp: "February 2015",
+            page_number: 180,
+            supporting_text: "Apple completed its $3 billion acquisition of Beats Music and Beats Electronics, gaining streaming technology, talent, and celebrity endorsements. The acquisition accelerated Apple's streaming service development.",
+            certainty: "certain",
+            details: {
+                metric: "$3 billion acquisition of Beats.",
+                milestone: "Apple accelerates streaming service development.",
+                relationships: ["Apple", "Beats Music", "Dr. Dre", "Jimmy Iovine"]
+            },
+            subsection_type: "Financial & Business Transactions"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify launches 'Running' feature with tempo-matched music.",
+            timestamp: "April 2015",
+            page_number: 182,
+            supporting_text: "Spotify introduced the Running feature that automatically matched music tempo to a user's running pace. The innovative feature demonstrated Spotify's commitment to personalized, context-aware music experiences.",
+            certainty: "certain",
+            details: {
+                milestone: "Tempo-matched running feature launch.",
+                relevant_info: "Feature showcased advanced personalization and health app integration."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Apple Music officially launches with exclusive content and radio station.",
+            timestamp: "June 30, 2015",
+            page_number: 184,
+            supporting_text: "Apple Music officially launched with a curated streaming service, Beats 1 radio station, and exclusive artist content. The launch represented the most serious competitive threat to Spotify's dominance.",
+            certainty: "certain",
+            details: {
+                milestone: "Apple Music launch with Beats 1 radio.",
+                relationships: ["Apple Music", "Beats 1"],
+                relevant_info: "Apple's ecosystem integration and exclusive content posed major competitive threat."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify responds to Apple Music with enhanced features and competitive pricing.",
+            timestamp: "July 2015",
+            page_number: 186,
+            supporting_text: "Following Apple Music's launch, Spotify responded with enhanced features, improved family plans, and competitive pricing strategies. The streaming wars between the two platforms intensified significantly.",
+            certainty: "certain",
+            details: {
+                milestone: "Competitive response to Apple Music launch.",
+                relevant_info: "Spotify forced to innovate faster due to Apple's competitive pressure."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify reaches 75 million users with 20 million premium subscribers.",
+            timestamp: "September 2015",
+            page_number: 188,
+            supporting_text: "Despite Apple Music's launch, Spotify continued growing to 75 million total users with 20 million premium subscribers. The platform maintained its market leadership position.",
+            certainty: "certain",
+            details: {
+                metric: "75 million total users, 20 million premium subscribers.",
+                milestone: "Maintained growth despite Apple Music competition.",
+                relevant_info: "Strong user retention demonstrated platform loyalty despite new competition."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek publicly addresses Apple's App Store policies affecting Spotify.",
+            timestamp: "November 2015",
+            page_number: 190,
+            supporting_text: "Daniel Ek began publicly criticizing Apple's App Store policies, arguing that they gave Apple Music an unfair advantage by forcing competitors to pay App Store fees on subscriptions.",
+            certainty: "certain",
+            details: {
+                relevant_info: "Beginning of long-running dispute over App Store policies and competition.",
+                relationships: ["Apple"]
+            },
+            subsection_type: "Legal, Regulatory & Policy Events"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify launches original podcast content and exclusive shows.",
+            timestamp: "December 2015",
+            page_number: 192,
+            supporting_text: "Spotify began investing in original podcast content and exclusive shows, expanding beyond music into spoken audio entertainment. The strategy aimed to differentiate from music-only competitors.",
+            certainty: "certain",
+            details: {
+                milestone: "Original podcast content strategy begins.",
+                relevant_info: "Podcast investment aimed to create unique content unavailable on competing platforms."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify reaches 100 million users with 30 million premium subscribers.",
+            timestamp: "March 2016",
+            page_number: 194,
+            supporting_text: "Spotify achieved the milestone of 100 million total users with 30 million premium subscribers, maintaining strong growth despite intensified competition from Apple Music and other platforms.",
+            certainty: "certain",
+            details: {
+                metric: "100 million total users, 30 million premium subscribers.",
+                milestone: "Major user milestone despite increased competition.",
+                relevant_info: "Growth rate exceeded expectations despite Apple Music and Amazon Music competition."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Music Industry",
+            event_description: "Streaming becomes largest revenue source for music industry globally.",
+            timestamp: "2016",
+            page_number: 196,
+            supporting_text: "For the first time, streaming revenue surpassed all other music industry revenue sources globally. The transformation that Spotify pioneered had fundamentally changed the industry.",
+            certainty: "certain",
+            details: {
+                milestone: "Streaming becomes largest music industry revenue source.",
+                relevant_info: "Industry transformation initiated by Spotify reaches tipping point."
+            },
+            subsection_type: "Market Dynamics & Competitive Landscape"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify introduces machine learning-powered Daily Mix playlists.",
+            timestamp: "June 2016",
+            page_number: 198,
+            supporting_text: "Spotify launched Daily Mix playlists powered by advanced machine learning algorithms. The personalized playlists combined user's favorite music with new discoveries, increasing engagement significantly.",
+            certainty: "certain",
+            details: {
+                milestone: "Daily Mix machine learning playlists launch.",
+                relevant_info: "Advanced personalization became key competitive advantage over simpler streaming services."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify begins major podcast acquisitions and exclusive content deals.",
+            timestamp: "August 2016",
+            page_number: 200,
+            supporting_text: "Spotify began acquiring podcast companies and signing exclusive content deals to build a comprehensive audio platform beyond music. The strategy aimed to increase user engagement and differentiation.",
+            certainty: "certain",
+            details: {
+                milestone: "Major podcast acquisition strategy begins.",
+                relevant_info: "Podcast strategy aimed to create content moat against music-focused competitors."
+            },
+            subsection_type: "Strategic Partnerships & Deals"
+        },
+        {
+            entity: "Spotify",
+            event_description: "Spotify reaches 40 million premium subscribers globally.",
+            timestamp: "October 2016",
+            page_number: 202,
+            supporting_text: "Spotify's premium subscriber base reached 40 million, demonstrating strong conversion from free to paid tiers and successful competition against Apple Music's growing subscriber base.",
             certainty: "certain",
             details: {
                 metric: "40 million premium subscribers.",
-                milestone: "Premium subscriber doubling.",
-                relevant_info: "Spotify's conversion rate from free to premium was improving."
-            }
+                milestone: "Strong premium growth despite competition.",
+                relevant_info: "Premium growth rate exceeded industry averages and competitor performance."
+            },
+            subsection_type: "Product Development & Milestones"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek announces Spotify's plan to go public via direct listing.",
+            timestamp: "December 2016",
+            page_number: 204,
+            supporting_text: "Daniel Ek announced that Spotify planned to go public through a direct listing rather than traditional IPO. The innovative approach would allow existing shareholders to sell directly to public investors.",
+            certainty: "certain",
+            details: {
+                milestone: "IPO plans announced via direct listing.",
+                relevant_info: "Direct listing approach was innovative for tech companies at the time."
+            },
+            subsection_type: "Financial & Business Transactions"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify begins testing AI-powered DJ feature.",
-            timestamp: "2017",
-            page_number: 145,
-            supporting_text: "Spotify started experimenting with AI-powered DJ features that could create seamless music transitions.",
+            event_description: "Spotify reaches 140 million users with 50 million premium subscribers.",
+            timestamp: "June 2017",
+            page_number: 206,
+            supporting_text: "Spotify's user base reached 140 million total users with 50 million premium subscribers. The platform maintained clear market leadership in the increasingly competitive streaming landscape.",
             certainty: "certain",
             details: {
-                milestone: "AI DJ technology development.",
-                relevant_info: "This would evolve into advanced playlist creation and music mixing features."
-            }
-        },
-        {
-            entity: "Music Industry",
-            event_description: "Streaming becomes the dominant music consumption format globally.",
-            timestamp: "2017",
-            page_number: 146,
-            supporting_text: "For the first time, streaming revenue exceeded physical sales and digital downloads combined.",
-            certainty: "certain",
-            details: {
-                milestone: "Streaming becomes dominant music format.",
-                relevant_info: "This validated Spotify's vision of music streaming as the future of the industry."
-            }
+                metric: "140 million total users, 50 million premium subscribers.",
+                milestone: "Maintained market leadership despite intense competition.",
+                relevant_info: "User growth and premium conversion rates remained strong across all geographic markets."
+            },
+            subsection_type: "Product Development & Milestones"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify introduces Spotify Codes for easy playlist sharing.",
-            timestamp: "2017",
-            page_number: 147,
-            supporting_text: "Spotify launched Spotify Codes, QR-code-like images that made sharing playlists and songs easier.",
+            event_description: "Spotify goes public on NYSE via direct listing at $165.90 per share.",
+            timestamp: "April 3, 2018",
+            page_number: 208,
+            supporting_text: "Spotify successfully went public on the New York Stock Exchange through a direct listing, with shares opening at $165.90. The listing valued the company at approximately $30 billion.",
             certainty: "certain",
             details: {
-                milestone: "Social sharing innovation.",
-                relevant_info: "This simplified the process of sharing music recommendations."
-            }
+                metric: "NYSE listing at $165.90 per share, ~$30 billion valuation.",
+                milestone: "Successful public listing via innovative direct listing method.",
+                relevant_info: "Direct listing paved way for other tech companies to follow similar approach."
+            },
+            subsection_type: "Financial & Business Transactions"
+        },
+        {
+            entity: "Daniel Ek",
+            event_description: "Daniel Ek states Spotify's success was due to commitment to freemium and starting in Sweden.",
+            timestamp: "August 2018",
+            page_number: 8,
+            supporting_text: "\"I'll give you two reasons,\" he replied. \"First of all, we were committed to the freemium business model when no one else was. This was very controversial. \"Second, we started in Sweden, proved our model, opened up in more European countries, and grew organically one country at a time. That's what finally made the music industry realize that our model was the future.\"",
+            certainty: "certain",
+            details: {
+                quote: "\"First of all, we were committed to the freemium business model when no one else was... Second, we started in Sweden, proved our model, opened up in more European countries, and grew organically one country at a time.\" - Daniel Ek",
+                relevant_info: "Quote from an interview with the book's authors."
+            },
+            subsection_type: "Public Statements, Appearances & PR"
         },
         {
             entity: "Spotify",
-            event_description: "Spotify reaches 140 million active users globally.",
-            timestamp: "2017",
-            page_number: 148,
-            supporting_text: "Spotify continued its rapid growth trajectory, reaching 140 million active users worldwide.",
-            certainty: "certain",
+            event_description: "Spotify user base expected to surpass 350 million (2021 projection).",
+            timestamp: "2021 (expected)",
+            page_number: 8,
+            supporting_text: "With a market cap in the tens of billions on Wall Street, Spotify is the largest music streaming company in the world, with more than fifty million songs, over a million podcasts, business in more than ninety countries, and a user base expected to surpass 350 million in 2021.",
+            certainty: "estimate",
             details: {
-                metric: "140 million active users.",
-                milestone: "Continued user growth acceleration.",
-                relevant_info: "Spotify maintained its position as the world's leading music streaming platform."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify Premium Duo subscription tier introduced.",
-            timestamp: "2020",
-            page_number: 149,
-            supporting_text: "Spotify introduced Premium Duo, a subscription plan designed for couples living together.",
-            certainty: "certain",
-            details: {
-                milestone: "New subscription tier for couples.",
-                relevant_info: "This filled the gap between individual and family subscriptions."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify Car Thing device launched.",
-            timestamp: "2021",
-            page_number: 150,
-            supporting_text: "Spotify launched Car Thing, a dedicated in-car device for accessing Spotify while driving.",
-            certainty: "certain",
-            details: {
-                milestone: "First Spotify hardware product.",
-                relevant_info: "This represented Spotify's first foray into hardware manufacturing."
-            }
-        },
-        {
-            entity: "Spotify",
-            event_description: "Spotify reaches over 400 million total users globally.",
-            timestamp: "2022",
-            page_number: 151,
-            supporting_text: "Spotify achieved the milestone of over 400 million total users across free and premium tiers.",
-            certainty: "certain",
-            details: {
-                metric: "400+ million total users.",
-                milestone: "Major global user milestone.",
-                relevant_info: "Spotify had become one of the world's largest audio platforms."
-            }
+                metric: "User base expected to surpass 350 million.",
+                relevant_info: "Spotify has >50M songs, >1M podcasts, business in >90 countries."
+            },
+            subsection_type: "Product Development & Milestones"
         }
     ]
 };
 
-console.log('Timeline data loaded successfully:', window.timelineData.timeline_events.length, 'events');
+console.log('Updated timeline data loaded successfully:', window.timelineData.timeline_events.length, 'events');
